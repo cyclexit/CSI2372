@@ -21,7 +21,7 @@ bool Set::add_element(int elem) {
     std::cout << elem << " is already in the set." << std::endl;
     return false;
   }
-  if (elems_.size() >= elem) {
+  if (elems_.size() >= kMaxSize) {
     std::cout << "Set is full!" << std::endl;
     return false;
   }
