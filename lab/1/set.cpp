@@ -29,6 +29,19 @@ bool Set::add_element(int elem) {
   return true;
 }
 
+void Set::remove_element(int elem) {
+  int idx = -1;
+  for (int i = 0; i < elems_.size(); ++i) {
+    if (elems_[i] == elem) {
+      idx = i;
+      break;
+    }
+  }
+  if (idx != -1) {
+    elems_.erase(elems_.begin() + idx);
+  }
+}
+
 bool Set::is_member(int elem) {
   for (const int x : elems_) {
     if (x == elem) {
