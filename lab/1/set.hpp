@@ -19,7 +19,7 @@ class Set {
   void remove_element(int elem);
   bool is_member(int elem);
   bool equal(Set& other);
-  bool subset(const Set& other);
+  bool subset(Set& other);
   Set set_union(const Set& other);
   Set intersection(const Set& other);
   Set difference(const Set& other);

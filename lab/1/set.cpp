@@ -52,6 +52,10 @@ bool Set::is_member(int elem) {
 }
 
 bool Set::equal(Set& other) {
+  return subset(other) && (cardinality() == other.cardinality());
+}
+
+bool Set::subset(Set& other) {
   for (const int x : elems_) {
     if (!other.is_member(x)) {
       return false;
