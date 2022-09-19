@@ -1,2 +1,8 @@
+# folders
 .vscode/
 bin/
+
+# files
+*.out
+in.txt
+out.txt
