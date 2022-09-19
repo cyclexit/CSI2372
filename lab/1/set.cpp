@@ -43,12 +43,21 @@ void Set::remove_element(int elem) {
 }
 
 bool Set::is_member(int elem) {
-  for (const int x : elems_) {
+  for (const int& x : elems_) {
     if (x == elem) {
       return true;
     }
   }
   return false;
+}
+
+bool Set::equal(Set& other) {
+  for (const int x : elems_) {
+    if (!other.is_member(x)) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /*

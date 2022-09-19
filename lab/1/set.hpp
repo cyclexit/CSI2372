@@ -18,7 +18,7 @@ class Set {
   bool add_element(int elem);
   void remove_element(int elem);
   bool is_member(int elem);
-  bool equal(const Set& other);
+  bool equal(Set& other);
   bool subset(const Set& other);
   Set set_union(const Set& other);
   Set intersection(const Set& other);
