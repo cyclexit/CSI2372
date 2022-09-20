@@ -64,7 +64,7 @@ bool Set::subset(const Set& other) const {
   return true;
 }
 
-Set Set::set_union(const Set& other) const {
+Set Set::Union(const Set& other) const {
   Set res(other);
   for (const int x : elems_) {
     res.add_element(x);
@@ -93,7 +93,7 @@ Set Set::difference(const Set& other) const {
 }
 
 Set Set::mutal_difference(const Set& other) const {
-  return difference(other).set_union(other.difference(*this));
+  return difference(other).Union(other.difference(*this));
 }
 
 void Set::print() const {

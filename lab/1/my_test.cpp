@@ -17,7 +17,7 @@ int main() {
   b.add_element(10);
   b.print();
 
-  a.set_union(b).print();
+  a.Union(b).print();
   a.mutal_difference(b).print();
 
   return 0;
