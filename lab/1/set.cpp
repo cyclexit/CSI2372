@@ -82,6 +82,20 @@ Set Set::intersection(const Set& other) const {
   return res;
 }
 
+Set Set::difference(const Set& other) const {
+  Set res;
+  for (const int x : elems_) {
+    if (!other.is_member(x)) {
+      res.add_element(x);
+    }
+  }
+  return res;
+}
+
+Set Set::mutal_difference(const Set& other) const {
+  return difference(other).set_union(other.difference(*this));
+}
+
 /*
  * private
  */
