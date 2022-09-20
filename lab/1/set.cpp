@@ -96,6 +96,13 @@ Set Set::mutal_difference(const Set& other) const {
   return difference(other).set_union(other.difference(*this));
 }
 
+void Set::print() const {
+  for (const int x : elems_) {
+    std::cout << x << " ";
+  }
+  std::cout << std::endl;
+}
+
 /*
  * private
  */

@@ -25,6 +25,8 @@ class Set {
   Set difference(const Set& other) const;
   Set mutal_difference(const Set& other) const;
 
+  void print() const;
+
  private:
   // data
   std::vector<int> elems_;
