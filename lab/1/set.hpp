@@ -14,16 +14,16 @@ class Set {
   Set(const Set& other);
 
   // methods
-  size_t cardinality();
+  size_t cardinality() const;
   bool add_element(int elem);
   void remove_element(int elem);
-  bool is_member(int elem);
-  bool equal(Set& other);
-  bool subset(Set& other);
-  Set set_union(const Set& other);
-  Set intersection(const Set& other);
-  Set difference(const Set& other);
-  Set mutal_difference(const Set& other);
+  bool is_member(int elem) const;
+  bool equal(const Set& other) const;
+  bool subset(const Set& other) const;
+  Set set_union(const Set& other) const;
+  Set intersection(const Set& other) const;
+  Set difference(const Set& other) const;
+  Set mutal_difference(const Set& other) const;
 
  private:
   // data

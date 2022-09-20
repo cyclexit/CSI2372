@@ -12,7 +12,7 @@ Set::Set(const Set& other) {
 };
 
 // methods
-size_t Set::cardinality() {
+size_t Set::cardinality() const {
   return elems_.size();
 }
 
@@ -42,7 +42,7 @@ void Set::remove_element(int elem) {
   }
 }
 
-bool Set::is_member(int elem) {
+bool Set::is_member(int elem) const {
   for (const int& x : elems_) {
     if (x == elem) {
       return true;
@@ -51,11 +51,11 @@ bool Set::is_member(int elem) {
   return false;
 }
 
-bool Set::equal(Set& other) {
+bool Set::equal(const Set& other) const {
   return subset(other) && (cardinality() == other.cardinality());
 }
 
-bool Set::subset(Set& other) {
+bool Set::subset(const Set& other) const {
   for (const int x : elems_) {
     if (!other.is_member(x)) {
       return false;
@@ -64,10 +64,20 @@ bool Set::subset(Set& other) {
   return true;
 }
 
-Set Set::set_union(const Set& other) {
+Set Set::set_union(const Set& other) const {
   Set res(other);
   for (const int x : elems_) {
     res.add_element(x);
+  }
+  return res;
+}
+
+Set Set::intersection(const Set& other) const {
+  Set res;
+  for (const int x : elems_) {
+    if (other.is_member(x)) {
+      res.add_element(x);
+    }
   }
   return res;
 }
