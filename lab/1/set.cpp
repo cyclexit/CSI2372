@@ -64,6 +64,14 @@ bool Set::subset(Set& other) {
   return true;
 }
 
+Set Set::set_union(const Set& other) {
+  Set res(other);
+  for (const int x : elems_) {
+    res.add_element(x);
+  }
+  return res;
+}
+
 /*
  * private
  */
