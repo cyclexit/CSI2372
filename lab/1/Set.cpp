@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "set.hpp"
+#include "Set.h"
 
 /*
  * public
@@ -92,7 +92,7 @@ Set Set::difference(const Set& other) const {
   return res;
 }
 
-Set Set::mutal_difference(const Set& other) const {
+Set Set::mutual_difference(const Set& other) const {
   return difference(other).Union(other.difference(*this));
 }
 

@@ -23,7 +23,7 @@ class Set {
   Set Union(const Set& other) const;
   Set intersection(const Set& other) const;
   Set difference(const Set& other) const;
-  Set mutal_difference(const Set& other) const;
+  Set mutual_difference(const Set& other) const;
 
   void print() const;
 
