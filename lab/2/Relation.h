@@ -10,7 +10,7 @@ class Relation {
   // constants
 
   // ctors and dtors
-  Relation();
+  Relation() = default;
   Relation(const Relation& other);
   ~Relation() = default;
 
