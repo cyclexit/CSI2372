@@ -98,4 +98,16 @@ Relation Relation::inverse() const {
   return res;
 }
 
-
+Relation Relation::combination(const Relation& other) const {
+  Relation res;
+  if (elems_ == other.elems_) {
+    for (auto p1 : relations_) {
+      for (auto p2 : other.relations_) {
+        if (p1.second == p2.first) {
+          res.add_element({p1.first, p2.second});
+        }
+      }
+    }
+  }
+  return res;
+}
