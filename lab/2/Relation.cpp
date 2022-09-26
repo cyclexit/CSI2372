@@ -65,3 +65,16 @@ bool Relation::asymmetric() const {
   }
   return true;
 }
+
+bool Relation::transitive() const {
+  for (auto p : relations_) {
+    for (int x : elems_) {
+      if (is_member({p.second, x})) {
+        if (!is_member({p.first, x})) {
+          return false;
+        }
+      }
+    }
+  }
+  return true;
+}
