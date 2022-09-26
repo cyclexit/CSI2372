@@ -89,3 +89,13 @@ bool Relation::is_function() const {
   }
   return true;
 }
+
+Relation Relation::inverse() const {
+  Relation res;
+  for (auto p : relations_) {
+    res.add_element({p.second, p.first});
+  }
+  return res;
+}
+
+
