@@ -31,7 +31,7 @@ bool Relation::equal(const Relation& other) const {
 
 bool Relation::reflexive() const {
   for (int e : elems_) {
-    if (relations_.count({e, e}) == 0) {
+    if (!is_member({e, e})) {
       return false;
     }
   }
@@ -40,7 +40,7 @@ bool Relation::reflexive() const {
 
 bool Relation::irreflexive() const {
   for (int e : elems_) {
-    if (relations_.count({e, e}) > 0) {
+    if (is_member({e, e})) {
       return false;
     }
   }
