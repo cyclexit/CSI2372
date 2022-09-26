@@ -46,3 +46,12 @@ bool Relation::irreflexive() const {
   }
   return true;
 }
+
+bool Relation::symmetric() const {
+  for (auto p : relations_) {
+    if (!is_member({p.second, p.first})) {
+      return false;
+    }
+  }
+  return true;
+}
