@@ -2,7 +2,7 @@
 #define RELATION_H_
 
 #include <cstdint>
-#include <vector>
+#include <set>
 #include <utility>
 
 class Relation {
@@ -42,7 +42,8 @@ class Relation {
   Relation combination(const Relation& other) const;
 
  private:
-  std::vector<std::pair<int, int>> relations_;
+  std::set<int> elems_;
+  std::set<std::pair<int, int>> relations_;
 };
 
 #endif // RELATION_H_
