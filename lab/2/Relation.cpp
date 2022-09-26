@@ -78,3 +78,14 @@ bool Relation::transitive() const {
   }
   return true;
 }
+
+bool Relation::is_function() const {
+  for (auto p1 : relations_) {
+    for (auto p2 : relations_) {
+      if ((p1.first == p2.first) && (p1.second != p2.second)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
