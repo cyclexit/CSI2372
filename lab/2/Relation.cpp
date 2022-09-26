@@ -55,3 +55,13 @@ bool Relation::symmetric() const {
   }
   return true;
 }
+
+bool Relation::asymmetric() const {
+  for (auto p : relations_) {
+    if (p.first == p.second) continue;
+    if (is_member({p.second, p.first})) {
+      return false;
+    }
+  }
+  return true;
+}
