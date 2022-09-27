@@ -127,19 +127,19 @@ bool Relation::transitive() {
   return true;
 }
 
-/*
-
-
 bool Relation::is_function() const {
-  for (auto p1 : relations_) {
-    for (auto p2 : relations_) {
-      if ((p1.first == p2.first) && (p1.second != p2.second)) {
+  for (int i = 0; i < sz; ++i) {
+    for (int j = 0; j < sz; ++j) {
+      if ((relations_[i].first == relations_[j].first)
+          && (relations_[i].second != relations_[j].second)) {
         return false;
       }
     }
   }
   return true;
 }
+
+/*
 
 Relation Relation::inverse() const {
   Relation res;
