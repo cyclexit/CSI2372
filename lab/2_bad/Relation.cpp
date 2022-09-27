@@ -1,7 +1,7 @@
 #include "Relation.h"
 
 Relation::Relation() {
-  relations_ = new std::pair<int, int>[kInitCapacity];
+  relations_ = new std::pair<int, int>[cap];
 }
 
 Relation::Relation(const Relation& other) : elems_(other.elems_), sz(other.sz) {
@@ -16,19 +16,53 @@ size_t Relation::cardinality() const {
   return sz;
 }
 
-bool Relation::add_element(std::pair<int, int> r) {
-  
+bool Relation::add_element(const std::pair<int, int>& r) {
+  if (is_member(r)) return false;
+
+  if (sz == cap) {
+    // enlarge the size
+    cap += cap / 2;
+    std::pair<int, int>* temp = new std::pair<int, int>[cap];
+    for (int i = 0; i < sz; ++i) {
+      temp[i] = relations_[i];
+    }
+    delete[] relations_;
+    relations_ = temp;
+    // add the new elements now
+    relations_[sz++] = r;
+  } else {
+    relations_[sz++] = r;
+    elems_.add_element(r.first);
+    elems_.add_element(r.second);
+  }
+  return true;
 }
 
-void Relation::remove_element(std::pair<int, int> r) {
-  // auto itr = relations_.find(r);
-  // if (itr != relations_.end()) {
-  //   relations_.erase(itr);
-  // }
+void Relation::remove_element(const std::pair<int, int>& r) {
+  int idx = -1;
+  for (int i = 0; i < sz; ++i) {
+    if (relations_[i] == r) {
+      idx = i;
+      break;
+    }
+  }
+  if (idx != -1) {
+    for (int i = idx; i < sz; ++i) {
+      if (i != sz - 1) {
+        relations_[i] = relations_[i + 1];
+      }
+    }
+    relations_[--sz] = std::pair<int, int>();
+  }
 }
 
-bool Relation::is_member(std::pair<int, int> r) const {
-  
+bool Relation::is_member(const std::pair<int, int>& r) const {
+  for (int i = 0; i < sz; ++i) {
+    if (relations_[i] == r) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /*
