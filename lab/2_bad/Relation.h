@@ -27,9 +27,9 @@ class Relation {
 
   bool equal(const Relation& other) const;
 
-  bool reflexive() const;
+  bool reflexive();
 
-  bool irreflexive() const;
+  bool irreflexive();
 
   bool symmetric() const;
 
@@ -44,6 +44,7 @@ class Relation {
   Relation combination(const Relation& other) const;
 
  private:
+  // data
   Set elems_;
   int cap = kInitCapacity;
   int sz = 0;

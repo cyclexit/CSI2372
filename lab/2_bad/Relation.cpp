@@ -65,14 +65,19 @@ bool Relation::is_member(const std::pair<int, int>& r) const {
   return false;
 }
 
-/*
-
-
 bool Relation::equal(const Relation& other) const {
-  return (elems_ == other.elems_) && (relations_ == other.relations_);
+  bool ok = elems_.equal(other.elems_) && (sz == other.sz);
+  if (ok) {
+    for (int i = 0; i < sz; ++i) {
+      if (!other.is_member(relations_[i])) {
+        return false;
+      }
+    }
+  }
+  return ok;
 }
 
-bool Relation::reflexive() const {
+bool Relation::reflexive() {
   for (int e : elems_) {
     if (!is_member({e, e})) {
       return false;
@@ -81,7 +86,7 @@ bool Relation::reflexive() const {
   return true;
 }
 
-bool Relation::irreflexive() const {
+bool Relation::irreflexive() {
   for (int e : elems_) {
     if (is_member({e, e})) {
       return false;
@@ -89,6 +94,8 @@ bool Relation::irreflexive() const {
   }
   return true;
 }
+
+/*
 
 bool Relation::symmetric() const {
   for (auto p : relations_) {

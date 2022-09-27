@@ -26,6 +26,10 @@ class Set {
   Set mutual_difference(const Set& other) const;
 
   void print() const;
+  using iterator = std::vector<int>::iterator;
+  using const_iterator = std::vector<int>::const_iterator;
+  iterator begin() { return elems_.begin(); }
+  iterator end() { return elems_.end(); }
 
  private:
   // data
