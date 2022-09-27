@@ -17,11 +17,11 @@ class Relation {
   // methods
   size_t cardinality() const;
 
-  bool add_element(std::pair<int, int> r);
+  bool add_element(const std::pair<int, int>& r);
 
-  void remove_element(std::pair<int, int> r);
+  void remove_element(const std::pair<int, int>& r);
 
-  bool is_member(std::pair<int, int> r) const;
+  bool is_member(const std::pair<int, int>& r) const;
 
   bool equal(const Relation& other) const;
 

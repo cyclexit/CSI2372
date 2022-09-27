@@ -9,19 +9,19 @@ size_t Relation::cardinality() const {
   return relations_.size();
 }
 
-bool Relation::add_element(std::pair<int, int> r) {
+bool Relation::add_element(const std::pair<int, int>& r) {
   auto ret = relations_.insert(r);
   return ret.second;
 }
 
-void Relation::remove_element(std::pair<int, int> r) {
+void Relation::remove_element(const std::pair<int, int>& r) {
   auto itr = relations_.find(r);
   if (itr != relations_.end()) {
     relations_.erase(itr);
   }
 }
 
-bool Relation::is_member(std::pair<int, int> r) const {
+bool Relation::is_member(const std::pair<int, int>& r) const {
   return relations_.count(r) > 0;
 }
 
