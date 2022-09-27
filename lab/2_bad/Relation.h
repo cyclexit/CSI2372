@@ -35,7 +35,7 @@ class Relation {
 
   bool asymmetric() const;
 
-  bool transitive() const;
+  bool transitive();
 
   bool is_function() const;
 

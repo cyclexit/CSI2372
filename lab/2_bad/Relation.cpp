@@ -114,13 +114,11 @@ bool Relation::asymmetric() const {
   return true;
 }
 
-/*
-
-bool Relation::transitive() const {
-  for (auto p : relations_) {
+bool Relation::transitive() {
+  for (int i = 0; i < sz; ++i) {
     for (int x : elems_) {
-      if (is_member({p.second, x})) {
-        if (!is_member({p.first, x})) {
+      if (is_member({relations_[i].second, x})) {
+        if (!is_member({relations_[i].first, x})) {
           return false;
         }
       }
@@ -128,6 +126,9 @@ bool Relation::transitive() const {
   }
   return true;
 }
+
+/*
+
 
 bool Relation::is_function() const {
   for (auto p1 : relations_) {
