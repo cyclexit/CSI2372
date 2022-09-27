@@ -18,11 +18,15 @@ size_t Set::cardinality() const {
 
 bool Set::add_element(int elem) {
   if (is_member(elem)) {
+#ifdef ENABLE_DEBUG
     std::cout << elem << " is already in the set." << std::endl;
+#endif // ENABLE_DEBUG
     return false;
   }
   if (elems_.size() >= kMaxSize) {
+#ifdef ENABLE_DEBUG
     std::cout << "Set is full!" << std::endl;
+#endif // ENABLE_DEBUG
     return false;
   }
   elems_.push_back(elem);
