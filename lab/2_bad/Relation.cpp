@@ -95,11 +95,9 @@ bool Relation::irreflexive() {
   return true;
 }
 
-/*
-
 bool Relation::symmetric() const {
-  for (auto p : relations_) {
-    if (!is_member({p.second, p.first})) {
+  for (int i = 0; i < sz; ++i) {
+    if (!is_member({relations_[i].second, relations_[i].first})) {
       return false;
     }
   }
@@ -107,14 +105,16 @@ bool Relation::symmetric() const {
 }
 
 bool Relation::asymmetric() const {
-  for (auto p : relations_) {
-    if (p.first == p.second) continue;
-    if (is_member({p.second, p.first})) {
+  for (int i = 0; i < sz; ++i) {
+    if (relations_[i].first == relations_[i].second) continue;
+    if (is_member({relations_[i].second, relations_[i].first})) {
       return false;
     }
   }
   return true;
 }
+
+/*
 
 bool Relation::transitive() const {
   for (auto p : relations_) {
