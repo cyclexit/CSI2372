@@ -6,6 +6,8 @@
 
 #include "Set.h"
 
+using Pair = std::pair<int, int>;
+
 class Relation {
  public:
   // constants
@@ -42,6 +44,8 @@ class Relation {
   Relation inverse() const;
 
   Relation combination(const Relation& other) const;
+
+  bool add_to_set(int x);
 
  private:
   // data

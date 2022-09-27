@@ -160,3 +160,7 @@ Relation Relation::combination(const Relation& other) const {
   }
   return res;
 }
+
+bool Relation::add_to_set(int x) {
+  return elems_.add_element(x);
+}

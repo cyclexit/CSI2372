@@ -4,4 +4,4 @@ project("lab2")
 
 file(GLOB SRCS *.cpp)
 
-add_executable("MyTest" ${SRCS})
+add_executable("TestRelation" ${SRCS})
