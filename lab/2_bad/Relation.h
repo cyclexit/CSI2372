@@ -1,0 +1,52 @@
+#ifndef RELATION_H_
+#define RELATION_H_
+
+#include <cstdint>
+#include <utility>
+
+#include "Set.h"
+
+class Relation {
+ public:
+  // constants
+  static constexpr int kInitCapacity = 100;
+
+  // ctors and dtors
+  Relation();
+  Relation(const Relation& other);
+  ~Relation();
+
+  // methods
+  size_t cardinality() const;
+
+  bool add_element(std::pair<int, int> r);
+
+  void remove_element(std::pair<int, int> r);
+
+  bool is_member(std::pair<int, int> r) const;
+
+  bool equal(const Relation& other) const;
+
+  bool reflexive() const;
+
+  bool irreflexive() const;
+
+  bool symmetric() const;
+
+  bool asymmetric() const;
+
+  bool transitive() const;
+
+  bool is_function() const;
+
+  Relation inverse() const;
+
+  Relation combination(const Relation& other) const;
+
+ private:
+  Set elems_;
+  int sz = 0;
+  std::pair<int, int>* relations_;
+};
+
+#endif // RELATION_H_
