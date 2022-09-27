@@ -139,16 +139,15 @@ bool Relation::is_function() const {
   return true;
 }
 
-/*
-
 Relation Relation::inverse() const {
   Relation res;
-  for (auto p : relations_) {
-    res.add_element({p.second, p.first});
+  for (int i = 0; i < sz; ++i) {
+    res.add_element({relations_[i].second, relations_[i].first});
   }
   return res;
 }
 
+/*
 Relation Relation::combination(const Relation& other) const {
   Relation res;
   if (elems_ == other.elems_) {
