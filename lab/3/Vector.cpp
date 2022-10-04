@@ -7,7 +7,12 @@ Vector::Vector() {
   elems_ = new double[dimension_];
 }
 
-Vector::Vector(double* arr, int n) : elems_(arr), dimension_(n) {}
+Vector::Vector(double* arr, int n) : dimension_(n) {
+  elems_ = new double[dimension_];
+  for (int i = 0; i < dimension_; ++i) {
+    elems_[i] = arr[i];
+  }
+}
 
 Vector::Vector(const Vector& other) {
   elems_ = other.elems_;
