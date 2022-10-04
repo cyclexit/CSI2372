@@ -26,11 +26,11 @@ class Vector {
   Vector& operator=(const Vector& other);
   friend Vector& operator+(Vector lhs, const Vector& rhs);
   friend Vector& operator-(Vector lhs, const Vector& rhs);
-  friend Vector& operator*(double val, const Vector& v); // multiplying a scalar and a vector
+  friend Vector operator*(double val, const Vector& v); // multiplying a scalar and a vector
   Vector& operator+=(const Vector& other);
   Vector& operator-=(const Vector& other);
-  Vector& operator*(double val); // multiplying a vector and a scalar
-  Vector& operator*(const Vector& other); // internal product
+  Vector operator*(double val); // multiplying a vector and a scalar
+  double operator*(const Vector& other); // internal product
   friend std::ostream& operator<<(std::ostream& out, const Vector& v);
 
   Vector operator-() const {
