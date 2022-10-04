@@ -25,10 +25,10 @@ class Vector {
   Vector& operator=(const Vector& other);
   Vector& operator+(const Vector& other);
   Vector& operator-(const Vector& other);
+  friend Vector& operator*(double val, const Vector& v); // multiplying a scalar and a vector
   Vector& operator+=(const Vector& other);
   Vector& operator-=(const Vector& other);
-  Vector& operator*(double val);
-  Vector& operator*(const Vector& other);
+  Vector& operator*(const Vector& other); // multiplying a vector and a scalar
   friend std::ostream& operator<<(std::ostream& out, const Vector& v);
 
  private:
@@ -36,6 +36,6 @@ class Vector {
   int sz_;
 };
 
-constexpr Vector operator*(Vector lhs, const Vector& rhs);
+constexpr Vector operator*(const Vector& lhs, const Vector& rhs);
 
 #endif // LAB_3_VECTOR_H_
