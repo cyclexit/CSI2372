@@ -150,15 +150,20 @@ Vector Vector::operator*(double val) {
 }
 
 // internal product
-double Vector::operator*(const Vector& other) {
+Vector Vector::operator*(const Vector& other) {
   int smaller_dimension = std::min(other.dimension_, dimension_);
-  double res = 0.0;
+  int res_dimension = std::max(other.dimension_, dimension_);
 
-  for (int i = 0; i < smaller_dimension; ++i) {
-    res += elems_[i] * other.elems_[i];
+  double* res = new double[res_dimension];
+  for (int i = 0; i < res_dimension; ++i) {
+    if (i < smaller_dimension) {
+      res[i] = elems_[i] * other.elems_[i];
+    } else {
+      res[i] = 0.0;
+    }
   }
 
-  return res;
+  return Vector(res, res_dimension);
 }
 
 std::ostream& operator<<(std::ostream& out, const Vector& v) {

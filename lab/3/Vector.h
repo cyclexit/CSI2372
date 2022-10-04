@@ -1,6 +1,7 @@
 #ifndef LAB_3_VECTOR_H_
 #define LAB_3_VECTOR_H_
 
+#include <cmath>
 #include <iostream>
 #include <limits>
 
@@ -30,7 +31,7 @@ class Vector {
   Vector& operator+=(const Vector& other);
   Vector& operator-=(const Vector& other);
   Vector operator*(double val); // multiplying a vector and a scalar
-  double operator*(const Vector& other); // internal product
+  Vector operator*(const Vector& other); // internal product
   friend std::ostream& operator<<(std::ostream& out, const Vector& v);
 
   Vector operator-() const {
