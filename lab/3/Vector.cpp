@@ -98,6 +98,7 @@ bool Vector::operator!=(const Vector& other) {
 Vector& Vector::operator=(const Vector& other) {
   elems_ = other.elems_;
   dimension_ = other.dimension_;
+  return *this;
 }
 
 Vector& operator+(Vector lhs, const Vector& rhs) {
@@ -173,4 +174,5 @@ std::ostream& operator<<(std::ostream& out, const Vector& v) {
     out << v.elems_[i];
   }
   out << ")";
+  return out;
 }
