@@ -14,6 +14,11 @@ Vector::Vector(const Vector& other) {
   dimension_ = other.dimension_;
 }
 
+Vector::~Vector() {
+  dimension_ = 0;
+  delete[] elems_;
+}
+
 int Vector::dimension() {
   return dimension_;
 }
