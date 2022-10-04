@@ -32,8 +32,9 @@ class Vector {
   friend std::ostream& operator<<(std::ostream& out, const Vector& v);
 
  private:
+  static constexpr int kDefaultDimension = 2;
   double* elems_;
-  int sz_;
+  int dimension_;
 };
 
 constexpr Vector operator*(const Vector& lhs, const Vector& rhs);
