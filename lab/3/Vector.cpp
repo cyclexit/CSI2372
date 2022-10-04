@@ -50,8 +50,11 @@ bool Vector::remove_dimension(int idx) {
   double* tmp = new double[dimension_ - 1];
   if (tmp == nullptr) return false;
 
-  for (int i = 0; i < dimension_; ++i) {
-    if (i != idx) tmp[i] = elems_[i];
+  for (int i = 0; i < idx; ++i) {
+    tmp[i] = elems_[i];
+  }
+  for (int i = idx + 1; i < dimension_; ++i) {
+    tmp[i - 1] = elems_[i];
   }
 
   delete[] elems_;
