@@ -14,14 +14,18 @@ Vector::Vector(double* arr, int n) : dimension_(n) {
   }
 }
 
-Vector::Vector(const Vector& other) {
-  elems_ = other.elems_;
-  dimension_ = other.dimension_;
+Vector::Vector(const Vector& other) : dimension_(other.dimension_) {
+  // NOTE: in the constructor this is not valid.
+  // if (elems_ != nullptr) delete[] elems_;
+  elems_ = new double[dimension_];
+  for (int i = 0; i < dimension_; ++i) {
+    elems_[i] = other.elems_[i];
+  }
 }
 
 Vector::~Vector() {
   dimension_ = 0;
-  delete[] elems_;
+  if (elems_ != nullptr) delete[] elems_;
 }
 
 int Vector::dimension() {
@@ -109,8 +113,14 @@ bool Vector::operator!=(const Vector& other) {
 }
 
 Vector& Vector::operator=(const Vector& other) {
-  elems_ = other.elems_;
   dimension_ = other.dimension_;
+
+  if (elems_ != nullptr) delete[] elems_;
+  elems_ = new double[dimension_];
+
+  for (int i = 0; i < dimension_; ++i) {
+    elems_[i] = other.elems_[i];
+  }
   return *this;
 }
 
