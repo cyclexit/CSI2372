@@ -28,7 +28,7 @@ Vector::~Vector() {
   if (elems_ != nullptr) delete[] elems_;
 }
 
-int Vector::dimension() {
+int Vector::dimension() const {
   return dimension_;
 }
 
@@ -87,7 +87,7 @@ bool Vector::insert_dimension(int idx, double val) {
   return true;
 }
 
-double Vector::magnitude() {
+double Vector::magnitude() const {
   double sqr_sum = 0.0;
   for (int i = 0; i < dimension_; ++i) {
     sqr_sum += elems_[i] * elems_[i];
@@ -95,11 +95,11 @@ double Vector::magnitude() {
   return sqrt(sqr_sum);
 }
 
-double Vector::operator[](int idx) {
+double Vector::operator[](int idx) const {
   return idx >= dimension_ ? kInvalidValue : elems_[idx];
 }
 
-bool Vector::operator==(const Vector& other) {
+bool Vector::operator==(const Vector& other) const {
   if (other.dimension_ != dimension_) return false;
 
   for (int i = 0; i < dimension_; ++i) {
@@ -108,7 +108,7 @@ bool Vector::operator==(const Vector& other) {
   return true;
 }
 
-bool Vector::operator!=(const Vector& other) {
+bool Vector::operator!=(const Vector& other) const {
   return !((*this) == other);
 }
 
@@ -169,12 +169,12 @@ Vector& Vector::operator-=(const Vector& other) {
 }
 
 // multiplying a vector and a scalar
-Vector Vector::operator*(double val) {
+Vector Vector::operator*(double val) const {
   return val * (*this);
 }
 
 // internal product
-Vector Vector::operator*(const Vector& other) {
+Vector Vector::operator*(const Vector& other) const {
   int smaller_dimension = std::min(other.dimension_, dimension_);
   int res_dimension = std::max(other.dimension_, dimension_);
 

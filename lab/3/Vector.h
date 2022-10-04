@@ -14,24 +14,24 @@ class Vector {
   ~Vector();
 
   // methods
-  int dimension();
+  int dimension() const;
   bool add_dimension(double val);
   bool remove_dimension(int idx);
   bool insert_dimension(int idx, double val);
-  double magnitude();
+  double magnitude() const;
 
   // operators
-  double operator[](int idx);
-  bool operator==(const Vector& other);
-  bool operator!=(const Vector& other);
+  double operator[](int idx) const;
+  bool operator==(const Vector& other) const;
+  bool operator!=(const Vector& other) const;
   Vector& operator=(const Vector& other);
   friend Vector& operator+(Vector lhs, const Vector& rhs);
   friend Vector& operator-(Vector lhs, const Vector& rhs);
   friend Vector operator*(double val, const Vector& v); // multiplying a scalar and a vector
   Vector& operator+=(const Vector& other);
   Vector& operator-=(const Vector& other);
-  Vector operator*(double val); // multiplying a vector and a scalar
-  Vector operator*(const Vector& other); // internal product
+  Vector operator*(double val) const; // multiplying a vector and a scalar
+  Vector operator*(const Vector& other) const; // internal product
   friend std::ostream& operator<<(std::ostream& out, const Vector& v);
 
   Vector operator-() const {
@@ -48,7 +48,5 @@ class Vector {
   double* elems_;
   int dimension_;
 };
-
-constexpr Vector operator*(const Vector& lhs, const Vector& rhs);
 
 #endif // LAB_3_VECTOR_H_
