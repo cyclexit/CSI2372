@@ -17,7 +17,7 @@ class Vector {
   int dimension();
   bool add_dimension(double val);
   bool remove_dimension(int idx);
-  bool insert_dimension(double val, int idx);
+  bool insert_dimension(int idx, double val);
   double magnitude();
 
   // operators

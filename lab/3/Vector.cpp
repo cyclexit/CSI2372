@@ -63,7 +63,7 @@ bool Vector::remove_dimension(int idx) {
   return true;
 }
 
-bool Vector::insert_dimension(double val, int idx) {
+bool Vector::insert_dimension(int idx, double val) {
   if (idx > dimension_) return false;
 
   double* tmp = new double[dimension_ + 1];
