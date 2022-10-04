@@ -25,12 +25,21 @@ class Vector {
   bool operator!=(const Vector& other);
   Vector& operator=(const Vector& other);
   friend Vector& operator+(Vector lhs, const Vector& rhs);
-  Vector& operator-(const Vector& other);
+  friend Vector& operator-(Vector lhs, const Vector& rhs);
   friend Vector& operator*(double val, const Vector& v); // multiplying a scalar and a vector
   Vector& operator+=(const Vector& other);
   Vector& operator-=(const Vector& other);
-  Vector& operator*(const Vector& other); // multiplying a vector and a scalar
+  Vector& operator*(double val); // multiplying a vector and a scalar
+  Vector& operator*(const Vector& other); // internal product
   friend std::ostream& operator<<(std::ostream& out, const Vector& v);
+
+  Vector operator-() const {
+    Vector res(*this);
+    for (int i = 0; i < res.dimension_; ++i) {
+      res.elems_[i] *= -1;
+    }
+    return res;
+  }
 
  private:
   static constexpr int kDefaultDimension = 2;

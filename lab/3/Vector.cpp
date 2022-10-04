@@ -104,6 +104,10 @@ Vector& operator+(Vector lhs, const Vector& rhs) {
   return (lhs += rhs);
 }
 
+Vector& operator-(Vector lhs, const Vector& rhs) {
+  return (lhs -= rhs);
+}
+
 Vector& Vector::operator+=(const Vector& other) {
   int smaller_dimension = std::min(other.dimension_, dimension_);
   int res_dimension = std::max(other.dimension_, dimension_);
@@ -111,9 +115,11 @@ Vector& Vector::operator+=(const Vector& other) {
   double* res = new double[res_dimension];
   for (int i = 0; i < res_dimension; ++i) {
     if (i < smaller_dimension) {
-      res[i] = elems_[i] * other.elems_[i];
+      // NOTE: If use "return ((*this) += (-other));" to implement operator-=(),
+      // the order of the addition below is very important !!!
+      res[i] = elems_[i] + other.elems_[i];
     } else {
-      res[i] = 0.0;
+      res[i] = (i >= dimension_ ? other.elems_[i] : elems_[i]);
     }
   }
 
@@ -121,4 +127,9 @@ Vector& Vector::operator+=(const Vector& other) {
   elems_ = res;
   dimension_ = res_dimension;
   return (*this);
+}
+
+Vector& Vector::operator-=(const Vector& other) {
+  // The solution below works depending on the implementation of operator+=().
+  return ((*this) += (-other));
 }
