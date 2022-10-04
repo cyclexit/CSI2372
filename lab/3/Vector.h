@@ -2,6 +2,7 @@
 #define LAB_3_VECTOR_H_
 
 #include <iostream>
+#include <limits>
 
 class Vector {
  public:
@@ -23,7 +24,7 @@ class Vector {
   bool operator==(const Vector& other);
   bool operator!=(const Vector& other);
   Vector& operator=(const Vector& other);
-  Vector& operator+(const Vector& other);
+  friend Vector& operator+(Vector lhs, const Vector& rhs);
   Vector& operator-(const Vector& other);
   friend Vector& operator*(double val, const Vector& v); // multiplying a scalar and a vector
   Vector& operator+=(const Vector& other);
@@ -33,6 +34,7 @@ class Vector {
 
  private:
   static constexpr int kDefaultDimension = 2;
+  static constexpr double kInvalidValue = std::numeric_limits<double>::max();
   double* elems_;
   int dimension_;
 };

@@ -77,3 +77,48 @@ double Vector::magnitude() {
   }
   return sqrt(res);
 }
+
+double Vector::operator[](int idx) {
+  return idx >= dimension_ ? kInvalidValue : elems_[idx];
+}
+
+bool Vector::operator==(const Vector& other) {
+  if (other.dimension_ != dimension_) return false;
+
+  for (int i = 0; i < dimension_; ++i) {
+    if (other.elems_[i] != elems_[i]) return false;
+  }
+  return true;
+}
+
+bool Vector::operator!=(const Vector& other) {
+  return !((*this) == other);
+}
+
+Vector& Vector::operator=(const Vector& other) {
+  elems_ = other.elems_;
+  dimension_ = other.dimension_;
+}
+
+Vector& operator+(Vector lhs, const Vector& rhs) {
+  return (lhs += rhs);
+}
+
+Vector& Vector::operator+=(const Vector& other) {
+  int smaller_dimension = std::min(other.dimension_, dimension_);
+  int res_dimension = std::max(other.dimension_, dimension_);
+  
+  double* res = new double[res_dimension];
+  for (int i = 0; i < res_dimension; ++i) {
+    if (i < smaller_dimension) {
+      res[i] = elems_[i] * other.elems_[i];
+    } else {
+      res[i] = 0.0;
+    }
+  }
+
+  delete[] elems_;
+  elems_ = res;
+  dimension_ = res_dimension;
+  return (*this);
+}
