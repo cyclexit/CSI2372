@@ -24,6 +24,8 @@ class BigInteger {
   // specify the parameter orders
   bool insert_digit();
 
+  // operators
+
  private:
   // data member
   static constexpr int kInitLen = 32;
