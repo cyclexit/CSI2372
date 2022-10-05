@@ -12,6 +12,14 @@ BigInteger::BigInteger() {
 
 BigInteger::BigInteger(int val, int base) {
   base_ = base;
+  len_ = calc_len(val, base);
+  digits_ = new int[len_];
+
+  int i = 0;
+  while(val) {
+    digits_[i++] = val % base_;
+    val /= base_;
+  }
 }
 
 /**
