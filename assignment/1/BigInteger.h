@@ -3,6 +3,11 @@
 
 class BigInteger {
  public:
+  // ctors and dtors
+  BigInteger();
+  BigInteger(int val, int base);
+  BigInteger(const BigInteger& other);
+  ~BigInteger();
 
  private:
   char* digits_;
