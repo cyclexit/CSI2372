@@ -30,9 +30,12 @@ char BigInteger::int_to_digit(int d) {
 
 // Calculate the digit length of the val with the given base.
 int BigInteger::calc_len(int val, int base) {
+  if (val == 0) return 1;
+
   int res = 0;
-  while (base) {
+  while (val) {
     ++res;
     val /= base;
   }
+  return res;
 }
