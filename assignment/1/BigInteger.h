@@ -14,8 +14,8 @@ class BigInteger {
   static constexpr int kInitLen = 32;
   int base_;
   int len_;
-  // Most significant digit index: (len_ - 1)
-  // Least significant digit index: 0
+  // Most significant digit index: 0
+  // Least significant digit index: (len_ - 1)
   int* digits_; // possible values: [0, 35]
 
   static char int_to_digit(int d);
