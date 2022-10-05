@@ -1,5 +1,5 @@
-#ifndef CSI2371_ASSIGNMENT_1_BIG_INTEGER_H_
-#define CSI2371_ASSIGNMENT_1_BIG_INTEGER_H_
+#ifndef CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
+#define CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
 
 class BigInteger {
  public:
@@ -10,9 +10,14 @@ class BigInteger {
   ~BigInteger();
 
  private:
-  char* digits_;
-  int len_;
+  // data member
+  static constexpr int kInitLen = 32;
   int base_;
+  int len_;
+  int* digits_; // possible values: [0, 35]
+
+  static char int_to_digit(int d);
+  static int calc_len(int val, int base);
 };
 
-#endif // CSI2371_ASSIGNMENT_1_BIG_INTEGER_H_
+#endif // CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
