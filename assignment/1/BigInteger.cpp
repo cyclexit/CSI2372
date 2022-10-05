@@ -26,6 +26,21 @@ BigInteger::BigInteger(int val, int base) {
   }
 }
 
+BigInteger::BigInteger(const BigInteger& other) {
+  base_ = other.base_;
+  len_ = other.len_;
+  digits_ = new int[len_];
+
+  for (int i = 0; i < len_; ++i) {
+    digits_[i] = other.digits_[i];
+  }
+}
+
+BigInteger::~BigInteger() {
+  len_ = 0;
+  if (digits_ != nullptr) delete[] digits_;
+}
+
 /**
  * private
  */
