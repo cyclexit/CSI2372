@@ -9,6 +9,21 @@ class BigInteger {
   BigInteger(const BigInteger& other);
   ~BigInteger();
 
+  // methods
+
+  // TODO: complete the signature
+  // specify the parameter orders
+  int num_digits();
+
+  // NOTE: check if d < base
+  bool add_digit(int d);
+
+  void remove_digit();
+
+  // TODO: complete the signature
+  // specify the parameter orders
+  bool insert_digit();
+
  private:
   // data member
   static constexpr int kInitLen = 32;
