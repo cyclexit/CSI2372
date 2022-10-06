@@ -191,7 +191,7 @@ Vector Vector::operator*(const Vector& other) const {
 }
 
 std::ostream& operator<<(std::ostream& out, const Vector& v) {
-  out << "v = (";
+  out << "(";
   for (int i = 0; i < v.dimension_; ++i) {
     if (i) out << ", ";
     out << v.elems_[i];
