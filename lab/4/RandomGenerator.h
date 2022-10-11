@@ -1,6 +1,7 @@
 #ifndef LAB_4_RANDOM_GENERATOR_H_
 #define LAB_4_RANDOM_GENERATOR_H_
 
+#include <cmath>
 #include <cstdlib>
 #include <iostream>
 
@@ -28,12 +29,12 @@ class RandomGenerator {
   bool operator==(const RandomGenerator& other);
   bool operator!=(const RandomGenerator& other);
   RandomGenerator& operator=(const RandomGenerator& other);
-  friend RandomGenerator operator+(RandomGenerator lhs, const RandomGenerator& rhs);
-  friend RandomGenerator operator-(RandomGenerator lhs, const RandomGenerator& rhs);
-  friend RandomGenerator operator*(RandomGenerator lhs, const RandomGenerator& rhs);
-  RandomGenerator& operator+=(const RandomGenerator& other);
-  RandomGenerator& operator-=(const RandomGenerator& other);
-  RandomGenerator& operator*=(const RandomGenerator& other);
+  friend RandomGenerator operator+(RandomGenerator lhs, RandomGenerator& rhs);
+  friend RandomGenerator operator-(RandomGenerator lhs, RandomGenerator& rhs);
+  friend RandomGenerator operator*(RandomGenerator lhs, RandomGenerator& rhs);
+  RandomGenerator& operator+=(RandomGenerator& other);
+  RandomGenerator& operator-=(RandomGenerator& other);
+  RandomGenerator& operator*=(RandomGenerator& other);
   RandomGenerator& operator++();
   RandomGenerator operator++(int);
   RandomGenerator& operator--();

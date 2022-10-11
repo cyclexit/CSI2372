@@ -75,16 +75,28 @@ RandomGenerator& RandomGenerator::operator=(const RandomGenerator& other) {
   return *this;
 }
 
-RandomGenerator operator+(RandomGenerator lhs, const RandomGenerator& rhs) {
+RandomGenerator operator+(RandomGenerator lhs, RandomGenerator& rhs) {
   return lhs += rhs;
 }
 
-RandomGenerator operator-(RandomGenerator lhs, const RandomGenerator& rhs) {
+RandomGenerator operator-(RandomGenerator lhs, RandomGenerator& rhs) {
   return lhs -= rhs;
 }
 
-RandomGenerator operator*(RandomGenerator lhs, const RandomGenerator& rhs) {
+RandomGenerator operator*(RandomGenerator lhs, RandomGenerator& rhs) {
   return lhs *= rhs;
+}
+
+RandomGenerator& RandomGenerator::operator+=(RandomGenerator& other) {
+  while (len_ != other.len_) {
+    len_ < other.len_ ? operator++() : ++other;
+  }
+
+  for (int i = 0; i < len_; ++i) {
+    random_seq_[i] = (random_seq_[i] + other.random_seq_[i]) % modulo_;
+  }
+
+  return *this;
 }
 
 RandomGenerator& RandomGenerator::operator++() {
