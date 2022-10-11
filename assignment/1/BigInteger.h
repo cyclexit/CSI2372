@@ -29,6 +29,9 @@ class BigInteger {
   bool operator!=(const BigInteger& other);
   // arithmetic operators
   BigInteger& operator=(const BigInteger& other);
+  BigInteger& operator+(int num);
+  friend BigInteger& operator+(int num, const BigInteger& big_num);
+  BigInteger& operator+(const BigInteger& other);
 
  private:
   // data member
