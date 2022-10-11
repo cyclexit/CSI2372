@@ -85,6 +85,10 @@ char BigInteger::operator[](int pos) {
   return int_to_digit(digits_[pos]);
 }
 
+bool BigInteger::operator==(const BigInteger& other) {
+  // TODO: need a helper function to_base_10
+}
+
 /**
  * private
  */
@@ -108,5 +112,17 @@ int BigInteger::calc_len(int num, int base) {
     ++res;
     num /= base;
   }
+  return res;
+}
+
+int BigInteger::to_base_10() {
+  int res = 0;
+  int digit_weight = 1;
+
+  for (int i = len_ - 1; i >= 0; --i) {
+    res += digit_weight * digits_[i];
+    digit_weight *= base_;
+  }
+
   return res;
 }

@@ -23,7 +23,9 @@ class BigInteger {
   bool insert_digit(int digit, int pos);
 
   // operators
+
   char operator[](int pos);
+  bool operator==(const BigInteger& other);
 
  private:
 
@@ -38,6 +40,7 @@ class BigInteger {
 
   static char int_to_digit(int digit);
   static int calc_len(int num, int base);
+  int to_base_10();
 };
 
 #endif // CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
