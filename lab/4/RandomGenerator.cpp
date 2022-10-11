@@ -171,4 +171,5 @@ std::ostream& operator<<(std::ostream& out, const RandomGenerator& rng) {
     if (i) out << ", ";
     out << rng.random_seq_[i];
   }
+  return out;
 }
