@@ -63,6 +63,7 @@ void BigInteger::remove_digit() {
 
 bool BigInteger::insert_digit(int digit, int pos) {
   if (pos > len_) return false;
+  if (digit >= base_) return false;
 
   int* temp = new int[len_ + 1];
   if (temp == nullptr) return false;
