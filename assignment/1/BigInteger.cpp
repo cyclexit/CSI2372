@@ -87,6 +87,7 @@ char BigInteger::operator[](int pos) {
 
 bool BigInteger::operator==(const BigInteger& other) {
   // TODO: need a helper function to_base_10
+  return to_base_10() == other.to_base_10();
 }
 
 /**
@@ -115,7 +116,7 @@ int BigInteger::calc_len(int num, int base) {
   return res;
 }
 
-int BigInteger::to_base_10() {
+int BigInteger::to_base_10() const {
   int res = 0;
   int digit_weight = 1;
 

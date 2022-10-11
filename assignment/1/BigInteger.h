@@ -40,7 +40,7 @@ class BigInteger {
 
   static char int_to_digit(int digit);
   static int calc_len(int num, int base);
-  int to_base_10();
+  int to_base_10() const;
 };
 
 #endif // CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
