@@ -18,14 +18,17 @@ class BigInteger {
   bool insert_digit(int digit, int pos);
 
   // operators
-  char operator[](int pos);
+  char operator[](int pos) const;
   // TODO: base conversion with BigInteger itself
+  // comparison operators
   bool operator==(const BigInteger& other);
   bool operator>(const BigInteger& other);
   bool operator<(const BigInteger& other);
   bool operator>=(const BigInteger& other);
   bool operator<=(const BigInteger& other);
   bool operator!=(const BigInteger& other);
+  // arithmetic operators
+  BigInteger& operator=(const BigInteger& other);
 
  private:
   // data member

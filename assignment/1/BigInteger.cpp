@@ -82,7 +82,7 @@ bool BigInteger::insert_digit(int digit, int pos) {
   return true;
 }
 
-char BigInteger::operator[](int pos) {
+char BigInteger::operator[](int pos) const {
   return int_to_digit(digits_[pos]);
 }
 
@@ -108,6 +108,20 @@ bool BigInteger::operator<=(const BigInteger& other) {
 
 bool BigInteger::operator!=(const BigInteger& other) {
   return to_base_10() != other.to_base_10();
+}
+
+BigInteger& BigInteger::operator=(const BigInteger& other) {
+  base_ = other.base_;
+  len_ = other.len_;
+
+  if (digits_ != nullptr) delete[] digits_;
+  digits_ = new int[len_];
+
+  for (int i = 0; i < len_; ++i) {
+    digits_[i] = other.digits_[i];
+  }
+
+  return *this;
 }
 
 /**
