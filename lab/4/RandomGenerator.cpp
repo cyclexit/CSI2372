@@ -26,7 +26,6 @@ RandomGenerator::RandomGenerator(const RandomGenerator& other) {
   len_ = other.len_;
   modulo_ = other.modulo_;
 
-  if (random_seq_ != nullptr) delete[] random_seq_;
   random_seq_ = new long long[len_];
 
   for (int i = 0; i < len_; ++i) {
@@ -75,15 +74,15 @@ RandomGenerator& RandomGenerator::operator=(const RandomGenerator& other) {
   return *this;
 }
 
-RandomGenerator operator+(RandomGenerator lhs, RandomGenerator& rhs) {
+RandomGenerator& operator+(RandomGenerator lhs, RandomGenerator& rhs) {
   return lhs += rhs;
 }
 
-RandomGenerator operator-(RandomGenerator lhs, RandomGenerator& rhs) {
+RandomGenerator& operator-(RandomGenerator lhs, RandomGenerator& rhs) {
   return lhs -= rhs;
 }
 
-RandomGenerator operator*(RandomGenerator lhs, RandomGenerator& rhs) {
+RandomGenerator& operator*(RandomGenerator lhs, RandomGenerator& rhs) {
   return lhs *= rhs;
 }
 
