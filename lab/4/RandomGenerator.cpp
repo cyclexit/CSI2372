@@ -38,3 +38,24 @@ RandomGenerator::~RandomGenerator() {
   s_ = len_ = modulo_ = 0;
   if (random_seq_ != nullptr) delete[] random_seq_;
 }
+
+int RandomGenerator::operator[](int idx) const {
+  return random_seq_[idx];
+}
+
+bool RandomGenerator::operator==(const RandomGenerator& other) {
+  if (len_ != other.len_ || s_ != other.s_) return false;
+
+  for (int i = 0; i < len_; ++i) {
+    if (random_seq_[i] != other.random_seq_[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+bool RandomGenerator::operator!=(const RandomGenerator& other) {
+  // TODO: think this logic twice. It seems alright...
+  return !(*this == other);
+}
