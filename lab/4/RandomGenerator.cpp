@@ -105,7 +105,21 @@ RandomGenerator& RandomGenerator::operator-=(RandomGenerator& other) {
   }
 
   for (int i = 0; i < len_; ++i) {
-    random_seq_[i] = abs(random_seq_[i] + other.random_seq_[i]);
+    random_seq_[i] = abs(random_seq_[i] - other.random_seq_[i]);
+  }
+
+  return *this;
+}
+
+RandomGenerator& RandomGenerator::operator*=(RandomGenerator& other) {
+  while (len_ != other.len_) {
+    len_ < other.len_ ? operator++() : ++other;
+  }
+
+  for (int i = 0; i < len_; ++i) {
+    random_seq_[i] = random_seq_[i] * other.random_seq_[i];
+    random_seq_[i] /= fast_pow(10, s_ / 2);
+    random_seq_[i] %= modulo_;
   }
 
   return *this;
