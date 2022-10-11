@@ -1,0 +1,38 @@
+#ifndef LAB_4_RANDOM_GENERATOR_H_
+#define LAB_4_RANDOM_GENERATOR_H_
+
+#include <cstdlib>
+#include <iostream>
+
+class RandomGenerator {
+ public:
+  // ctors and dtors
+  RandomGenerator();
+  RandomGenerator(int s, int rnd1, int rnd2);
+  RandomGenerator(const RandomGenerator& other);
+  ~RandomGenerator();
+
+  // operators
+  int operator[](int idx) const;
+  bool operator==(const RandomGenerator& other);
+  bool operator!=(const RandomGenerator& other);
+  RandomGenerator& operator=(const RandomGenerator& other);
+  friend RandomGenerator operator+(RandomGenerator& lhs, const RandomGenerator& rhs);
+  friend RandomGenerator operator-(RandomGenerator& lhs, const RandomGenerator& rhs);
+  friend RandomGenerator operator*(RandomGenerator& lhs, const RandomGenerator& rhs);
+  RandomGenerator& operator+=(const RandomGenerator& other);
+  RandomGenerator& operator-=(const RandomGenerator& other);
+  RandomGenerator& operator*=(const RandomGenerator& other);
+  RandomGenerator& operator++();
+  RandomGenerator operator++(int);
+  RandomGenerator& operator--();
+  RandomGenerator operator--(int);
+  friend std::ostream& operator<<(std::ostream& out, const RandomGenerator& rng);
+
+ private:
+  static constexpr int kMinSeqLen = 2;
+  int s_, len_;
+  int* random_seq_;
+};
+
+#endif // LAB_4_RANDOM_GENERATOR_H_
