@@ -5,25 +5,19 @@ class BigInteger {
  public:
 
   // ctors and dtors
-
   BigInteger();
   BigInteger(int num, int base);
   BigInteger(const BigInteger& other);
   ~BigInteger();
 
   // methods
-
   int num_digits();
-
   // NOTE: check if d < base
   bool add_digit(int digit);
-
   void remove_digit();
-
   bool insert_digit(int digit, int pos);
 
   // operators
-
   char operator[](int pos);
   // TODO: base conversion with BigInteger itself
   bool operator==(const BigInteger& other);
@@ -34,10 +28,7 @@ class BigInteger {
   bool operator!=(const BigInteger& other);
 
  private:
-
   // data member
-
-  static constexpr int kInitLen = 32;
   int base_;
   int len_;
   // Most significant digit index: 0

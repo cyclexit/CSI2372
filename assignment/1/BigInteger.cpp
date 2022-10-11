@@ -6,8 +6,8 @@
 
 BigInteger::BigInteger() {
   base_ = 10;
-  len_ = kInitLen;
-  digits_ = new int[len_];
+  len_ = 1;
+  digits_ = new int[len_]{0};
 }
 
 BigInteger::BigInteger(int num, int base) {
