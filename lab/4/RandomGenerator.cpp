@@ -112,14 +112,18 @@ RandomGenerator& RandomGenerator::operator-=(RandomGenerator& other) {
 }
 
 RandomGenerator& RandomGenerator::operator++() {
+  // generate the next pseudorandom number
+  int nxt = random_seq_[len_ - 1] * random_seq_[len_ - 2];
+  nxt /= fast_pow(10, s_ / 2);
+  nxt %= modulo_;
+
   int* temp = new int[len_ + 1];
   for (int i = 0; i < len_; ++i) {
     temp[i] = random_seq_[i];
   }
   delete[] random_seq_;
   random_seq_ = temp;
-  // TODO: do the generation here. Don't use rand here
-  random_seq_[len_++] = rand() % modulo_;
+  random_seq_[len_++] = nxt;
   return *this;
 }
 
