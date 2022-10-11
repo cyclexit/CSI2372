@@ -81,6 +81,10 @@ bool BigInteger::insert_digit(int digit, int pos) {
   return true;
 }
 
+char BigInteger::operator[](int pos) {
+  return int_to_digit(digits_[pos]);
+}
+
 /**
  * private
  */

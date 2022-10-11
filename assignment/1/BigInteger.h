@@ -23,6 +23,7 @@ class BigInteger {
   bool insert_digit(int digit, int pos);
 
   // operators
+  char operator[](int pos);
 
  private:
 
