@@ -59,3 +59,18 @@ bool RandomGenerator::operator!=(const RandomGenerator& other) {
   // TODO: think this logic twice. It seems alright...
   return !(*this == other);
 }
+
+RandomGenerator& RandomGenerator::operator=(const RandomGenerator& other) {
+  s_ = other.s_;
+  len_ = other.len_;
+  modulo_ = other.modulo_;
+
+  if (random_seq_ != nullptr) delete[] random_seq_;
+  random_seq_ = new int[len_];
+
+  for (int i = 0; i < len_; ++i) {
+    random_seq_[i] = other.random_seq_[i];
+  }
+
+  return *this;
+}
