@@ -118,6 +118,7 @@ RandomGenerator& RandomGenerator::operator++() {
   }
   delete[] random_seq_;
   random_seq_ = temp;
+  // TODO: do the generation here. Don't use rand here
   random_seq_[len_++] = rand() % modulo_;
   return *this;
 }
@@ -145,4 +146,11 @@ RandomGenerator RandomGenerator::operator--(int) {
   RandomGenerator old(*this);
   operator--();
   return old;
+}
+
+std::ostream& operator<<(std::ostream& out, const RandomGenerator& rng) {
+  for (int i = 0; i < rng.len_; ++i) {
+    if (i) out << ", ";
+    out << rng.random_seq_[i];
+  }
 }
