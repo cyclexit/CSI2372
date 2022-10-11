@@ -5,7 +5,7 @@ RandomGenerator::RandomGenerator() {
   len_ = kMinSeqLen;
   modulo_ = fast_pow(10, s_);
 
-  random_seq_ = new int[len_];
+  random_seq_ = new long long[len_];
   for (int i = 0; i < len_; ++i) {
     random_seq_[i] = rand() % modulo_;
   }
@@ -16,7 +16,7 @@ RandomGenerator::RandomGenerator(int half_s, int rnd1, int rnd2) {
   len_ = kMinSeqLen;
   modulo_ = fast_pow(10, s_);
 
-  random_seq_ = new int[len_];
+  random_seq_ = new long long[len_];
   random_seq_[0] = rnd1 % modulo_;
   random_seq_[1] = rnd2 % modulo_;
 }
@@ -27,7 +27,7 @@ RandomGenerator::RandomGenerator(const RandomGenerator& other) {
   modulo_ = other.modulo_;
 
   if (random_seq_ != nullptr) delete[] random_seq_;
-  random_seq_ = new int[len_];
+  random_seq_ = new long long[len_];
 
   for (int i = 0; i < len_; ++i) {
     random_seq_[i] = other.random_seq_[i];
@@ -66,7 +66,7 @@ RandomGenerator& RandomGenerator::operator=(const RandomGenerator& other) {
   modulo_ = other.modulo_;
 
   if (random_seq_ != nullptr) delete[] random_seq_;
-  random_seq_ = new int[len_];
+  random_seq_ = new long long[len_];
 
   for (int i = 0; i < len_; ++i) {
     random_seq_[i] = other.random_seq_[i];
@@ -127,11 +127,11 @@ RandomGenerator& RandomGenerator::operator*=(RandomGenerator& other) {
 
 RandomGenerator& RandomGenerator::operator++() {
   // generate the next pseudorandom number
-  int nxt = random_seq_[len_ - 1] * random_seq_[len_ - 2];
+  long long nxt = random_seq_[len_ - 1] * random_seq_[len_ - 2];
   nxt /= fast_pow(10, s_ / 2);
   nxt %= modulo_;
 
-  int* temp = new int[len_ + 1];
+  long long* temp = new long long[len_ + 1];
   for (int i = 0; i < len_; ++i) {
     temp[i] = random_seq_[i];
   }
@@ -150,7 +150,7 @@ RandomGenerator RandomGenerator::operator++(int) {
 RandomGenerator& RandomGenerator::operator--() {
   if (len_ <= kMinSeqLen) return *this;
 
-  int* temp = new int[len_ - 1];
+  long long* temp = new long long[len_ - 1];
   for (int i = 0; i < len_ - 1; ++i) {
     temp[i] = random_seq_[i];
   }

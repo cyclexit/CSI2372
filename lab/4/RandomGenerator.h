@@ -43,8 +43,9 @@ class RandomGenerator {
 
  private:
   static constexpr int kMinSeqLen = 2;
-  int s_, len_, modulo_;
-  int* random_seq_;
+  int s_, len_;
+  long long modulo_;
+  long long* random_seq_;
 };
 
 #endif // LAB_4_RANDOM_GENERATOR_H_
