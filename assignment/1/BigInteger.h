@@ -3,16 +3,16 @@
 
 class BigInteger {
  public:
+
   // ctors and dtors
+
   BigInteger();
-  BigInteger(int val, int base);
+  BigInteger(int num, int base);
   BigInteger(const BigInteger& other);
   ~BigInteger();
 
   // methods
 
-  // TODO: complete the signature
-  // specify the parameter orders
   int num_digits();
 
   // NOTE: check if d < base
@@ -20,14 +20,14 @@ class BigInteger {
 
   void remove_digit();
 
-  // TODO: complete the signature
-  // specify the parameter orders
-  bool insert_digit();
+  bool insert_digit(int digit, int pos);
 
   // operators
 
  private:
+
   // data member
+
   static constexpr int kInitLen = 32;
   int base_;
   int len_;

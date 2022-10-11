@@ -10,18 +10,18 @@ BigInteger::BigInteger() {
   digits_ = new int[len_];
 }
 
-BigInteger::BigInteger(int val, int base) {
+BigInteger::BigInteger(int num, int base) {
   base_ = base;
-  len_ = calc_len(val, base);
+  len_ = calc_len(num, base);
   digits_ = new int[len_];
 
-  if (val == 0) {
-    digits_[0] = val;
+  if (num == 0) {
+    digits_[0] = num;
   } else {
     int i = 0;
-    while(val) {
-      digits_[i++] = val % base_;
-      val /= base_;
+    while(num) {
+      digits_[i++] = num % base_;
+      num /= base_;
     }
   }
 }
@@ -55,14 +55,14 @@ char BigInteger::int_to_digit(int d) {
   }
 }
 
-// Calculate the digit length of the val with the given base.
-int BigInteger::calc_len(int val, int base) {
-  if (val == 0) return 1;
+// Calculate the digit length of the num with the given base.
+int BigInteger::calc_len(int num, int base) {
+  if (num == 0) return 1;
 
   int res = 0;
-  while (val) {
+  while (num) {
     ++res;
-    val /= base;
+    num /= base;
   }
   return res;
 }
