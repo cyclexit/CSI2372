@@ -26,6 +26,11 @@ class BigInteger {
 
   char operator[](int pos);
   bool operator==(const BigInteger& other);
+  bool operator>(const BigInteger& other);
+  bool operator<(const BigInteger& other);
+  bool operator>=(const BigInteger& other);
+  bool operator<=(const BigInteger& other);
+  bool operator!=(const BigInteger& other);
 
  private:
 

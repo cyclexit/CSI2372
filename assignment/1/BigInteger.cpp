@@ -86,8 +86,27 @@ char BigInteger::operator[](int pos) {
 }
 
 bool BigInteger::operator==(const BigInteger& other) {
-  // TODO: need a helper function to_base_10
   return to_base_10() == other.to_base_10();
+}
+
+bool BigInteger::operator>(const BigInteger& other) {
+  return to_base_10() > other.to_base_10();
+}
+
+bool BigInteger::operator<(const BigInteger& other) {
+  return to_base_10() < other.to_base_10();
+}
+
+bool BigInteger::operator>=(const BigInteger& other) {
+  return to_base_10() >= other.to_base_10();
+}
+
+bool BigInteger::operator<=(const BigInteger& other) {
+  return to_base_10() <= other.to_base_10();
+}
+
+bool BigInteger::operator!=(const BigInteger& other) {
+  return to_base_10() != other.to_base_10();
 }
 
 /**
