@@ -25,6 +25,7 @@ class BigInteger {
   // operators
 
   char operator[](int pos);
+  // TODO: base conversion with BigInteger itself
   bool operator==(const BigInteger& other);
   bool operator>(const BigInteger& other);
   bool operator<(const BigInteger& other);
