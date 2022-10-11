@@ -74,3 +74,15 @@ RandomGenerator& RandomGenerator::operator=(const RandomGenerator& other) {
 
   return *this;
 }
+
+RandomGenerator operator+(RandomGenerator lhs, const RandomGenerator& rhs) {
+  return lhs += rhs;
+}
+
+RandomGenerator operator-(RandomGenerator lhs, const RandomGenerator& rhs) {
+  return lhs -= rhs;
+}
+
+RandomGenerator operator*(RandomGenerator lhs, const RandomGenerator& rhs) {
+  return lhs *= rhs;
+}

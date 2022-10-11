@@ -28,9 +28,9 @@ class RandomGenerator {
   bool operator==(const RandomGenerator& other);
   bool operator!=(const RandomGenerator& other);
   RandomGenerator& operator=(const RandomGenerator& other);
-  friend RandomGenerator operator+(RandomGenerator& lhs, const RandomGenerator& rhs);
-  friend RandomGenerator operator-(RandomGenerator& lhs, const RandomGenerator& rhs);
-  friend RandomGenerator operator*(RandomGenerator& lhs, const RandomGenerator& rhs);
+  friend RandomGenerator operator+(RandomGenerator lhs, const RandomGenerator& rhs);
+  friend RandomGenerator operator-(RandomGenerator lhs, const RandomGenerator& rhs);
+  friend RandomGenerator operator*(RandomGenerator lhs, const RandomGenerator& rhs);
   RandomGenerator& operator+=(const RandomGenerator& other);
   RandomGenerator& operator-=(const RandomGenerator& other);
   RandomGenerator& operator*=(const RandomGenerator& other);
