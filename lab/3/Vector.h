@@ -1,7 +1,9 @@
 #ifndef LAB_3_VECTOR_H_
 #define LAB_3_VECTOR_H_
 
+#include <cmath>
 #include <iostream>
+#include <limits>
 
 class Vector {
  public:
@@ -12,30 +14,39 @@ class Vector {
   ~Vector();
 
   // methods
-  int dimension();
+  int dimension() const;
   bool add_dimension(double val);
   bool remove_dimension(int idx);
-  bool insert_dimension(double val, int idx);
-  double magnitude();
+  bool insert_dimension(int idx, double val);
+  double magnitude() const;
 
   // operators
-  double operator[](int idx);
-  bool operator==(const Vector& other);
-  bool operator!=(const Vector& other);
+  double operator[](int idx) const;
+  bool operator==(const Vector& other) const;
+  bool operator!=(const Vector& other) const;
   Vector& operator=(const Vector& other);
-  Vector& operator+(const Vector& other);
-  Vector& operator-(const Vector& other);
+  friend Vector& operator+(Vector lhs, const Vector& rhs);
+  friend Vector& operator-(Vector lhs, const Vector& rhs);
+  friend Vector operator*(double val, const Vector& v); // multiplying a scalar and a vector
   Vector& operator+=(const Vector& other);
   Vector& operator-=(const Vector& other);
-  Vector& operator*(double val);
-  Vector& operator*(const Vector& other);
+  Vector operator*(double val) const; // multiplying a vector and a scalar
+  Vector operator*(const Vector& other) const; // internal product
   friend std::ostream& operator<<(std::ostream& out, const Vector& v);
 
- private:
-  double* elems_;
-  int sz_;
-};
+  Vector operator-() const {
+    Vector res(*this);
+    for (int i = 0; i < res.dimension_; ++i) {
+      res.elems_[i] *= -1;
+    }
+    return res;
+  }
 
-constexpr Vector operator*(Vector lhs, const Vector& rhs);
+ private:
+  static constexpr int kDefaultDimension = 2;
+  static constexpr double kInvalidValue = std::numeric_limits<double>::max();
+  double* elems_;
+  int dimension_;
+};
 
 #endif // LAB_3_VECTOR_H_
