@@ -86,3 +86,39 @@ RandomGenerator operator-(RandomGenerator lhs, const RandomGenerator& rhs) {
 RandomGenerator operator*(RandomGenerator lhs, const RandomGenerator& rhs) {
   return lhs *= rhs;
 }
+
+RandomGenerator& RandomGenerator::operator++() {
+  int* temp = new int[len_ + 1];
+  for (int i = 0; i < len_; ++i) {
+    temp[i] = random_seq_[i];
+  }
+  delete[] random_seq_;
+  random_seq_ = temp;
+  random_seq_[len_++] = rand() % modulo_;
+  return *this;
+}
+
+RandomGenerator RandomGenerator::operator++(int) {
+  RandomGenerator old(*this);
+  operator++();
+  return old;
+}
+
+RandomGenerator& RandomGenerator::operator--() {
+  if (len_ <= kMinSeqLen) return *this;
+
+  int* temp = new int[len_ - 1];
+  for (int i = 0; i < len_ - 1; ++i) {
+    temp[i] = random_seq_[i];
+  }
+  delete[] random_seq_;
+  random_seq_ = temp;
+  --len_;
+  return *this;
+}
+
+RandomGenerator RandomGenerator::operator--(int) {
+  RandomGenerator old(*this);
+  operator--();
+  return old;
+}
