@@ -4,6 +4,17 @@
 #include <cstdlib>
 #include <iostream>
 
+template<typename T>
+T fast_pow(T base, T pow) {
+  T res = 1;
+  while (pow) {
+    if (pow & 1) res = res * base;
+    base = base * base;
+    pow >>= 1;
+  }
+  return res;
+}
+
 class RandomGenerator {
  public:
   // ctors and dtors
@@ -31,7 +42,7 @@ class RandomGenerator {
 
  private:
   static constexpr int kMinSeqLen = 2;
-  int s_, len_;
+  int s_, len_, modulo_;
   int* random_seq_;
 };
 
