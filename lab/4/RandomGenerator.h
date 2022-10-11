@@ -20,7 +20,7 @@ class RandomGenerator {
  public:
   // ctors and dtors
   RandomGenerator();
-  RandomGenerator(int s, int rnd1, int rnd2);
+  RandomGenerator(int half_s, int rnd1, int rnd2);
   RandomGenerator(const RandomGenerator& other);
   ~RandomGenerator();
 

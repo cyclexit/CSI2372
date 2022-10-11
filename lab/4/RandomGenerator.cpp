@@ -11,8 +11,8 @@ RandomGenerator::RandomGenerator() {
   }
 }
 
-RandomGenerator::RandomGenerator(int s, int rnd1, int rnd2) {
-  s_ = s;
+RandomGenerator::RandomGenerator(int half_s, int rnd1, int rnd2) {
+  s_ = 2 * half_s;
   len_ = kMinSeqLen;
   modulo_ = fast_pow(10, s_);
 
