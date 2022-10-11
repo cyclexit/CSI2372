@@ -99,6 +99,18 @@ RandomGenerator& RandomGenerator::operator+=(RandomGenerator& other) {
   return *this;
 }
 
+RandomGenerator& RandomGenerator::operator-=(RandomGenerator& other) {
+  while (len_ != other.len_) {
+    len_ < other.len_ ? operator++() : ++other;
+  }
+
+  for (int i = 0; i < len_; ++i) {
+    random_seq_[i] = abs(random_seq_[i] + other.random_seq_[i]);
+  }
+
+  return *this;
+}
+
 RandomGenerator& RandomGenerator::operator++() {
   int* temp = new int[len_ + 1];
   for (int i = 0; i < len_; ++i) {
