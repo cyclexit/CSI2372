@@ -1,6 +1,7 @@
 #ifndef CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
 #define CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
 
+#include <algorithm>
 #include <iostream>
 
 class BigInteger {
@@ -42,8 +43,8 @@ class BigInteger {
   // data member
   int base_;
   int len_;
-  // Most significant digit index: 0
-  // Least significant digit index: (len_ - 1)
+  // Most significant digit index: (len_ - 1)
+  // Least significant digit index: 0
   int* digits_; // possible values: [0, 35]
 
   static char int_to_digit(int digit);

@@ -18,9 +18,9 @@ BigInteger::BigInteger(int num, int base) {
   if (num == 0) {
     digits_[0] = num;
   } else {
-    int i = len_ - 1;
+    int i = 0;
     while (num) {
-      digits_[i--] = num % base_;
+      digits_[i++] = num % base_;
       num /= base_;
     }
   }
@@ -46,14 +46,14 @@ int BigInteger::num_digits() {
 }
 
 bool BigInteger::add_digit(int digit) {
-  return insert_digit(digit, len_);
+  return insert_digit(digit, 0);
 }
 
 void BigInteger::remove_digit() {
   int* temp = new int[len_ - 1];
 
-  for (int i = 0; i < len_ - 1; ++i) {
-    temp[i] = digits_[i];
+  for (int i = 1; i < len_; ++i) {
+    temp[i - 1] = digits_[i];
   }
 
   delete[] digits_;
@@ -126,8 +126,12 @@ BigInteger& BigInteger::operator=(const BigInteger& other) {
   return *this;
 }
 
+// BigInteger& BigInteger::operator+=(int num) {
+
+// }
+
 std::ostream& operator<<(std::ostream& out, const BigInteger& big_num) {
-  for (int i = 0; i < big_num.len_; ++i) {
+  for (int i = big_num.len_ - 1; i >= 0; --i) {
     out << big_num.digits_[i];
   }
   return out;
