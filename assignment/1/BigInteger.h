@@ -1,6 +1,8 @@
 #ifndef CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
 #define CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
 
+#include <iostream>
+
 class BigInteger {
  public:
 
@@ -33,6 +35,8 @@ class BigInteger {
   BigInteger operator+(int num);
   friend BigInteger operator+(int num, const BigInteger& big_num);
   BigInteger operator+(const BigInteger& other);
+  // input and output operators
+  friend std::ostream& operator<<(std::ostream& out, const BigInteger& big_num);
 
  private:
   // data member

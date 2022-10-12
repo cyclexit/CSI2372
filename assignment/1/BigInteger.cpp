@@ -126,6 +126,13 @@ BigInteger& BigInteger::operator=(const BigInteger& other) {
   return *this;
 }
 
+std::ostream& operator<<(std::ostream& out, const BigInteger& big_num) {
+  for (int i = 0; i < big_num.len_; ++i) {
+    out << big_num.digits_[i];
+  }
+  return out;
+}
+
 /**
  * private
  */
