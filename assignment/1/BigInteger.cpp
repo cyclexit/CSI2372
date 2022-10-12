@@ -88,29 +88,29 @@ char BigInteger::operator[](int pos) const {
 
 // TODO: re-implement all comparison operators
 
-bool BigInteger::operator==(const BigInteger& other) {
-  return to_base_10() == other.to_base_10();
-}
+// bool BigInteger::operator==(const BigInteger& other) {
+//   return to_base_10() == other.to_base_10();
+// }
 
-bool BigInteger::operator>(const BigInteger& other) {
-  return to_base_10() > other.to_base_10();
-}
+// bool BigInteger::operator>(const BigInteger& other) {
+//   return to_base_10() > other.to_base_10();
+// }
 
-bool BigInteger::operator<(const BigInteger& other) {
-  return to_base_10() < other.to_base_10();
-}
+// bool BigInteger::operator<(const BigInteger& other) {
+//   return to_base_10() < other.to_base_10();
+// }
 
-bool BigInteger::operator>=(const BigInteger& other) {
-  return to_base_10() >= other.to_base_10();
-}
+// bool BigInteger::operator>=(const BigInteger& other) {
+//   return to_base_10() >= other.to_base_10();
+// }
 
-bool BigInteger::operator<=(const BigInteger& other) {
-  return to_base_10() <= other.to_base_10();
-}
+// bool BigInteger::operator<=(const BigInteger& other) {
+//   return to_base_10() <= other.to_base_10();
+// }
 
-bool BigInteger::operator!=(const BigInteger& other) {
-  return to_base_10() != other.to_base_10();
-}
+// bool BigInteger::operator!=(const BigInteger& other) {
+//   return to_base_10() != other.to_base_10();
+// }
 
 BigInteger& BigInteger::operator=(const BigInteger& other) {
   base_ = other.base_;
@@ -126,9 +126,47 @@ BigInteger& BigInteger::operator=(const BigInteger& other) {
   return *this;
 }
 
-// BigInteger& BigInteger::operator+=(int num) {
+BigInteger& BigInteger::operator+=(int num) {
+  BigInteger big_num(num, base_);
 
-// }
+  int slen = std::min(len_, big_num.len_);
+  int llen = std::max(len_, big_num.len_);
+  int* temp = new int[llen];
+
+  // simply add each digit
+  for (int i = 0; i < slen; ++i) {
+    temp[i] = digits_[i] + big_num.digits_[i];
+  }
+  for (int i = slen; i < llen; ++i) {
+    temp[i] = len_ < big_num.len_ ? big_num.digits_[i] : digits_[i];
+  }
+
+  // check if the most significant digit has overflow
+  // and change the data members here
+  if (temp[llen] >= base_) {
+    delete[] digits_;
+    len_ = llen + 1;
+    digits_ = new int[len_];
+    for (int i = 0; i < llen; ++i) {
+      digits_[i] = temp[i];
+    }
+    delete[] temp;
+  } else {
+    delete[] digits_;
+    len_ = llen;
+    digits_ = temp;
+  }
+
+  // deal with carry
+  for (int i = 0; i < len_ - 1; ++i) {
+    if (digits_[i] >= base_) {
+      digits_[i + 1] += digits_[i] / base_;
+      digits_[i] %= base_;
+    }
+  }
+
+  return *this;
+}
 
 std::ostream& operator<<(std::ostream& out, const BigInteger& big_num) {
   for (int i = big_num.len_ - 1; i >= 0; --i) {
