@@ -5,12 +5,14 @@
  */
 
 BigInteger::BigInteger() {
+  is_negative_ = false;
   base_ = 10;
   len_ = 1;
   digits_ = new int[len_]{0};
 }
 
 BigInteger::BigInteger(int num, int base) {
+  is_negative_ = num < 0;
   base_ = base;
   len_ = calc_len(num, base);
   digits_ = new int[len_];
@@ -27,6 +29,7 @@ BigInteger::BigInteger(int num, int base) {
 }
 
 BigInteger::BigInteger(const BigInteger& other) {
+  is_negative_ = other.is_negative_;
   base_ = other.base_;
   len_ = other.len_;
   digits_ = new int[len_];
@@ -113,6 +116,7 @@ char BigInteger::operator[](int pos) const {
 // }
 
 BigInteger& BigInteger::operator=(const BigInteger& other) {
+  is_negative_ = other.is_negative_;
   base_ = other.base_;
   len_ = other.len_;
 
@@ -128,6 +132,7 @@ BigInteger& BigInteger::operator=(const BigInteger& other) {
 
 BigInteger& BigInteger::operator+=(int num) {
   BigInteger big_num(num, base_);
+  // TODO: if the value is negative, use the operator-=
 
   int slen = std::min(len_, big_num.len_);
   int llen = std::max(len_, big_num.len_);
@@ -166,6 +171,14 @@ BigInteger& BigInteger::operator+=(int num) {
   }
 
   return *this;
+}
+
+BigInteger operator+(BigInteger big_num, int num) {
+  return big_num += num;
+}
+
+BigInteger operator+(int num, BigInteger big_num) {
+  return big_num += num;
 }
 
 std::ostream& operator<<(std::ostream& out, const BigInteger& big_num) {
