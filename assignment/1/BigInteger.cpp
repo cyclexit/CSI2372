@@ -18,9 +18,9 @@ BigInteger::BigInteger(int num, int base) {
   if (num == 0) {
     digits_[0] = num;
   } else {
-    int i = 0;
+    int i = len_ - 1;
     while (num) {
-      digits_[i++] = num % base_;
+      digits_[i--] = num % base_;
       num /= base_;
     }
   }
