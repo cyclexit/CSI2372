@@ -19,7 +19,7 @@ BigInteger::BigInteger(int num, int base) {
     digits_[0] = num;
   } else {
     int i = 0;
-    while(num) {
+    while (num) {
       digits_[i++] = num % base_;
       num /= base_;
     }
@@ -85,6 +85,8 @@ bool BigInteger::insert_digit(int digit, int pos) {
 char BigInteger::operator[](int pos) const {
   return int_to_digit(digits_[pos]);
 }
+
+// TODO: re-implement all comparison operators
 
 bool BigInteger::operator==(const BigInteger& other) {
   return to_base_10() == other.to_base_10();
