@@ -81,6 +81,7 @@ char BigInteger::operator[](int pos) const {
   return int_to_digit(digits_[pos]);
 }
 
+// comparison operators
 bool BigInteger::operator==(const BigInteger& other) {
   if (base_ != other.base_) {
     // TODO: implement this case
@@ -131,6 +132,7 @@ bool BigInteger::operator!=(const BigInteger& other) {
   return !operator==(other);
 }
 
+// assignment operators
 BigInteger& BigInteger::operator=(const BigInteger& other) {
   is_negative_ = other.is_negative_;
   base_ = other.base_;
@@ -155,6 +157,7 @@ BigInteger& BigInteger::operator=(int num) {
   return *this;
 }
 
+// addition with int
 BigInteger& BigInteger::operator+=(int num) {
   // 1. check the sign of num and this object
   // 2. (1) if the sign is different, digit-wise sub
@@ -182,6 +185,7 @@ BigInteger operator+(int num, BigInteger big_num) {
   return big_num += num;
 }
 
+// addition with BigInteger
 BigInteger& BigInteger::operator+=(const BigInteger& other) {
   // TODO: implement this
   return *this;
@@ -191,6 +195,7 @@ BigInteger operator+(BigInteger lhs, const BigInteger& rhs) {
   return lhs += rhs;
 }
 
+// subtraction with int
 BigInteger& BigInteger::operator-=(int num) {
   return operator+=(-num);
 }
@@ -203,6 +208,7 @@ BigInteger operator-(int num, BigInteger big_num) {
   return big_num -= num;
 }
 
+// multiplication with int
 BigInteger& BigInteger::operator*=(int num) {
   BigInteger other(num, base_);
   is_negative_ ^= other.is_negative_;
@@ -239,6 +245,7 @@ BigInteger operator*(int num, BigInteger big_num) {
   return big_num *= num;
 }
 
+// input and output operators
 std::ostream& operator<<(std::ostream& out, const BigInteger& big_num) {
   if (big_num.is_negative_) out << "-";
   for (int i = big_num.len_ - 1; i >= 0; --i) {
