@@ -96,21 +96,32 @@ bool BigInteger::operator==(const BigInteger& other) {
   }
 }
 
-// bool BigInteger::operator>(const BigInteger& other) {
-//   return to_base_10() > other.to_base_10();
-// }
+bool BigInteger::operator>(const BigInteger& other) {
+  return !operator<=(other);
+}
 
-// bool BigInteger::operator<(const BigInteger& other) {
-//   return to_base_10() < other.to_base_10();
-// }
+bool BigInteger::operator<(const BigInteger& other) {
+  return operator<=(other) && operator!=(other);
+}
 
-// bool BigInteger::operator>=(const BigInteger& other) {
-//   return to_base_10() >= other.to_base_10();
-// }
+bool BigInteger::operator>=(const BigInteger& other) {
+  return operator>(other) || operator==(other);
+}
 
-// bool BigInteger::operator<=(const BigInteger& other) {
-//   return to_base_10() <= other.to_base_10();
-// }
+bool BigInteger::operator<=(const BigInteger& other) {
+  if (base_ != other.base_) {
+    // TODO: implement this case
+    return false;
+  } else {
+    if (len_ != other.len_) return len_ < other.len_;
+    for (int i = len_ - 1; i >= 0; --i) {
+      if (digits_[i] > other.digits_[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
 
 bool BigInteger::operator!=(const BigInteger& other) {
   return !operator==(other);

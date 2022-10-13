@@ -19,5 +19,10 @@ int main() {
   cout << b1 << endl;
   cout << (b1 * -1) << endl;
 
+  BigInteger b2(99, 10), b3(1000, 10);
+  cout << (b2 < b3) << endl;
+  cout << (b2 > b3) << endl;
+  cout << (b2 == b3) << endl;
+
   return 0;
 }
