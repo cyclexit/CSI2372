@@ -64,5 +64,15 @@ int main() {
   printf("(b3 == b2) = %d\n", (b3 == b2));
   printf("(b3 != b2) = %d\n", (b3 != b2));
 
+  b2 = -1000;
+  b3 = -100;
+  cout << b2 << " " << b3 << endl;
+  printf("(b2 < b3) = %d\n", (b2 < b3));
+  printf("(b2 <= b3) = %d\n", (b2 <= b3));
+  printf("(b2 > b3) = %d\n", (b2 > b3));
+  printf("(b2 >= b3) = %d\n", (b2 >= b3));
+  printf("(b2 == b3) = %d\n", (b2 == b3));
+  printf("(b2 != b3) = %d\n", (b2 != b3));
+
   return 0;
 }

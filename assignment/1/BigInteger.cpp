@@ -116,13 +116,14 @@ bool BigInteger::operator<=(const BigInteger& other) {
   } else {
     if (is_negative_ && !other.is_negative_) return true;
     if (!is_negative_ && other.is_negative_) return false;
-    if (len_ != other.len_) return len_ < other.len_;
+    bool both_negative = is_negative_ && other.is_negative_;
+    if (len_ != other.len_) return (len_ < other.len_) ^ both_negative;
     for (int i = len_ - 1; i >= 0; --i) {
       if (digits_[i] > other.digits_[i]) {
-        return false;
+        return false ^ both_negative;
       }
     }
-    return true;
+    return true ^ both_negative;
   }
 }
 
