@@ -68,6 +68,8 @@ class BigInteger {
   static char int_to_digit(int digit);
   static int calc_len(int num, int base);
   static int* calc_digits(int num, int base);
+  void digit_wise_add(const BigInteger& other);
+  void digit_wise_sub(const BigInteger& other);
 };
 
 #endif // CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_

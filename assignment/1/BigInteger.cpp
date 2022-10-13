@@ -86,6 +86,7 @@ bool BigInteger::operator==(const BigInteger& other) {
     // TODO: implement this case
     return false;
   } else {
+    if (is_negative_ ^ other.is_negative_) return false;
     if (len_ != other.len_) return false;
     for (int i = 0; i < len_; ++i) {
       if (digits_[i] != other.digits_[i]) {
@@ -113,6 +114,8 @@ bool BigInteger::operator<=(const BigInteger& other) {
     // TODO: implement this case
     return false;
   } else {
+    if (is_negative_ && !other.is_negative_) return true;
+    if (!is_negative_ && other.is_negative_) return false;
     if (len_ != other.len_) return len_ < other.len_;
     for (int i = len_ - 1; i >= 0; --i) {
       if (digits_[i] > other.digits_[i]) {
@@ -311,4 +314,42 @@ int* BigInteger::calc_digits(int num, int base) {
   }
 
   return res;
+}
+
+// other: should have the same base as (*this)
+// Don't deal with sign in this function
+// Sign is resolved in arithmetic operators
+void BigInteger::digit_wise_add(const BigInteger& other) {
+  int shorter_len = std::min(len_, other.len_);
+  int longer_len = std::max(len_, other.len_);
+  // reserve one more digit for potential carry
+  int* temp = new int[longer_len + 1];
+
+  // simply add each digit
+  for (int i = 0; i < shorter_len; ++i) {
+    temp[i] = digits_[i] + other.digits_[i];
+  }
+  for (int i = shorter_len; i < longer_len; ++i) {
+    temp[i] = len_ < other.len_ ? other.digits_[i] : digits_[i];
+  }
+
+  // deal with carry
+  for (int i = 0; i < longer_len; ++i) {
+    if (temp[i] >= base_) {
+      temp[i + 1] += temp[i] / base_;
+      temp[i] %= base_;
+    }
+  }
+
+  // assgin
+  len_ = longer_len + (temp[longer_len] > 0);
+  delete[] digits_;
+  digits_ = temp;
+}
+
+// other: should have the same base as (*this)
+// Don't deal with sign in this function
+// Sign is resolved in arithmetic operators
+void BigInteger::digit_wise_sub(const BigInteger& other) {
+
 }

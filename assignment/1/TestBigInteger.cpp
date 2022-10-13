@@ -46,5 +46,23 @@ int main() {
   printf("(b2 == b3) = %d\n", (b2 == b3));
   printf("(b2 != b3) = %d\n", (b2 != b3));
 
+  b2 = -1000;
+  cout << b2 << " " << b3 << endl;
+  printf("(b2 < b3) = %d\n", (b2 < b3));
+  printf("(b2 <= b3) = %d\n", (b2 <= b3));
+  printf("(b2 > b3) = %d\n", (b2 > b3));
+  printf("(b2 >= b3) = %d\n", (b2 >= b3));
+  printf("(b2 == b3) = %d\n", (b2 == b3));
+  printf("(b2 != b3) = %d\n", (b2 != b3));
+
+  printf("flip the side of b2 and b3\n");
+  cout << b2 << " " << b3 << endl;
+  printf("(b3 < b2) = %d\n", (b3 < b2));
+  printf("(b3 <= b2) = %d\n", (b3 <= b2));
+  printf("(b3 > b2) = %d\n", (b3 > b2));
+  printf("(b3 >= b2) = %d\n", (b3 >= b2));
+  printf("(b3 == b2) = %d\n", (b3 == b2));
+  printf("(b3 != b2) = %d\n", (b3 != b2));
+
   return 0;
 }
