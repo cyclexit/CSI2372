@@ -81,9 +81,20 @@ char BigInteger::operator[](int pos) const {
   return int_to_digit(digits_[pos]);
 }
 
-// bool BigInteger::operator==(const BigInteger& other) {
-//   return to_base_10() == other.to_base_10();
-// }
+bool BigInteger::operator==(const BigInteger& other) {
+  if (base_ != other.base_) {
+    // TODO: implement this case
+    return false;
+  } else {
+    if (len_ != other.len_) return false;
+    for (int i = 0; i < len_; ++i) {
+      if (digits_[i] != other.digits_[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
 
 // bool BigInteger::operator>(const BigInteger& other) {
 //   return to_base_10() > other.to_base_10();
@@ -101,9 +112,9 @@ char BigInteger::operator[](int pos) const {
 //   return to_base_10() <= other.to_base_10();
 // }
 
-// bool BigInteger::operator!=(const BigInteger& other) {
-//   return to_base_10() != other.to_base_10();
-// }
+bool BigInteger::operator!=(const BigInteger& other) {
+  return !operator==(other);
+}
 
 BigInteger& BigInteger::operator=(const BigInteger& other) {
   is_negative_ = other.is_negative_;
