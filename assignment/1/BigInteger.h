@@ -52,8 +52,17 @@ class BigInteger {
   // multiplication with BigInteger
   BigInteger& operator*=(const BigInteger& other);
   friend BigInteger operator*(BigInteger lhs, const BigInteger& rhs);
+  // ++ operators
+  BigInteger& operator++();
+  BigInteger operator++(int);
+  // -- opeartors
+  BigInteger& operator--();
+  BigInteger operator--(int);
   // input and output operators
   friend std::ostream& operator<<(std::ostream& out, const BigInteger& big_num);
+  friend std::ostream& operator>>(std::istream& in, const BigInteger& big_num);
+
+  // bonus operators (do it when I have time...)
 
  private:
   // data member
