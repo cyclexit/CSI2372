@@ -66,6 +66,7 @@ void BigInteger::remove_digit() {
 
 bool BigInteger::insert_digit(int digit, int pos) {
   if (pos > len_) return false;
+  // NOTE: if digit >= base, the insertion is invalid.
   if (digit >= base_) return false;
 
   int* temp = new int[len_ + 1];
@@ -131,8 +132,11 @@ BigInteger& BigInteger::operator=(const BigInteger& other) {
 }
 
 BigInteger& BigInteger::operator+=(int num) {
+  if (num < 0) {
+    // TODO: if the value is negative, use the operator-=
+    // return operator-=(num);
+  }
   BigInteger big_num(num, base_);
-  // TODO: if the value is negative, use the operator-=
 
   int slen = std::min(len_, big_num.len_);
   int llen = std::max(len_, big_num.len_);
@@ -179,6 +183,41 @@ BigInteger operator+(BigInteger big_num, int num) {
 
 BigInteger operator+(int num, BigInteger big_num) {
   return big_num += num;
+}
+
+BigInteger& BigInteger::operator*=(int num) {
+  BigInteger other(num, base_);
+  is_negative_ ^= other.is_negative_;
+
+  int* temp = new int[other.len_ + len_];
+  for (int i = 0; i < other.len_ + len_; ++i) {
+    temp[i] = 0;
+  }
+  for (int i = 0; i < len_; ++i) {
+    for (int j = 0; j < other.len_; ++j) {
+      temp[i + j] += digits_[i] * other.digits_[j];
+    }
+  }
+
+  // deal with carry
+  for (int i = 0; i < len_ + other.len_ - 1; ++i) {
+    temp[i + 1] += temp[i] / base_;
+    temp[i] %= base_;
+  }
+
+  delete[] digits_;
+  digits_ = temp;
+  len_ += other.len_;
+
+  return *this;
+}
+
+BigInteger operator*(BigInteger big_num, int num) {
+  return big_num *= num;
+}
+
+BigInteger operator*(int num, BigInteger big_num) {
+  return big_num *= num;
 }
 
 std::ostream& operator<<(std::ostream& out, const BigInteger& big_num) {

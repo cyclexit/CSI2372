@@ -13,15 +13,13 @@ class BigInteger {
   ~BigInteger();
 
   // methods
-  int num_digits();
-  // NOTE: check if d < base
-  bool add_digit(int digit);
-  void remove_digit();
-  bool insert_digit(int digit, int pos);
+  int num_digits(); // done
+  bool add_digit(int digit); // done
+  void remove_digit(); // done
+  bool insert_digit(int digit, int pos); // done
 
   // operators
-  char operator[](int pos) const;
-  // TODO: base conversion with BigInteger itself
+  char operator[](int pos) const; // done
   // comparison operators
   bool operator==(const BigInteger& other);
   bool operator>(const BigInteger& other);
@@ -32,12 +30,19 @@ class BigInteger {
   // arithmetic operators
   BigInteger& operator=(const BigInteger& other);
   // addition with int
-  BigInteger& operator+=(int num);
-  friend BigInteger operator+(BigInteger big_num, int num);
-  friend BigInteger operator+(int num, BigInteger big_num);
+  BigInteger& operator+=(int num); // done
+  friend BigInteger operator+(BigInteger big_num, int num); // done
+  friend BigInteger operator+(int num, BigInteger big_num); // done
   // addition with BigInteger
   BigInteger& operator+=(const BigInteger& other);
   BigInteger operator+(const BigInteger& other);
+  // multiplication with int
+  BigInteger& operator*=(int num);
+  friend BigInteger operator*(BigInteger big_num, int num);
+  friend BigInteger operator*(int num, BigInteger big_num);
+  // multiplication with BigInteger
+  BigInteger& operator*=(const BigInteger& other);
+  BigInteger operator*(const BigInteger& other);
   // input and output operators
   friend std::ostream& operator<<(std::ostream& out, const BigInteger& big_num);
 
