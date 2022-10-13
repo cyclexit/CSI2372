@@ -70,6 +70,7 @@ class BigInteger {
   static int* calc_digits(int num, int base);
   void digit_wise_add(const BigInteger& other);
   void digit_wise_sub(const BigInteger& other);
+  bool abs_less_than(const BigInteger& other);
 };
 
 #endif // CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_

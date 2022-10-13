@@ -156,47 +156,19 @@ BigInteger& BigInteger::operator=(int num) {
 }
 
 BigInteger& BigInteger::operator+=(int num) {
-  BigInteger big_num(num, base_);
-  // TODO: 
   // 1. check the sign of num and this object
-  // 2. if the sign is different, use -= with -num
-  //    if the sign is the same, go ahead
-  // 3. determine the sign of this object
+  // 2. (1) if the sign is different, digit-wise sub
+  //    and determine the sign of this object;
+  //    (2) if the sign is the same, digit-wise add
+  BigInteger other(num, base_);
 
-  int slen = std::min(len_, big_num.len_);
-  int llen = std::max(len_, big_num.len_);
-  int* temp = new int[llen];
-
-  // simply add each digit
-  for (int i = 0; i < slen; ++i) {
-    temp[i] = digits_[i] + big_num.digits_[i];
-  }
-  for (int i = slen; i < llen; ++i) {
-    temp[i] = len_ < big_num.len_ ? big_num.digits_[i] : digits_[i];
-  }
-
-  // check if the most significant digit has overflow
-  // and change the data members here
-  if (temp[llen] >= base_) {
-    delete[] digits_;
-    len_ = llen + 1;
-    digits_ = new int[len_];
-    for (int i = 0; i < llen; ++i) {
-      digits_[i] = temp[i];
-    }
-    delete[] temp;
+  if (is_negative_ ^ other.is_negative_) {
+    // different sign
+    if (abs_less_than(other)) is_negative_ = !is_negative_;
+    digit_wise_sub(other);
   } else {
-    delete[] digits_;
-    len_ = llen;
-    digits_ = temp;
-  }
-
-  // deal with carry
-  for (int i = 0; i < len_ - 1; ++i) {
-    if (digits_[i] >= base_) {
-      digits_[i + 1] += digits_[i] / base_;
-      digits_[i] %= base_;
-    }
+    // same sign
+    digit_wise_add(other);
   }
 
   return *this;
@@ -382,4 +354,14 @@ void BigInteger::digit_wise_sub(const BigInteger& other) {
   len_ = longer_len;
   delete[] digits_;
   digits_ = temp;
+}
+
+bool BigInteger::abs_less_than(const BigInteger& other) {
+  if (len_ != other.len_) return len_ < other.len_;
+  for (int i = len_ - 1; i >= 0; --i) {
+    if (digits_[i] > other.digits_[i]) {
+      return false;
+    }
+  }
+  return true;
 }

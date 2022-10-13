@@ -12,6 +12,7 @@ int main() {
   b1.remove_digit();
   cout << b1 << endl;
 
+  // simple arithmetic test
   b1 += 123;
   cout << b1 << endl;
 
@@ -19,6 +20,7 @@ int main() {
   cout << b1 << endl;
   cout << (b1 * -1) << endl;
 
+  // comparison test
   BigInteger b2(99, 10), b3(1000, 10);
   cout << b2 << " " << b3 << endl;
   printf("(b2 < b3) = %d\n", (b2 < b3));
