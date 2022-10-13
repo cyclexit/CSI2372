@@ -142,6 +142,15 @@ BigInteger& BigInteger::operator=(const BigInteger& other) {
   return *this;
 }
 
+BigInteger& BigInteger::operator=(int num) {
+  is_negative_ = num < 0;
+  num = abs(num);
+  len_ = calc_len(num, base_);
+  delete[] digits_;
+  digits_ = calc_digits(num, base_);
+  return *this;
+}
+
 BigInteger& BigInteger::operator+=(int num) {
   BigInteger big_num(num, base_);
   // TODO: 

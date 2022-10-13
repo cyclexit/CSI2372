@@ -28,8 +28,9 @@ class BigInteger {
   bool operator>=(const BigInteger& other);
   bool operator<=(const BigInteger& other);
   bool operator!=(const BigInteger& other);
-  // arithmetic operators
+  // assignment operators
   BigInteger& operator=(const BigInteger& other);
+  BigInteger& operator=(int num);
   // addition with int
   BigInteger& operator+=(int num);
   friend BigInteger operator+(BigInteger big_num, int num);
