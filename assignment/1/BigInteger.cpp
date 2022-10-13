@@ -352,5 +352,34 @@ void BigInteger::digit_wise_add(const BigInteger& other) {
 // Don't deal with sign in this function
 // Sign is resolved in arithmetic operators
 void BigInteger::digit_wise_sub(const BigInteger& other) {
+  int shorter_len = std::min(len_, other.len_);
+  int longer_len = std::max(len_, other.len_);
+  int* temp = new int[longer_len];
 
+  // simply subtract each digit
+  if (operator<(other)) {
+    for (int i = 0; i < shorter_len; ++i) {
+      temp[i] = other.digits_[i] - digits_[i];
+    }
+  } else {
+    for (int i = 0; i < shorter_len; ++i) {
+      temp[i] = digits_[i] - other.digits_[i];
+    }
+  }
+  for (int i = shorter_len; i < longer_len; ++i) {
+    temp[i] = len_ < other.len_ ? other.digits_[i] : digits_[i];
+  }
+
+  // deal with borrow
+  for (int i = 0; i < longer_len; ++i) {
+    if (temp[i] < 0) {
+      --temp[i + 1];
+      temp[i] += base_;
+    }
+  }
+
+  // assgin
+  len_ = longer_len;
+  delete[] digits_;
+  digits_ = temp;
 }
