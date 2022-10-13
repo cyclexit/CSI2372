@@ -91,8 +91,6 @@ char BigInteger::operator[](int pos) const {
   return int_to_digit(digits_[pos]);
 }
 
-// TODO: re-implement all comparison operators
-
 // bool BigInteger::operator==(const BigInteger& other) {
 //   return to_base_10() == other.to_base_10();
 // }
@@ -133,11 +131,11 @@ BigInteger& BigInteger::operator=(const BigInteger& other) {
 }
 
 BigInteger& BigInteger::operator+=(int num) {
-  if (num < 0) {
-    // TODO: if the value is negative, use the operator-=
-    // return operator-=(num);
-  }
   BigInteger big_num(num, base_);
+  // TODO: 
+  // 1. check the sign of num and this object
+  // 2. if the sign is different, use -= else continue
+  // 3. determine the sign of this object
 
   int slen = std::min(len_, big_num.len_);
   int llen = std::max(len_, big_num.len_);
@@ -184,6 +182,22 @@ BigInteger operator+(BigInteger big_num, int num) {
 
 BigInteger operator+(int num, BigInteger big_num) {
   return big_num += num;
+}
+
+BigInteger& BigInteger::operator+=(const BigInteger& other) {
+
+}
+
+BigInteger& BigInteger::operator-=(int num) {
+  return *this;
+}
+
+BigInteger operator-(BigInteger big_num, int num) {
+  return big_num -= num;
+}
+
+BigInteger operator-(int num, BigInteger big_num) {
+  return big_num -= num;
 }
 
 BigInteger& BigInteger::operator*=(int num) {
@@ -253,17 +267,5 @@ int BigInteger::calc_len(int num, int base) {
     ++res;
     num /= base;
   }
-  return res;
-}
-
-int BigInteger::to_base_10() const {
-  int res = 0;
-  int digit_weight = 1;
-
-  for (int i = len_ - 1; i >= 0; --i) {
-    res += digit_weight * digits_[i];
-    digit_weight *= base_;
-  }
-
   return res;
 }

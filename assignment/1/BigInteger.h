@@ -14,13 +14,13 @@ class BigInteger {
   ~BigInteger();
 
   // methods
-  int num_digits(); // done
-  bool add_digit(int digit); // done
-  void remove_digit(); // done
-  bool insert_digit(int digit, int pos); // done
+  int num_digits();
+  bool add_digit(int digit);
+  void remove_digit();
+  bool insert_digit(int digit, int pos);
 
   // operators
-  char operator[](int pos) const; // done
+  char operator[](int pos) const;
   // comparison operators
   bool operator==(const BigInteger& other);
   bool operator>(const BigInteger& other);
@@ -31,19 +31,26 @@ class BigInteger {
   // arithmetic operators
   BigInteger& operator=(const BigInteger& other);
   // addition with int
-  BigInteger& operator+=(int num); // done
-  friend BigInteger operator+(BigInteger big_num, int num); // done
-  friend BigInteger operator+(int num, BigInteger big_num); // done
+  BigInteger& operator+=(int num);
+  friend BigInteger operator+(BigInteger big_num, int num);
+  friend BigInteger operator+(int num, BigInteger big_num);
   // addition with BigInteger
   BigInteger& operator+=(const BigInteger& other);
-  BigInteger operator+(const BigInteger& other);
+  friend BigInteger operator+(BigInteger lhs, const BigInteger& rhs);
+  // subtraction with int
+  BigInteger& operator-=(int num);
+  friend BigInteger operator-(BigInteger big_num, int num);
+  friend BigInteger operator-(int num, BigInteger big_num);
+  // subtraction with BigInteger
+  BigInteger& operator-=(const BigInteger& other);
+  friend BigInteger operator-(BigInteger lhs, const BigInteger& rhs);
   // multiplication with int
   BigInteger& operator*=(int num);
   friend BigInteger operator*(BigInteger big_num, int num);
   friend BigInteger operator*(int num, BigInteger big_num);
   // multiplication with BigInteger
   BigInteger& operator*=(const BigInteger& other);
-  BigInteger operator*(const BigInteger& other);
+  friend BigInteger operator*(BigInteger lhs, const BigInteger& rhs);
   // input and output operators
   friend std::ostream& operator<<(std::ostream& out, const BigInteger& big_num);
 
@@ -59,7 +66,6 @@ class BigInteger {
   // helper function
   static char int_to_digit(int digit);
   static int calc_len(int num, int base);
-  int to_base_10() const;
 };
 
 #endif // CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
