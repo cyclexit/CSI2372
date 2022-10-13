@@ -183,6 +183,7 @@ BigInteger operator+(int num, BigInteger big_num) {
 }
 
 BigInteger& BigInteger::operator+=(const BigInteger& other) {
+  // TODO: implement this
   return *this;
 }
 
@@ -191,7 +192,7 @@ BigInteger operator+(BigInteger lhs, const BigInteger& rhs) {
 }
 
 BigInteger& BigInteger::operator-=(int num) {
-  return *this;
+  return operator+=(-num);
 }
 
 BigInteger operator-(BigInteger big_num, int num) {
@@ -351,7 +352,7 @@ void BigInteger::digit_wise_sub(const BigInteger& other) {
   }
 
   // assgin
-  len_ = longer_len;
+  len_ = longer_len - (temp[longer_len - 1] == 0);
   delete[] digits_;
   digits_ = temp;
 }

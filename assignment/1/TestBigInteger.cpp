@@ -19,6 +19,10 @@ int main() {
   b1 *= -2;
   cout << b1 << endl;
   cout << (b1 * -1) << endl;
+  cout << (b1 - 1) << endl;
+
+  b1 += 1000;
+  cout << b1 << endl;
 
   // comparison test
   BigInteger b2(99, 10), b3(1000, 10);
