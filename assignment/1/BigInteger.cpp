@@ -208,6 +208,16 @@ BigInteger operator-(int num, BigInteger big_num) {
   return big_num -= num;
 }
 
+// subtraction with BigInteger
+BigInteger& BigInteger::operator-=(const BigInteger& other) {
+  // TODO: implement this
+  return *this;
+}
+
+BigInteger operator-(BigInteger lhs, const BigInteger& rhs) {
+  return lhs -= rhs;
+}
+
 // multiplication with int
 BigInteger& BigInteger::operator*=(int num) {
   BigInteger other(num, base_);
@@ -243,6 +253,16 @@ BigInteger operator*(BigInteger big_num, int num) {
 
 BigInteger operator*(int num, BigInteger big_num) {
   return big_num *= num;
+}
+
+// multiplication with BigInteger
+BigInteger& BigInteger::operator*=(const BigInteger& other) {
+  // TODO: implement this
+  return *this;
+}
+
+BigInteger operator*(BigInteger lhs, const BigInteger& rhs) {
+  return lhs *= rhs;
 }
 
 // input and output operators
