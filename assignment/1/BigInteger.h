@@ -2,6 +2,7 @@
 #define CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
 
 #include <algorithm>
+#include <cstdlib>
 #include <iostream>
 
 class BigInteger {

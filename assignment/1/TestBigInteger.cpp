@@ -15,5 +15,9 @@ int main() {
   b1 += 123;
   cout << b1 << endl;
 
+  b1 *= -2;
+  cout << b1 << endl;
+  cout << (b1 * -1) << endl;
+
   return 0;
 }

@@ -13,6 +13,7 @@ BigInteger::BigInteger() {
 
 BigInteger::BigInteger(int num, int base) {
   is_negative_ = num < 0;
+  num = abs(num);
   base_ = base;
   len_ = calc_len(num, base);
   digits_ = new int[len_];
@@ -208,6 +209,7 @@ BigInteger& BigInteger::operator*=(int num) {
   delete[] digits_;
   digits_ = temp;
   len_ += other.len_;
+  if (digits_[len_ - 1] == 0) --len_;
 
   return *this;
 }
@@ -221,6 +223,7 @@ BigInteger operator*(int num, BigInteger big_num) {
 }
 
 std::ostream& operator<<(std::ostream& out, const BigInteger& big_num) {
+  if (big_num.is_negative_) out << "-";
   for (int i = big_num.len_ - 1; i >= 0; --i) {
     out << big_num.digits_[i];
   }
