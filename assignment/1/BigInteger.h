@@ -66,6 +66,7 @@ class BigInteger {
   // helper function
   static char int_to_digit(int digit);
   static int calc_len(int num, int base);
+  static int* calc_digits(int num, int base);
 };
 
 #endif // CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_

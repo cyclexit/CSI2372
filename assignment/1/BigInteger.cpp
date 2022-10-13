@@ -16,17 +16,7 @@ BigInteger::BigInteger(int num, int base) {
   num = abs(num);
   base_ = base;
   len_ = calc_len(num, base);
-  digits_ = new int[len_];
-
-  if (num == 0) {
-    digits_[0] = num;
-  } else {
-    int i = 0;
-    while (num) {
-      digits_[i++] = num % base_;
-      num /= base_;
-    }
-  }
+  digits_ = calc_digits(num, base_);
 }
 
 BigInteger::BigInteger(const BigInteger& other) {
@@ -134,7 +124,8 @@ BigInteger& BigInteger::operator+=(int num) {
   BigInteger big_num(num, base_);
   // TODO: 
   // 1. check the sign of num and this object
-  // 2. if the sign is different, use -= else continue
+  // 2. if the sign is different, use -= with -num
+  //    if the sign is the same, go ahead
   // 3. determine the sign of this object
 
   int slen = std::min(len_, big_num.len_);
@@ -185,7 +176,11 @@ BigInteger operator+(int num, BigInteger big_num) {
 }
 
 BigInteger& BigInteger::operator+=(const BigInteger& other) {
+  return *this;
+}
 
+BigInteger operator+(BigInteger lhs, const BigInteger& rhs) {
+  return lhs += rhs;
 }
 
 BigInteger& BigInteger::operator-=(int num) {
@@ -267,5 +262,22 @@ int BigInteger::calc_len(int num, int base) {
     ++res;
     num /= base;
   }
+  return res;
+}
+
+// num: should be positive
+int* BigInteger::calc_digits(int num, int base) {
+  int* res = new int[calc_len(num, base)];
+
+  if (num == 0) {
+    res[0] = num;
+  } else {
+    int i = 0;
+    while (num) {
+      res[i++] = num % base;
+      num /= base;
+    }
+  }
+
   return res;
 }
