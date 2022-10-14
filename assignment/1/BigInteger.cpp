@@ -496,8 +496,6 @@ void BigInteger::digit_wise_add(const BigInteger& other) {
   }
 
   // assgin
-  // TODO: ACTUAL bug is HERE! 
-  //       when *this and other have the same len, don't do this stupid thing...
   len_ = longer_len + (temp[longer_len] > 0);
   delete[] digits_;
   digits_ = temp;
