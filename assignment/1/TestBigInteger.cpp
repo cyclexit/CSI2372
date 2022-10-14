@@ -103,6 +103,8 @@ int main() {
   // arithmetic test with different sign
   b2 -= b3;
   cout << b2 << endl;
+  cout << ++b2 << endl;
+  cout << --b3 << endl;
 
   return 0;
 }

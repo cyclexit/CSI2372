@@ -294,6 +294,30 @@ BigInteger operator*(BigInteger lhs, const BigInteger& rhs) {
   return lhs *= rhs;
 }
 
+// ++ operators
+BigInteger& BigInteger::operator++() {
+  operator+=(1);
+  return *this;
+}
+
+BigInteger BigInteger::operator++(int) {
+  BigInteger old(*this);
+  operator++();
+  return old;
+}
+
+// -- opeartors
+BigInteger& BigInteger::operator--() {
+  operator-=(1);
+  return *this;
+}
+
+BigInteger BigInteger::operator--(int) {
+  BigInteger old(*this);
+  operator--();
+  return old;
+}
+
 // input and output operators
 std::ostream& operator<<(std::ostream& out, const BigInteger& big_num) {
   if (big_num.is_negative_) out << "-";
