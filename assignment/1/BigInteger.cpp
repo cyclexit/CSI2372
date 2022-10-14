@@ -468,7 +468,10 @@ void BigInteger::digit_wise_add(const BigInteger& other) {
   // reserve one more digit for potential carry
   int* temp = new int[longer_len + 1];
 
-  // simply add each digit
+  std::cout << __FUNCTION__ << ": shorter_len = " << shorter_len << ", longer_len = " << longer_len << std::endl; // debug
+  std::cout << __FUNCTION__ << ": other =" << other << std::endl; // debug
+
+  // simply add each digit from Least Significant Digit
   for (int i = 0; i < shorter_len; ++i) {
     temp[i] = digits_[i] + other.digits_[i];
   }
@@ -498,10 +501,10 @@ void BigInteger::digit_wise_sub(const BigInteger& other) {
   int longer_len = std::max(len_, other.len_);
   int* temp = new int[longer_len];
 
-  // std::cout << shorter_len << " " << longer_len << std::endl; // debug
-  // std::cout << other << std::endl; // debug
+  std::cout << __FUNCTION__ << ": shorter_len = " << shorter_len << ", longer_len = " << longer_len << std::endl; // debug
+  std::cout << __FUNCTION__ << ": other =" << other << std::endl; // debug
 
-  // simply subtract each digit
+  // simply subtract each digit from Least Significant Digit
   // NOTE: use the one with bigger abs value to avoid underflow
   if (abs_less_than(other)) {
     for (int i = 0; i < shorter_len; ++i) {
