@@ -159,6 +159,8 @@ BigInteger& BigInteger::operator+=(int num) {
   //    and determine the sign of this object;
   //    (2) if the sign is the same, digit-wise add
   BigInteger other(num, base_);
+  std::cout << __FUNCTION__ << " this: " << *this << std::endl; // debug
+  std::cout << __FUNCTION__ << " other: " << other << std::endl; // debug
 
   if (is_negative_ ^ other.is_negative_) {
     // different sign
@@ -183,7 +185,9 @@ BigInteger operator+(int num, BigInteger big_num) {
 
 // addition with BigInteger
 BigInteger& BigInteger::operator+=(const BigInteger& other) {
+  // std::cout << __FUNCTION__ << ": *this = " << *this << ", other = " << other << std::endl;
   BigInteger same_base = to_same_base(other);
+  // std::cout << __FUNCTION__ << ": *this = " << *this << ", same_base = " << same_base << std::endl;
 
   if (is_negative_ ^ same_base.is_negative_) {
     // different sign
@@ -211,13 +215,20 @@ BigInteger operator-(BigInteger big_num, int num) {
 }
 
 BigInteger operator-(int num, BigInteger big_num) {
-  return BigInteger(num, big_num.base_) -= big_num;
+  std::cout << __FUNCTION__ << ": num = " << num << ", big_num = " << big_num << std::endl; // debug
+  BigInteger res = BigInteger(num, big_num.base_);
+  std::cout << __FUNCTION__ << ": res = " << res << ", big_num = " << big_num << std::endl; // debug
+  res = res - big_num;
+  std::cout << __FUNCTION__ << ": res = " << res << ", big_num = " << big_num << std::endl; // debug
+  return res;
 }
 
 // subtraction with BigInteger
 BigInteger& BigInteger::operator-=(const BigInteger& other) {
   BigInteger flip_sign(other);
+  std::cout << __FUNCTION__ << ": *this = " << *this << ", other = " << other << std::endl; // debug
   flip_sign.is_negative_ = !other.is_negative_;
+  std::cout << __FUNCTION__ << ": other = " << other << ", flip_sign = " << flip_sign << std::endl; // debug
   return operator+=(flip_sign);
 }
 
@@ -489,6 +500,8 @@ void BigInteger::digit_wise_add(const BigInteger& other) {
   }
 
   // assgin
+  // TODO: ACTUAL bug is HERE! 
+  //       when *this and other have the same len, don't do this stupid thing...
   len_ = longer_len + (temp[longer_len] > 0);
   delete[] digits_;
   digits_ = temp;
@@ -502,8 +515,8 @@ void BigInteger::digit_wise_sub(const BigInteger& other) {
   int longer_len = std::max(len_, other.len_);
   int* temp = new int[longer_len];
 
-  // std::cout << __FUNCTION__ << ": shorter_len = " << shorter_len << ", longer_len = " << longer_len << std::endl; // debug
-  // std::cout << __FUNCTION__ << ": other = " << other << ", *this = " << *this << std::endl; // debug
+  std::cout << __FUNCTION__ << ": shorter_len = " << shorter_len << ", longer_len = " << longer_len << std::endl; // debug
+  std::cout << __FUNCTION__ << ": other = " << other << ", *this = " << *this << std::endl; // debug
 
   // simply subtract each digit from Least Significant Digit
   // NOTE: use the one with bigger abs value to avoid underflow
@@ -548,16 +561,23 @@ bool BigInteger::abs_less_than(const BigInteger& other) {
 // NOTE: in my opinion, this function is the key of this assignment
 // Sign is handled in this funcion
 BigInteger BigInteger::to_same_base(const BigInteger& other) {
+  // TODO: fix the bug here!!!!!
+  //       this function is nestedly called.
   BigInteger res(0, base_);
+  std::cout << res << std::endl; // debug
   // transform the abs value
+  std::cout << __FUNCTION__ << " other.len_: " << other.len_ << std::endl; // debug
   res += other.digits_[other.len_ - 1];
+  std::cout << res << std::endl; // debug
   for (int i = other.len_ - 2; i >= 0; --i) {
     res *= other.base_;
     res += other.digits_[i];
+    std::cout << res << std::endl; // debug
   }
   // make the sign correct
   res.is_negative_ = other.is_negative_;
-  // std::cout << __FUNCTION__ << " this: " << *this << std::endl; // debug
-  // std::cout << __FUNCTION__ << " other: " << res << std::endl; // debug
+  std::cout << __FUNCTION__ << " this: " << *this << std::endl; // debug
+  std::cout << __FUNCTION__ << " other: " << other << std::endl; // debug
+  std::cout << __FUNCTION__ << " res: " << res << std::endl; // debug
   return res;
 }
