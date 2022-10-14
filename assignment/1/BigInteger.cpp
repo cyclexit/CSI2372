@@ -263,8 +263,30 @@ BigInteger operator*(int num, BigInteger big_num) {
 
 // multiplication with BigInteger
 BigInteger& BigInteger::operator*=(const BigInteger& other) {
-  // TODO: implement this
   BigInteger same_base = to_same_base(other);
+  is_negative_ ^= same_base.is_negative_;
+
+  int* temp = new int[same_base.len_ + len_];
+  for (int i = 0; i < same_base.len_ + len_; ++i) {
+    temp[i] = 0;
+  }
+  for (int i = 0; i < len_; ++i) {
+    for (int j = 0; j < same_base.len_; ++j) {
+      temp[i + j] += digits_[i] * same_base.digits_[j];
+    }
+  }
+
+  // deal with carry
+  for (int i = 0; i < len_ + same_base.len_ - 1; ++i) {
+    temp[i + 1] += temp[i] / base_;
+    temp[i] %= base_;
+  }
+
+  delete[] digits_;
+  digits_ = temp;
+  len_ += same_base.len_;
+  if (digits_[len_ - 1] == 0) --len_;
+
   return *this;
 }
 
@@ -402,6 +424,7 @@ bool BigInteger::abs_less_than(const BigInteger& other) {
 }
 
 // NOTE: in my opinion, this function is the key of this assignment
+// Sign is handled in this funcion
 BigInteger BigInteger::to_same_base(const BigInteger& other) {
   BigInteger res(0, base_);
   // transform the abs value
