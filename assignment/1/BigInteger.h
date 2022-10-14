@@ -69,8 +69,8 @@ class BigInteger {
   friend BigInteger operator/(BigInteger big_num, int num);
   friend BigInteger operator/(int num, BigInteger big_num);
   // division with BigInteger
-  BigInteger& operator*=(const BigInteger& other);
-  friend BigInteger operator*(BigInteger lhs, const BigInteger& rhs);
+  BigInteger& operator/=(const BigInteger& other);
+  friend BigInteger operator/(BigInteger lhs, const BigInteger& rhs);
   // mod with int
   BigInteger& operator%=(int num);
   friend BigInteger operator%(BigInteger big_num, int num);

@@ -356,6 +356,56 @@ std::istream& operator>>(std::istream& in, BigInteger& big_num) {
   return in;
 }
 
+// bonus operators
+
+// division with int
+BigInteger& BigInteger::operator/=(int num) {
+  // TODO: implement this
+  return *this;
+};
+
+BigInteger operator/(BigInteger big_num, int num) {
+  return big_num /= num;
+}
+
+BigInteger operator/(int num, BigInteger big_num) {
+  return big_num /= num;
+}
+
+// division with BigInteger
+BigInteger& BigInteger::operator/=(const BigInteger& other) {
+  // TODO: implement this
+  return *this;
+}
+
+BigInteger operator/(BigInteger lhs, const BigInteger& rhs) {
+  return lhs /= rhs;
+}
+
+// mod with int
+BigInteger& BigInteger::operator%=(int num) {
+  // TODO: implement this
+  return *this;
+}
+
+BigInteger operator%(BigInteger big_num, int num) {
+  return big_num %= num;
+}
+
+BigInteger operator%(int num, BigInteger big_num) {
+  return big_num %= num;
+}
+
+// mod with BigInteger
+BigInteger& BigInteger::operator%=(const BigInteger& other) {
+  // TODO: implement this
+  return *this;
+}
+
+BigInteger operator%(BigInteger lhs, const BigInteger& rhs) {
+  return lhs %= lhs;
+}
+
 /**
  * private
  */
