@@ -5,10 +5,15 @@
 using namespace std;
 
 int main() {
-  BigInteger b1(99, 10);
-  cout << b1 << endl;
+  // Test BigInteger cin
+  BigInteger b0;
+  cin >> b0;
+  cout << b0 << endl;
+  cout << --b0 << endl;
 
   // simple test
+  BigInteger b1(99, 10);
+  cout << b1 << endl;
   b1.add_digit(0);
   b1.remove_digit();
   cout << b1 << endl;

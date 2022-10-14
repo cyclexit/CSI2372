@@ -61,7 +61,7 @@ class BigInteger {
   BigInteger operator--(int);
   // input and output operators
   friend std::ostream& operator<<(std::ostream& out, const BigInteger& big_num);
-  friend std::ostream& operator>>(std::istream& in, BigInteger& big_num);
+  friend std::istream& operator>>(std::istream& in, BigInteger& big_num);
 
   // bonus operators (do it when I have time...)
 

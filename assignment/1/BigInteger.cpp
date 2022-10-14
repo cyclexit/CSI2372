@@ -327,12 +327,33 @@ std::ostream& operator<<(std::ostream& out, const BigInteger& big_num) {
   return out;
 }
 
-std::ostream& operator>>(std::istream& in, BigInteger& big_num) {
+std::istream& operator>>(std::istream& in, BigInteger& big_num) {
   std::string str;
   int base;
   in >> str >> base;
-  // TODO: validate the digits in str
-  
+
+  // validate the digits in str
+  bool base_matched = true;
+  for (int i = 0; i < str.size(); ++i) {
+    int d = BigInteger::digit_to_int(str[i]);
+    if (d == -1) {
+      std::cout << "Fatal Error (Hongyi Lin) : Input contains invalid character, the parsing result will be invalid" << std::endl;
+    } else if (d >= base) {
+      base = d + 1;
+    }
+  }
+  if (!base_matched) {
+    std::cout << "Error: base not matched!" << std::endl;
+  }
+
+  // parse the values
+  big_num = BigInteger(0, base);
+  big_num += BigInteger::digit_to_int(str[0]);
+  for (int i = 1; i < str.size(); ++i) {
+    big_num *= big_num.base_;
+    big_num += BigInteger::digit_to_int(str[i]);
+  }
+  return in;
 }
 
 /**
