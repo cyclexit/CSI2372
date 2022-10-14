@@ -12,7 +12,7 @@ int main() {
   b1.remove_digit();
   cout << b1 << endl;
 
-  // simple arithmetic test
+  // arithmetic test with primitive int
   b1 += 123;
   cout << b1 << endl;
 
@@ -99,6 +99,10 @@ int main() {
   printf("(b2 >= b3) = %d\n", (b2 >= b3));
   printf("(b2 == b3) = %d\n", (b2 == b3));
   printf("(b2 != b3) = %d\n", (b2 != b3));
+
+  // arithmetic test with different sign
+  b2 -= b3;
+  cout << b2 << endl;
 
   return 0;
 }

@@ -184,13 +184,13 @@ BigInteger operator+(int num, BigInteger big_num) {
 BigInteger& BigInteger::operator+=(const BigInteger& other) {
   BigInteger same_base = to_same_base(other);
 
-  if (is_negative_ ^ other.is_negative_) {
+  if (is_negative_ ^ same_base.is_negative_) {
     // different sign
-    if (abs_less_than(other)) is_negative_ = !is_negative_;
-    digit_wise_sub(other);
+    if (abs_less_than(same_base)) is_negative_ = !is_negative_;
+    digit_wise_sub(same_base);
   } else {
     // same sign
-    digit_wise_add(other);
+    digit_wise_add(same_base);
   }
 
   return *this;
@@ -385,8 +385,11 @@ void BigInteger::digit_wise_sub(const BigInteger& other) {
   int longer_len = std::max(len_, other.len_);
   int* temp = new int[longer_len];
 
+  // std::cout << shorter_len << " " << longer_len << std::endl; // debug
+  // std::cout << other << std::endl; // debug
+
   // simply subtract each digit
-  if (operator<(other)) {
+  if (abs_less_than(other)) {
     for (int i = 0; i < shorter_len; ++i) {
       temp[i] = other.digits_[i] - digits_[i];
     }
@@ -411,6 +414,7 @@ void BigInteger::digit_wise_sub(const BigInteger& other) {
   len_ = longer_len - (temp[longer_len - 1] == 0);
   delete[] digits_;
   digits_ = temp;
+  // std::cout << *this << std::endl; // debug
 }
 
 bool BigInteger::abs_less_than(const BigInteger& other) {
