@@ -84,7 +84,7 @@ char BigInteger::operator[](int pos) const {
 }
 
 // comparison operators
-bool BigInteger::operator==(const BigInteger& other) {
+bool BigInteger::operator==(const BigInteger& other) const {
   BigInteger same_base = to_same_base(other);
 
   if (is_negative_ ^ same_base.is_negative_) return false;
@@ -96,32 +96,32 @@ bool BigInteger::operator==(const BigInteger& other) {
   }
   return true;
 }
-bool BigInteger::operator==(int num) {
+bool BigInteger::operator==(int num) const {
   return operator==(BigInteger(num, base_));
 }
 
-bool BigInteger::operator>(const BigInteger& other) {
+bool BigInteger::operator>(const BigInteger& other) const {
   return !operator<=(other);
 }
-bool BigInteger::operator>(int num) {
+bool BigInteger::operator>(int num) const {
   return operator>(BigInteger(num, base_));
 }
 
-bool BigInteger::operator<(const BigInteger& other) {
+bool BigInteger::operator<(const BigInteger& other) const {
   return operator<=(other) && operator!=(other);
 }
-bool BigInteger::operator<(int num) {
+bool BigInteger::operator<(int num) const {
   return operator<(BigInteger(num, base_));
 }
 
-bool BigInteger::operator>=(const BigInteger& other) {
+bool BigInteger::operator>=(const BigInteger& other) const {
   return operator>(other) || operator==(other);
 }
-bool BigInteger::operator>=(int num) {
+bool BigInteger::operator>=(int num) const {
   return operator>=(BigInteger(num, base_));
 }
 
-bool BigInteger::operator<=(const BigInteger& other) {
+bool BigInteger::operator<=(const BigInteger& other) const {
   BigInteger same_base = to_same_base(other);
 
   if (is_negative_ && !same_base.is_negative_) return true;
@@ -135,14 +135,14 @@ bool BigInteger::operator<=(const BigInteger& other) {
   }
   return true ^ both_negative;
 }
-bool BigInteger::operator<=(int num) {
+bool BigInteger::operator<=(int num) const {
   return operator<=(BigInteger(num, base_));
 }
 
-bool BigInteger::operator!=(const BigInteger& other) {
+bool BigInteger::operator!=(const BigInteger& other) const {
   return !operator==(other);
 }
-bool BigInteger::operator!=(int num) {
+bool BigInteger::operator!=(int num) const {
   return operator!=(BigInteger(num, base_));
 }
 
@@ -386,7 +386,7 @@ std::istream& operator>>(std::istream& in, BigInteger& big_num) {
 
 // division with int
 BigInteger& BigInteger::operator/=(int num) {
-  if (num == 0) throw("Math Error: divided by 0!");
+  if (num == 0) throw("Math Error: divided by zero!");
 
   BigInteger other(num, base_);
   if (abs_less_than(other)) return *this = BigInteger(0, base_);
@@ -408,7 +408,14 @@ BigInteger operator/(int num, BigInteger big_num) {
 
 // division with BigInteger
 BigInteger& BigInteger::operator/=(const BigInteger& other) {
-  // TODO: implement this
+  if (other == 0) throw("Math Error: divided by zero!");
+
+  BigInteger same_base = to_same_base(other);
+  if (abs_less_than(same_base)) return *this = BigInteger(0, base_);
+  // deal with sign here
+  is_negative_ ^= same_base.is_negative_;
+  same_base.is_negative_ = false;
+  digit_wise_div(same_base);
 
   return *this;
 }
@@ -619,7 +626,7 @@ bool BigInteger::abs_less_than(const BigInteger& other) {
 
 // NOTE: in my opinion, this function is the key of this assignment
 // Sign is handled in this funcion
-BigInteger BigInteger::to_same_base(const BigInteger& other) {
+BigInteger BigInteger::to_same_base(const BigInteger& other) const {
   BigInteger res(0, base_);
   // transform the abs value
   res += other.digits_[other.len_ - 1];

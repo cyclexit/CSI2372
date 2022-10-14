@@ -23,18 +23,18 @@ class BigInteger {
   // operators
   char operator[](int pos) const;
   // comparison operators
-  bool operator==(const BigInteger& other);
-  bool operator==(int num);
-  bool operator>(const BigInteger& other);
-  bool operator>(int num);
-  bool operator<(const BigInteger& other);
-  bool operator<(int num);
-  bool operator>=(const BigInteger& other);
-  bool operator>=(int num);
-  bool operator<=(const BigInteger& other);
-  bool operator<=(int num);
-  bool operator!=(const BigInteger& other);
-  bool operator!=(int num);
+  bool operator==(const BigInteger& other) const;
+  bool operator==(int num) const;
+  bool operator>(const BigInteger& other) const;
+  bool operator>(int num) const;
+  bool operator<(const BigInteger& other) const;
+  bool operator<(int num) const;
+  bool operator>=(const BigInteger& other) const;
+  bool operator>=(int num) const;
+  bool operator<=(const BigInteger& other) const;
+  bool operator<=(int num) const;
+  bool operator!=(const BigInteger& other) const;
+  bool operator!=(int num) const;
   // assignment operators
   BigInteger& operator=(const BigInteger& other);
   BigInteger& operator=(int num);
@@ -103,7 +103,7 @@ class BigInteger {
   void digit_wise_sub(const BigInteger& other);
   void digit_wise_div(const BigInteger& other);
   bool abs_less_than(const BigInteger& other);
-  BigInteger to_same_base(const BigInteger& other);
+  BigInteger to_same_base(const BigInteger& other) const;
 };
 
 #endif // CSI2372_ASSIGNMENT_1_BIG_INTEGER_H_
