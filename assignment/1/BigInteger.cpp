@@ -176,8 +176,9 @@ BigInteger operator+(BigInteger big_num, int num) {
   return big_num += num;
 }
 
-BigInteger operator+(int num, const BigInteger& big_num) {
-  return BigInteger(num, big_num.base_) += big_num;
+BigInteger operator+(int num, BigInteger big_num) {
+  // commutative law for addition
+  return big_num += num;
 }
 
 // addition with BigInteger
@@ -209,7 +210,7 @@ BigInteger operator-(BigInteger big_num, int num) {
   return big_num -= num;
 }
 
-BigInteger operator-(int num, const BigInteger& big_num) {
+BigInteger operator-(int num, BigInteger big_num) {
   return BigInteger(num, big_num.base_) -= big_num;
 }
 
@@ -257,7 +258,7 @@ BigInteger operator*(BigInteger big_num, int num) {
   return big_num *= num;
 }
 
-BigInteger operator*(int num, const BigInteger& big_num) {
+BigInteger operator*(int num, BigInteger big_num) {
   return BigInteger(num, big_num.base_) *= big_num;
 }
 
@@ -368,7 +369,7 @@ BigInteger operator/(BigInteger big_num, int num) {
   return big_num /= num;
 }
 
-BigInteger operator/(int num, const BigInteger& big_num) {
+BigInteger operator/(int num, BigInteger big_num) {
   return BigInteger(num, big_num.base_) /= big_num;
 }
 
@@ -392,7 +393,7 @@ BigInteger operator%(BigInteger big_num, int num) {
   return big_num %= num;
 }
 
-BigInteger operator%(int num, const BigInteger& big_num) {
+BigInteger operator%(int num, BigInteger big_num) {
   return BigInteger(num, big_num.base_) %= big_num;
 }
 
@@ -468,8 +469,8 @@ void BigInteger::digit_wise_add(const BigInteger& other) {
   // reserve one more digit for potential carry
   int* temp = new int[longer_len + 1];
 
-  std::cout << __FUNCTION__ << ": shorter_len = " << shorter_len << ", longer_len = " << longer_len << std::endl; // debug
-  std::cout << __FUNCTION__ << ": other =" << other << std::endl; // debug
+  // std::cout << __FUNCTION__ << ": shorter_len = " << shorter_len << ", longer_len = " << longer_len << std::endl; // debug
+  // std::cout << __FUNCTION__ << ": other = " << other << ", *this = " << *this << std::endl; // debug
 
   // simply add each digit from Least Significant Digit
   for (int i = 0; i < shorter_len; ++i) {
@@ -501,8 +502,8 @@ void BigInteger::digit_wise_sub(const BigInteger& other) {
   int longer_len = std::max(len_, other.len_);
   int* temp = new int[longer_len];
 
-  std::cout << __FUNCTION__ << ": shorter_len = " << shorter_len << ", longer_len = " << longer_len << std::endl; // debug
-  std::cout << __FUNCTION__ << ": other =" << other << std::endl; // debug
+  // std::cout << __FUNCTION__ << ": shorter_len = " << shorter_len << ", longer_len = " << longer_len << std::endl; // debug
+  // std::cout << __FUNCTION__ << ": other = " << other << ", *this = " << *this << std::endl; // debug
 
   // simply subtract each digit from Least Significant Digit
   // NOTE: use the one with bigger abs value to avoid underflow

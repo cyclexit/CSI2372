@@ -35,21 +35,21 @@ class BigInteger {
   // addition with int
   BigInteger& operator+=(int num);
   friend BigInteger operator+(BigInteger big_num, int num);
-  friend BigInteger operator+(int num, const BigInteger& big_num);
+  friend BigInteger operator+(int num, BigInteger big_num);
   // addition with BigInteger
   BigInteger& operator+=(const BigInteger& other);
   friend BigInteger operator+(BigInteger lhs, const BigInteger& rhs);
   // subtraction with int
   BigInteger& operator-=(int num);
   friend BigInteger operator-(BigInteger big_num, int num);
-  friend BigInteger operator-(int num, const BigInteger& big_num);
+  friend BigInteger operator-(int num, BigInteger big_num);
   // subtraction with BigInteger
   BigInteger& operator-=(const BigInteger& other);
   friend BigInteger operator-(BigInteger lhs, const BigInteger& rhs);
   // multiplication with int
   BigInteger& operator*=(int num);
   friend BigInteger operator*(BigInteger big_num, int num);
-  friend BigInteger operator*(int num, const BigInteger& big_num);
+  friend BigInteger operator*(int num, BigInteger big_num);
   // multiplication with BigInteger
   BigInteger& operator*=(const BigInteger& other);
   friend BigInteger operator*(BigInteger lhs, const BigInteger& rhs);
@@ -67,14 +67,14 @@ class BigInteger {
   // division with int
   BigInteger& operator/=(int num);
   friend BigInteger operator/(BigInteger big_num, int num);
-  friend BigInteger operator/(int num, const BigInteger& big_num);
+  friend BigInteger operator/(int num, BigInteger big_num);
   // division with BigInteger
   BigInteger& operator/=(const BigInteger& other);
   friend BigInteger operator/(BigInteger lhs, const BigInteger& rhs);
   // mod with int
   BigInteger& operator%=(int num);
   friend BigInteger operator%(BigInteger big_num, int num);
-  friend BigInteger operator%(int num, const BigInteger& big_num);
+  friend BigInteger operator%(int num, BigInteger big_num);
   // mod with BigInteger
   BigInteger& operator%=(const BigInteger& other);
   friend BigInteger operator%(BigInteger lhs, const BigInteger& rhs);
