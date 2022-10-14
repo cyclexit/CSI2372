@@ -368,7 +368,43 @@ std::istream& operator>>(std::istream& in, BigInteger& big_num) {
 
 // division with int
 BigInteger& BigInteger::operator/=(int num) {
-  return operator/=(BigInteger(num, base_));
+  // TODO: implement this
+  if (num == 0) throw("Math Error: divided by 0!");
+  BigInteger other(num, base_);
+  if (abs_less_than(other)) return *this = BigInteger(0, base_);
+  // deal with sign here
+  is_negative_ ^= other.is_negative_;
+
+  // digit-wise div with abs value
+  BigInteger temp(0, base_);
+  // find the starting position
+  int idx = len_ - 1;
+  while (temp.abs_less_than(other)) {
+    if (idx != len_ - 1) temp *= base_;
+    temp += digits_[idx];
+    if (temp.abs_less_than(other)) --idx;
+  }
+
+  // calculate the result
+  int res_len = idx + 1;
+  // std::cout << __FUNCTION__ << ": res_len = " << res_len << std::endl; // debug
+  int* res = new int[res_len];
+  for ( ; idx >= 0; --idx) {
+    int q = base_ - 1;
+    while (other * q > temp) --q;
+    temp -= q * other;
+    res[idx] = q;
+    if (idx) {
+      temp *= base_;
+      temp += digits_[idx - 1];
+    }
+  }
+
+  len_ = res_len;
+  delete[] digits_;
+  digits_ = res;
+
+  return *this;
 };
 
 BigInteger operator/(BigInteger big_num, int num) {
@@ -543,10 +579,11 @@ void BigInteger::digit_wise_sub(const BigInteger& other) {
   digits_ = temp;
 }
 
+// other: should have the same base as (*this)
 bool BigInteger::abs_less_than(const BigInteger& other) {
   if (len_ != other.len_) return len_ < other.len_;
   for (int i = len_ - 1; i >= 0; --i) {
-    if (digits_[i] > other.digits_[i]) {
+    if (digits_[i] >= other.digits_[i]) {
       return false;
     }
   }
