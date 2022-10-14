@@ -369,38 +369,13 @@ std::istream& operator>>(std::istream& in, BigInteger& big_num) {
 // division with int
 BigInteger& BigInteger::operator/=(int num) {
   if (num == 0) throw("Math Error: divided by 0!");
+
   BigInteger other(num, base_);
   if (abs_less_than(other)) return *this = BigInteger(0, base_);
   // deal with sign here
   is_negative_ ^= other.is_negative_;
-
-  // digit-wise div with abs value
-  BigInteger temp(0, base_);
-  // find the starting position
-  int idx = len_ - 1;
-  while (temp.abs_less_than(other)) {
-    if (idx != len_ - 1) temp *= base_;
-    temp += digits_[idx];
-    if (temp.abs_less_than(other)) --idx;
-  }
-  // calculate the result
-  int res_len = idx + 1;
-  // std::cout << __FUNCTION__ << ": res_len = " << res_len << std::endl; // debug
-  int* res = new int[res_len];
-  for ( ; idx >= 0; --idx) {
-    int q = base_ - 1;
-    while (other * q > temp) --q;
-    temp -= q * other;
-    res[idx] = q;
-    if (idx) {
-      temp *= base_;
-      temp += digits_[idx - 1];
-    }
-  }
-
-  len_ = res_len;
-  delete[] digits_;
-  digits_ = res;
+  other.is_negative_ = false;
+  digit_wise_div(other);
 
   return *this;
 }
@@ -575,6 +550,42 @@ void BigInteger::digit_wise_sub(const BigInteger& other) {
   len_ = longer_len - (temp[longer_len - 1] == 0);
   delete[] digits_;
   digits_ = temp;
+}
+
+// other: should have the same base as (*this), and should be POSITIVE(+)!
+// Don't deal with sign in this function
+// Sign is resolved in arithmetic operators
+void BigInteger::digit_wise_div(const BigInteger& other) {
+  // std::cout << __FUNCTION__ << ": *this = " << *this << std::endl; // debug
+  // std::cout << __FUNCTION__ << ": other = " << other << std::endl; // debug
+
+  // digit-wise div with abs value
+  BigInteger temp(0, base_);
+  // find the starting position
+  int idx = len_ - 1;
+  while (temp.abs_less_than(other)) {
+    if (idx != len_ - 1) temp *= base_;
+    temp += digits_[idx];
+    if (temp.abs_less_than(other)) --idx;
+  }
+  // calculate the result
+  int res_len = idx + 1;
+  std::cout << __FUNCTION__ << ": res_len = " << res_len << std::endl; // debug
+  int* res = new int[res_len];
+  for ( ; idx >= 0; --idx) {
+    int q = base_ - 1;
+    while (temp.abs_less_than(other * q)) --q;
+    temp -= q * other;
+    res[idx] = q;
+    if (idx) {
+      temp *= base_;
+      temp += digits_[idx - 1];
+    }
+  }
+
+  len_ = res_len;
+  delete[] digits_;
+  digits_ = res;
 }
 
 // other: should have the same base as (*this)
