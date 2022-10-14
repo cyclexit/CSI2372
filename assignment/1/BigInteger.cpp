@@ -413,6 +413,7 @@ void BigInteger::digit_wise_sub(const BigInteger& other) {
   // std::cout << other << std::endl; // debug
 
   // simply subtract each digit
+  // NOTE: use the one with bigger abs value to avoid underflow
   if (abs_less_than(other)) {
     for (int i = 0; i < shorter_len; ++i) {
       temp[i] = other.digits_[i] - digits_[i];
