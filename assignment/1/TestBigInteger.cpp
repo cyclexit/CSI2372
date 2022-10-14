@@ -80,5 +80,7 @@ int main() {
   printf("(b2 == b3) = %d\n", (b2 == b3));
   printf("(b2 != b3) = %d\n", (b2 != b3));
 
+  // comparison test different base
+
   return 0;
 }

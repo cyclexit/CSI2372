@@ -44,8 +44,9 @@ bool BigInteger::add_digit(int digit) {
 }
 
 void BigInteger::remove_digit() {
-  int* temp = new int[len_ - 1];
+  if (len_ == 0) return;
 
+  int* temp = new int[len_ - 1];
   for (int i = 1; i < len_; ++i) {
     temp[i - 1] = digits_[i];
   }
@@ -83,19 +84,16 @@ char BigInteger::operator[](int pos) const {
 
 // comparison operators
 bool BigInteger::operator==(const BigInteger& other) {
-  if (base_ != other.base_) {
-    // TODO: implement this case
-    return false;
-  } else {
-    if (is_negative_ ^ other.is_negative_) return false;
-    if (len_ != other.len_) return false;
-    for (int i = 0; i < len_; ++i) {
-      if (digits_[i] != other.digits_[i]) {
-        return false;
-      }
+  BigInteger same_base = to_same_base(other);
+
+  if (is_negative_ ^ same_base.is_negative_) return false;
+  if (len_ != same_base.len_) return false;
+  for (int i = 0; i < len_; ++i) {
+    if (digits_[i] != same_base.digits_[i]) {
+      return false;
     }
-    return true;
   }
+  return true;
 }
 
 bool BigInteger::operator>(const BigInteger& other) {
@@ -111,21 +109,18 @@ bool BigInteger::operator>=(const BigInteger& other) {
 }
 
 bool BigInteger::operator<=(const BigInteger& other) {
-  if (base_ != other.base_) {
-    // TODO: implement this case
-    return false;
-  } else {
-    if (is_negative_ && !other.is_negative_) return true;
-    if (!is_negative_ && other.is_negative_) return false;
-    bool both_negative = is_negative_ && other.is_negative_;
-    if (len_ != other.len_) return (len_ < other.len_) ^ both_negative;
-    for (int i = len_ - 1; i >= 0; --i) {
-      if (digits_[i] > other.digits_[i]) {
-        return false ^ both_negative;
-      }
+  BigInteger same_base = to_same_base(other);
+
+  if (is_negative_ && !same_base.is_negative_) return true;
+  if (!is_negative_ && same_base.is_negative_) return false;
+  bool both_negative = is_negative_ && same_base.is_negative_;
+  if (len_ != same_base.len_) return (len_ < same_base.len_) ^ both_negative;
+  for (int i = len_ - 1; i >= 0; --i) {
+    if (digits_[i] > same_base.digits_[i]) {
+      return false ^ both_negative;
     }
-    return true ^ both_negative;
   }
+  return true ^ both_negative;
 }
 
 bool BigInteger::operator!=(const BigInteger& other) {
@@ -392,4 +387,19 @@ bool BigInteger::abs_less_than(const BigInteger& other) {
     }
   }
   return true;
+}
+
+BigInteger BigInteger::to_same_base(const BigInteger& other) {
+  BigInteger res(0, base_);
+  // transform the abs value
+  res += other.digits_[other.len_ - 1];
+  for (int i = other.len_ - 2; i >= 0; --i) {
+    res *= other.base_;
+    res += other.digits_[i];
+  }
+  // make the sign correct
+  res.is_negative_ = other.is_negative_;
+  // std::cout << __FUNCTION__ << " this: " << *this << std::endl; // debug
+  // std::cout << __FUNCTION__ << " other: " << res << std::endl; // debug
+  return res;
 }
