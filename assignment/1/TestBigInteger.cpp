@@ -16,6 +16,7 @@ int main() {
   cout << b1 << endl;
   b1 /= 9;
   cout << b1 << endl;
+  cout << (22 / b1) << endl;
   b1.add_digit(0);
   b1.remove_digit();
   cout << b1 << endl;

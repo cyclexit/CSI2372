@@ -368,7 +368,6 @@ std::istream& operator>>(std::istream& in, BigInteger& big_num) {
 
 // division with int
 BigInteger& BigInteger::operator/=(int num) {
-  // TODO: implement this
   if (num == 0) throw("Math Error: divided by 0!");
   BigInteger other(num, base_);
   if (abs_less_than(other)) return *this = BigInteger(0, base_);
@@ -384,7 +383,6 @@ BigInteger& BigInteger::operator/=(int num) {
     temp += digits_[idx];
     if (temp.abs_less_than(other)) --idx;
   }
-
   // calculate the result
   int res_len = idx + 1;
   // std::cout << __FUNCTION__ << ": res_len = " << res_len << std::endl; // debug
@@ -405,7 +403,7 @@ BigInteger& BigInteger::operator/=(int num) {
   digits_ = res;
 
   return *this;
-};
+}
 
 BigInteger operator/(BigInteger big_num, int num) {
   return big_num /= num;
