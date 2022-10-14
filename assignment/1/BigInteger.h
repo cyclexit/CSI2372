@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
+#include <string>
 
 class BigInteger {
  public:
@@ -60,7 +61,7 @@ class BigInteger {
   BigInteger operator--(int);
   // input and output operators
   friend std::ostream& operator<<(std::ostream& out, const BigInteger& big_num);
-  friend std::ostream& operator>>(std::istream& in, const BigInteger& big_num);
+  friend std::ostream& operator>>(std::istream& in, BigInteger& big_num);
 
   // bonus operators (do it when I have time...)
 
@@ -75,6 +76,7 @@ class BigInteger {
 
   // helper function
   static char int_to_digit(int digit);
+  static int digit_to_int(char digit);
   static int calc_len(int num, int base);
   static int* calc_digits(int num, int base);
   void digit_wise_add(const BigInteger& other);

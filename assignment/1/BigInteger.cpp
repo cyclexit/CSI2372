@@ -327,6 +327,14 @@ std::ostream& operator<<(std::ostream& out, const BigInteger& big_num) {
   return out;
 }
 
+std::ostream& operator>>(std::istream& in, BigInteger& big_num) {
+  std::string str;
+  int base;
+  in >> str >> base;
+  // TODO: validate the digits in str
+  
+}
+
 /**
  * private
  */
@@ -338,6 +346,16 @@ char BigInteger::int_to_digit(int digit) {
     return '0' + digit;
   } else {
     return 'A' + (digit - 10) % 26;
+  }
+}
+
+int BigInteger::digit_to_int(char digit) {
+  if ('0' <= digit && digit <= '9') {
+    return digit - '0';
+  } else if ('A' <= digit && digit <= 'Z') {
+    return digit - 'A' + 10;
+  } else {
+    return -1;
   }
 }
 
