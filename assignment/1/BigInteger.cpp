@@ -96,17 +96,29 @@ bool BigInteger::operator==(const BigInteger& other) {
   }
   return true;
 }
+bool BigInteger::operator==(int num) {
+  return operator==(BigInteger(num, base_));
+}
 
 bool BigInteger::operator>(const BigInteger& other) {
   return !operator<=(other);
+}
+bool BigInteger::operator>(int num) {
+  return operator>(BigInteger(num, base_));
 }
 
 bool BigInteger::operator<(const BigInteger& other) {
   return operator<=(other) && operator!=(other);
 }
+bool BigInteger::operator<(int num) {
+  return operator<(BigInteger(num, base_));
+}
 
 bool BigInteger::operator>=(const BigInteger& other) {
   return operator>(other) || operator==(other);
+}
+bool BigInteger::operator>=(int num) {
+  return operator>=(BigInteger(num, base_));
 }
 
 bool BigInteger::operator<=(const BigInteger& other) {
@@ -123,9 +135,15 @@ bool BigInteger::operator<=(const BigInteger& other) {
   }
   return true ^ both_negative;
 }
+bool BigInteger::operator<=(int num) {
+  return operator<=(BigInteger(num, base_));
+}
 
 bool BigInteger::operator!=(const BigInteger& other) {
   return !operator==(other);
+}
+bool BigInteger::operator!=(int num) {
+  return operator!=(BigInteger(num, base_));
 }
 
 // assignment operators

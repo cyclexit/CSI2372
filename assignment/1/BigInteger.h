@@ -24,11 +24,17 @@ class BigInteger {
   char operator[](int pos) const;
   // comparison operators
   bool operator==(const BigInteger& other);
+  bool operator==(int num);
   bool operator>(const BigInteger& other);
+  bool operator>(int num);
   bool operator<(const BigInteger& other);
+  bool operator<(int num);
   bool operator>=(const BigInteger& other);
+  bool operator>=(int num);
   bool operator<=(const BigInteger& other);
+  bool operator<=(int num);
   bool operator!=(const BigInteger& other);
+  bool operator!=(int num);
   // assignment operators
   BigInteger& operator=(const BigInteger& other);
   BigInteger& operator=(int num);
