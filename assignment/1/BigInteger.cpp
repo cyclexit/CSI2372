@@ -56,6 +56,7 @@ void BigInteger::remove_digit() {
   --len_;
 }
 
+// NOTE: pos is indexed from the least significant digit.
 bool BigInteger::insert_digit(int digit, int pos) {
   if (pos > len_) return false;
   // NOTE: if digit >= base, the insertion is invalid.
