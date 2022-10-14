@@ -10,7 +10,7 @@
 * Recommend [cmake](https://cmake.org).
 
 
-1. Put the professor's test file in the same directory with my source code.
+1. Put the professor's testing code in the same directory with my source code.
 2. Compile my code with following commands
     ```bash
     mkdir build
