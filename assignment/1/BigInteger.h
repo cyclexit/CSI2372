@@ -102,6 +102,7 @@ class BigInteger {
   void digit_wise_add(const BigInteger& other);
   void digit_wise_sub(const BigInteger& other);
   void digit_wise_div(const BigInteger& other);
+  void digit_wise_mod(const BigInteger& other);
   bool abs_less_than(const BigInteger& other);
   BigInteger to_same_base(const BigInteger& other) const;
 };

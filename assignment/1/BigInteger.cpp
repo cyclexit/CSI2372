@@ -609,6 +609,33 @@ void BigInteger::digit_wise_div(const BigInteger& other) {
   digits_ = res;
 }
 
+// other: should have the same base as (*this), and should be POSITIVE(+)!
+// Don't deal with sign in this function
+// Sign is resolved in arithmetic operators
+void BigInteger::digit_wise_mod(const BigInteger& other) {
+  // digit-wise div with abs value
+  BigInteger temp(0, base_);
+  // find the starting position
+  int idx = len_ - 1;
+  while (temp.abs_less_than(other)) {
+    if (idx != len_ - 1) temp *= base_;
+    temp += digits_[idx];
+    if (temp.abs_less_than(other)) --idx;
+  }
+  // calculate the result
+  for ( ; idx >= 0; --idx) {
+    int q = base_ - 1;
+    while (temp.abs_less_than(other * q)) --q;
+    temp -= q * other;
+    if (idx) {
+      temp *= base_;
+      temp += digits_[idx - 1];
+    }
+  }
+
+  *this = temp;
+}
+
 // other: should have the same base as (*this)
 bool BigInteger::abs_less_than(const BigInteger& other) {
   if (len_ != other.len_) return len_ < other.len_;
