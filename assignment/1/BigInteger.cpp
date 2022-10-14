@@ -182,7 +182,17 @@ BigInteger operator+(int num, BigInteger big_num) {
 
 // addition with BigInteger
 BigInteger& BigInteger::operator+=(const BigInteger& other) {
-  // TODO: implement this
+  BigInteger same_base = to_same_base(other);
+
+  if (is_negative_ ^ other.is_negative_) {
+    // different sign
+    if (abs_less_than(other)) is_negative_ = !is_negative_;
+    digit_wise_sub(other);
+  } else {
+    // same sign
+    digit_wise_add(other);
+  }
+
   return *this;
 }
 
@@ -205,8 +215,9 @@ BigInteger operator-(int num, BigInteger big_num) {
 
 // subtraction with BigInteger
 BigInteger& BigInteger::operator-=(const BigInteger& other) {
-  // TODO: implement this
-  return *this;
+  BigInteger flip_sign(other);
+  flip_sign.is_negative_ = !other.is_negative_;
+  return operator+=(flip_sign);
 }
 
 BigInteger operator-(BigInteger lhs, const BigInteger& rhs) {
@@ -253,6 +264,7 @@ BigInteger operator*(int num, BigInteger big_num) {
 // multiplication with BigInteger
 BigInteger& BigInteger::operator*=(const BigInteger& other) {
   // TODO: implement this
+  BigInteger same_base = to_same_base(other);
   return *this;
 }
 
