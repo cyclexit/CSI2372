@@ -6,10 +6,10 @@ using namespace std;
 
 int main() {
   // Test BigInteger cin
-  BigInteger b0;
-  cin >> b0;
-  cout << b0 << endl;
-  cout << --b0 << endl;
+  // BigInteger b0;
+  // cin >> b0;
+  // cout << b0 << endl;
+  // cout << --b0 << endl;
 
   // simple test
   BigInteger b1(99, 10);
@@ -17,7 +17,9 @@ int main() {
   b1.add_digit(0);
   b1.remove_digit();
   cout << b1 << endl;
-
+  // int - BigInteger
+  cout << (10 - b1) << endl;
+ 
   // stress test with add_digit
   for (int i = 0; i < 100; ++i) {
     b1.add_digit(i % 10);
@@ -27,6 +29,8 @@ int main() {
   // arithmetic test with primitive int
   b1 += 123;
   cout << b1 << endl;
+  // int - BigInteger
+  cout << (10 - b1) << endl;
 
   b1 *= -2;
   cout << b1 << endl;

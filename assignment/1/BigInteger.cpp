@@ -176,8 +176,8 @@ BigInteger operator+(BigInteger big_num, int num) {
   return big_num += num;
 }
 
-BigInteger operator+(int num, BigInteger big_num) {
-  return big_num += num;
+BigInteger operator+(int num, const BigInteger& big_num) {
+  return BigInteger(num, big_num.base_) += big_num;
 }
 
 // addition with BigInteger
@@ -209,8 +209,8 @@ BigInteger operator-(BigInteger big_num, int num) {
   return big_num -= num;
 }
 
-BigInteger operator-(int num, BigInteger big_num) {
-  return big_num -= num;
+BigInteger operator-(int num, const BigInteger& big_num) {
+  return BigInteger(num, big_num.base_) -= big_num;
 }
 
 // subtraction with BigInteger
@@ -257,8 +257,8 @@ BigInteger operator*(BigInteger big_num, int num) {
   return big_num *= num;
 }
 
-BigInteger operator*(int num, BigInteger big_num) {
-  return big_num *= num;
+BigInteger operator*(int num, const BigInteger& big_num) {
+  return BigInteger(num, big_num.base_) *= big_num;
 }
 
 // multiplication with BigInteger
@@ -368,8 +368,8 @@ BigInteger operator/(BigInteger big_num, int num) {
   return big_num /= num;
 }
 
-BigInteger operator/(int num, BigInteger big_num) {
-  return big_num /= num;
+BigInteger operator/(int num, const BigInteger& big_num) {
+  return BigInteger(num, big_num.base_) /= big_num;
 }
 
 // division with BigInteger
@@ -392,8 +392,8 @@ BigInteger operator%(BigInteger big_num, int num) {
   return big_num %= num;
 }
 
-BigInteger operator%(int num, BigInteger big_num) {
-  return big_num %= num;
+BigInteger operator%(int num, const BigInteger& big_num) {
+  return BigInteger(num, big_num.base_) %= big_num;
 }
 
 // mod with BigInteger
