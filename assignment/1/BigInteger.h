@@ -64,6 +64,20 @@ class BigInteger {
   friend std::istream& operator>>(std::istream& in, BigInteger& big_num);
 
   // bonus operators (do it when I have time...)
+  // division with int
+  BigInteger& operator/=(int num);
+  friend BigInteger operator/(BigInteger big_num, int num);
+  friend BigInteger operator/(int num, BigInteger big_num);
+  // division with BigInteger
+  BigInteger& operator*=(const BigInteger& other);
+  friend BigInteger operator*(BigInteger lhs, const BigInteger& rhs);
+  // mod with int
+  BigInteger& operator%=(int num);
+  friend BigInteger operator%(BigInteger big_num, int num);
+  friend BigInteger operator%(int num, BigInteger big_num);
+  // mod with BigInteger
+  BigInteger& operator%=(const BigInteger& other);
+  friend BigInteger operator%(BigInteger lhs, const BigInteger& rhs);
 
  private:
   // data member
