@@ -178,15 +178,13 @@ BigInteger operator+(BigInteger big_num, int num) {
 }
 
 BigInteger operator+(int num, BigInteger big_num) {
-  // commutative law for addition
+  // NOTE: commutative law for addition
   return big_num += num;
 }
 
 // addition with BigInteger
 BigInteger& BigInteger::operator+=(const BigInteger& other) {
-  // std::cout << __FUNCTION__ << ": *this = " << *this << ", other = " << other << std::endl;
   BigInteger same_base = to_same_base(other);
-  // std::cout << __FUNCTION__ << ": *this = " << *this << ", same_base = " << same_base << std::endl;
 
   if (is_negative_ ^ same_base.is_negative_) {
     // different sign
@@ -275,9 +273,11 @@ BigInteger& BigInteger::operator*=(const BigInteger& other) {
   is_negative_ ^= same_base.is_negative_;
 
   int* temp = new int[same_base.len_ + len_];
+  // NOTE: init all values to 0 for a safe play
   for (int i = 0; i < same_base.len_ + len_; ++i) {
     temp[i] = 0;
   }
+
   for (int i = 0; i < len_; ++i) {
     for (int j = 0; j < same_base.len_; ++j) {
       temp[i + j] += digits_[i] * same_base.digits_[j];
@@ -368,8 +368,7 @@ std::istream& operator>>(std::istream& in, BigInteger& big_num) {
 
 // division with int
 BigInteger& BigInteger::operator/=(int num) {
-  // TODO: implement this
-  return *this;
+  return operator/=(BigInteger(num, base_));
 };
 
 BigInteger operator/(BigInteger big_num, int num) {
@@ -383,6 +382,7 @@ BigInteger operator/(int num, BigInteger big_num) {
 // division with BigInteger
 BigInteger& BigInteger::operator/=(const BigInteger& other) {
   // TODO: implement this
+
   return *this;
 }
 
