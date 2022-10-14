@@ -8,8 +8,15 @@ int main() {
   BigInteger b1(99, 10);
   cout << b1 << endl;
 
+  // simple test
   b1.add_digit(0);
   b1.remove_digit();
+  cout << b1 << endl;
+
+  // stress test with add_digit
+  for (int i = 0; i < 100; ++i) {
+    b1.add_digit(i % 10);
+  }
   cout << b1 << endl;
 
   // arithmetic test with primitive int
@@ -100,7 +107,7 @@ int main() {
   printf("(b2 == b3) = %d\n", (b2 == b3));
   printf("(b2 != b3) = %d\n", (b2 != b3));
 
-  // arithmetic test with different sign
+  // arithmetic test with different signs and bases
   b2 -= b3;
   cout << b2 << endl;
   cout << ++b2 << endl;
