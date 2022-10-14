@@ -581,9 +581,6 @@ void BigInteger::digit_wise_sub(const BigInteger& other) {
 // Don't deal with sign in this function
 // Sign is resolved in arithmetic operators
 void BigInteger::digit_wise_div(const BigInteger& other) {
-  // std::cout << __FUNCTION__ << ": *this = " << *this << std::endl; // debug
-  // std::cout << __FUNCTION__ << ": other = " << other << std::endl; // debug
-
   // digit-wise div with abs value
   BigInteger temp(0, base_);
   // find the starting position
@@ -595,7 +592,6 @@ void BigInteger::digit_wise_div(const BigInteger& other) {
   }
   // calculate the result
   int res_len = idx + 1;
-  std::cout << __FUNCTION__ << ": res_len = " << res_len << std::endl; // debug
   int* res = new int[res_len];
   for ( ; idx >= 0; --idx) {
     int q = base_ - 1;
@@ -617,11 +613,11 @@ void BigInteger::digit_wise_div(const BigInteger& other) {
 bool BigInteger::abs_less_than(const BigInteger& other) {
   if (len_ != other.len_) return len_ < other.len_;
   for (int i = len_ - 1; i >= 0; --i) {
-    if (digits_[i] >= other.digits_[i]) {
-      return false;
+    if (digits_[i] < other.digits_[i]) {
+      return true;
     }
   }
-  return true;
+  return false;
 }
 
 // NOTE: in my opinion, this function is the key of this assignment
