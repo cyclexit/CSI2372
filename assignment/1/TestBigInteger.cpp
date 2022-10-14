@@ -81,6 +81,24 @@ int main() {
   printf("(b2 != b3) = %d\n", (b2 != b3));
 
   // comparison test different base
+  b2 = BigInteger(100, 10);
+  b3 = BigInteger(100, 16);
+  cout << b2 << "(10) " << b3 << "(16)" << endl;
+  printf("(b2 < b3) = %d\n", (b2 < b3));
+  printf("(b2 <= b3) = %d\n", (b2 <= b3));
+  printf("(b2 > b3) = %d\n", (b2 > b3));
+  printf("(b2 >= b3) = %d\n", (b2 >= b3));
+  printf("(b2 == b3) = %d\n", (b2 == b3));
+  printf("(b2 != b3) = %d\n", (b2 != b3));
+
+  b3 = 472;
+  cout << b2 << "(10) " << b3 << "(16)" << endl;
+  printf("(b2 < b3) = %d\n", (b2 < b3));
+  printf("(b2 <= b3) = %d\n", (b2 <= b3));
+  printf("(b2 > b3) = %d\n", (b2 > b3));
+  printf("(b2 >= b3) = %d\n", (b2 >= b3));
+  printf("(b2 == b3) = %d\n", (b2 == b3));
+  printf("(b2 != b3) = %d\n", (b2 != b3));
 
   return 0;
 }

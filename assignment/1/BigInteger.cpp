@@ -264,7 +264,7 @@ BigInteger operator*(BigInteger lhs, const BigInteger& rhs) {
 std::ostream& operator<<(std::ostream& out, const BigInteger& big_num) {
   if (big_num.is_negative_) out << "-";
   for (int i = big_num.len_ - 1; i >= 0; --i) {
-    out << big_num.digits_[i];
+    out << big_num[i];
   }
   return out;
 }
@@ -389,6 +389,7 @@ bool BigInteger::abs_less_than(const BigInteger& other) {
   return true;
 }
 
+// NOTE: in my opinion, this function is the key of this assignment
 BigInteger BigInteger::to_same_base(const BigInteger& other) {
   BigInteger res(0, base_);
   // transform the abs value
