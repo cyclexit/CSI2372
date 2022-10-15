@@ -19,12 +19,14 @@ int main() {
   // cout << (22 / b1) << endl;
   b1.add_digit(0);
   b1.remove_digit();
-  cout << b1 << endl;
+  cout << "b1 = " << b1 << "(10)" << endl;
   // int, BigInteger
   cout << (10 + b1) << endl;
   cout << (10 - b1) << endl;
   BigInteger b1_1(-2, 16);
+  cout << "b1_1 = " << b1_1 << "(16)" << endl;
   cout << b1 / b1_1 << endl;
+  cout << b1 % b1_1 << endl;
  
   // stress test with add_digit
   for (int i = 0; i < 100; ++i) {

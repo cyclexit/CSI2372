@@ -425,8 +425,19 @@ BigInteger operator/(BigInteger lhs, const BigInteger& rhs) {
 }
 
 // mod with int
+// NOTE: The mod logic is the same with the C++ primitive signed mod, especially
+//       mod with negative values. Basically speaking, C++ mod has two features:
+//       1. The result sign is the same as the left-hand side.
+//       2. Then, do the modulo with the abs values of two numbers.
 BigInteger& BigInteger::operator%=(int num) {
-  // TODO: implement this
+  if (num == 0) throw("Math Error: modulo by zero!");
+
+  BigInteger other(num, base_);
+  other.is_negative_ = false;
+  bool old_sign = is_negative_;
+  digit_wise_mod(other);
+  is_negative_ = old_sign;
+
   return *this;
 }
 
@@ -440,12 +451,19 @@ BigInteger operator%(int num, BigInteger big_num) {
 
 // mod with BigInteger
 BigInteger& BigInteger::operator%=(const BigInteger& other) {
-  // TODO: implement this
+  if (other == 0) throw("Math Error: modulo by zero!");
+
+  BigInteger same_base = to_same_base(other);
+  same_base.is_negative_ = false;
+  bool old_sign = is_negative_;
+  digit_wise_mod(same_base);
+  is_negative_ = old_sign;
+
   return *this;
 }
 
 BigInteger operator%(BigInteger lhs, const BigInteger& rhs) {
-  return lhs %= lhs;
+  return lhs %= rhs;
 }
 
 /**
