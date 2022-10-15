@@ -603,7 +603,7 @@ void BigInteger::digit_wise_div(const BigInteger& other) {
   BigInteger temp(0, base_);
   // find the starting position
   int idx = len_ - 1;
-  while (temp.abs_less_than(other)) {
+  while (idx >= 0 && temp.abs_less_than(other)) {
     if (idx != len_ - 1) temp *= base_;
     temp += digits_[idx];
     if (temp.abs_less_than(other)) --idx;
@@ -635,7 +635,7 @@ void BigInteger::digit_wise_mod(const BigInteger& other) {
   BigInteger temp(0, base_);
   // find the starting position
   int idx = len_ - 1;
-  while (temp.abs_less_than(other)) {
+  while (idx >= 0 && temp.abs_less_than(other)) {
     if (idx != len_ - 1) temp *= base_;
     temp += digits_[idx];
     if (temp.abs_less_than(other)) --idx;
