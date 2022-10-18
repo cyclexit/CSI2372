@@ -119,13 +119,14 @@ void DoubleLinkedList::remove_from_back() {
   }
 }
 
-int& DoubleLinkedList::operator[](int idx) const {
+int& DoubleLinkedList::operator[](int idx) {
+  if (idx >= len_) return dummy_;
   Node* cur = head_;
   while (idx--) cur = cur->next_;
   return cur->data_;
 }
 
-std::ostream& operator<<(std::ostream& out, const DoubleLinkedList& lst) {
+std::ostream& operator<<(std::ostream& out, DoubleLinkedList& lst) {
   for (int i = 0; i < lst.len_; ++i) {
     if (i) out << ", ";
     out << lst[i];

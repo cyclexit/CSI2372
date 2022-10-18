@@ -33,12 +33,13 @@ class DoubleLinkedList {
 	void remove_from_back();
 
   // operators
-  int& operator[](int idx) const;
+  int& operator[](int idx);
   friend std::ostream& operator<<(std::ostream& out,
-                                  const DoubleLinkedList& lst);
+                                  DoubleLinkedList& lst);
 
  private:
   int len_;
+  int dummy_ = -1;
   Node* head_;
   Node* tail_;
 };
