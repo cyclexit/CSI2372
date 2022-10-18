@@ -20,3 +20,12 @@ bool DoubleLinkedList::add_to_front(int data) {
   ++len_;
   return true;
 }
+
+bool DoubleLinkedList::add_to_back(int data) {
+  Node* node = new Node(data, tail_, nullptr);
+  if (node == nullptr) return false;
+  tail_ = node;
+  if (head_ == nullptr) head_ = node;
+  ++len_;
+  return true;
+}
