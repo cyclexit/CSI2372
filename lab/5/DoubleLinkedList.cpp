@@ -42,5 +42,40 @@ bool DoubleLinkedList::insert_item(int idx, int data) {
 }
 
 void DoubleLinkedList::remove_item(int data) {
+  Node* cur = head_;
+  while (cur) {
+    Node* nxt = cur->next_;
+    if (cur->data_ == data) {
+      // NOTE: remove all nodes with data_ == data
+      if (cur == head_) {
+        remove_from_front();
+      } else if (cur == tail_) {
+        remove_from_back();
+      } else {
+        cur->prev_->next_ = cur->next_;
+        cur->next_->prev_ = cur->prev_;
+        delete cur;
+      }
+    }
+    cur = nxt;
+  }
+}
 
+void DoubleLinkedList::remove_from_front() {
+  if (head_) {
+    Node* tmp = head_->next_;
+    if (tail_ == head_) tail_ = tmp;
+    delete head_;
+    head_ = tmp;
+  }
+}
+
+void DoubleLinkedList::remove_from_back() {
+  if (tail_) {
+    Node* tmp = tail_->prev_;
+    if (tmp) tmp->next_ = nullptr;
+    if (head_ == tail_) head_ = tmp;
+    delete tail_;
+    tail_ = tmp;
+  }
 }
