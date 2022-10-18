@@ -29,10 +29,18 @@ bool DoubleLinkedList::insert_item(int idx, int data) {
     cur = cur->next_;
   }
   node->prev_ = cur;
-  node->next_ = cur->next_;
-  cur->next_->prev_ = node;
-  cur->next_ = node;
+  node->next_ = cur ? cur->next_ : nullptr;
+  if (cur) {
+    if (cur->next_) cur->next_->prev_ = node;
+    cur->next_ = node;
+  }
+  if (!head_) head_ = node;
+  if (!tail_) tail_ = node;
 
   ++len_;
   return true;
+}
+
+void DoubleLinkedList::remove_item(int data) {
+
 }
