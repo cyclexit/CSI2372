@@ -32,7 +32,7 @@ class DoubleLinkedList {
 	void remove_from_back();
 
   // operators
-  int operator[](int idx);
+  int operator[](int idx) const;
   friend std::ostream& operator<<(std::ostream& out,
                                   const DoubleLinkedList& lst);
 
