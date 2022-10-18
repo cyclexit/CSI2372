@@ -1,0 +1,6 @@
+#ifndef LAB_5_DOUBLE_LINKED_LIST_H_
+#define LAB_5_DOUBLE_LINKED_LIST_H_
+
+
+
+#endif // LAB_5_DOUBLE_LINKED_LIST_H_
