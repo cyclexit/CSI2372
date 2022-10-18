@@ -15,7 +15,18 @@ int DoubleLinkedList::count_nodes() const {
 }
 
 bool DoubleLinkedList::add_to_front(int data) {
-  return insert_item(0, data);
+  Node* node = new Node(data, nullptr, nullptr);
+  if (node == nullptr) return false;
+  if (head_) {
+    head_->prev_ = node;
+    node->next_ = head_;
+    head_ = node;
+  } else {
+    head_ = node;
+    if (!tail_) tail_ = node;
+  }
+  ++len_;
+  return true;
 }
 
 bool DoubleLinkedList::add_to_back(int data) {
@@ -24,6 +35,8 @@ bool DoubleLinkedList::add_to_back(int data) {
 
 bool DoubleLinkedList::insert_item(int idx, int data) {
   if (idx < 0 || idx > len_) return false;
+
+  if (idx == 0) return add_to_front(data);
 
   Node* node = new Node(data, nullptr, nullptr);
   if (node == nullptr) return false;

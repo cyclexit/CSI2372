@@ -27,7 +27,9 @@ int main()
 
 	//Testing add_to_front
 	mylist.add_to_front(44);
+  cout << mylist << endl; // debug
 	mylist.add_to_front(30);
+  cout << mylist << endl; // debug
 	if (mylist[0] == 30 && mylist[1] == 44) cout << "Test 1 - add_to_front - Passed" << endl;
 	else cout << "Test 1 - add_to_front - Failed" << endl;
 
