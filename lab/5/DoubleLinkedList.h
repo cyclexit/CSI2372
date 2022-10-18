@@ -6,11 +6,11 @@
 class DoubleLinkedList {
  public:
   // nested classes
-  class Node {
+  struct Node {
     int data_;
     Node* prev_;
     Node* next_;
-   public:
+
     Node() = default;
     Node(int data, Node* prev, Node* next) {
       data_ = data;

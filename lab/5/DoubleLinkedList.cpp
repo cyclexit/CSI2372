@@ -11,21 +11,28 @@ DoubleLinkedList::~DoubleLinkedList() {
 }
 
 bool DoubleLinkedList::add_to_front(int data) {
-  // NOTE: this means nothing in the linked list,
-  //       so we also need to update tail_
-  Node* node = new Node(data, nullptr, head_);
-  if (node == nullptr) return false;
-  head_ = node;
-  if (tail_ == nullptr) tail_ = node;
-  ++len_;
-  return true;
+  return insert_item(0, data);
 }
 
 bool DoubleLinkedList::add_to_back(int data) {
-  Node* node = new Node(data, tail_, nullptr);
+  return insert_item(len_, data);
+}
+
+bool DoubleLinkedList::insert_item(int idx, int data) {
+  if (idx < 0 || idx > len_) return false;
+
+  Node* node = new Node(data, nullptr, nullptr);
   if (node == nullptr) return false;
-  tail_ = node;
-  if (head_ == nullptr) head_ = node;
+
+  Node* cur = head_;
+  for (int i = 0; i < idx - 1; ++i) {
+    cur = cur->next_;
+  }
+  node->prev_ = cur;
+  node->next_ = cur->next_;
+  cur->next_->prev_ = node;
+  cur->next_ = node;
+
   ++len_;
   return true;
 }
