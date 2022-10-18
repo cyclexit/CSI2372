@@ -27,14 +27,11 @@ int main()
 
 	//Testing add_to_front
 	mylist.add_to_front(44);
-  // cout << mylist << endl; // debug
 	mylist.add_to_front(30);
-  // cout << mylist << endl; // debug
 	if (mylist[0] == 30 && mylist[1] == 44) cout << "Test 1 - add_to_front - Passed" << endl;
 	else cout << "Test 1 - add_to_front - Failed" << endl;
 
 	mylist.add_to_front(19);
-  // cout << mylist << endl; // debug
 	if (mylist[0] == 19) cout << "Test 2 - add_to_front - Passed" << endl;
 	else cout << "Test 2 - add_to_front - Failed" << endl;
 
@@ -43,12 +40,10 @@ int main()
 	else cout << "Test 1 - count_nodes - Failed" << endl;
 
 	mylist.remove_from_front();
-  // cout << mylist << endl; // debug
 	if (mylist.count_nodes() == 12) cout << "Test 2 - count_nodes - Passed" << endl;
 	else cout << "Test 2 - count_nodes - Failed" << endl;
 
 	mylist.remove_from_back();
-  // cout << mylist << endl; // debug
 	if (mylist.count_nodes() == 11) cout << "Test 3 - count_nodes - Passed" << endl;
 	else cout << "Test 3 - count_nodes - Failed" << endl;
 	
