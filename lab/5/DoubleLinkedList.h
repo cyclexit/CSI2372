@@ -37,6 +37,7 @@ class DoubleLinkedList {
                                   const DoubleLinkedList& lst);
 
  private:
+  int len_;
   Node* head_;
   Node* tail_;
 };
