@@ -5,10 +5,18 @@
 
 class DoubleLinkedList {
  public:
+  // nested classes
   class Node {
-    int data;
-    Node* prev;
-    Node* next;
+    int data_;
+    Node* prev_;
+    Node* next_;
+   public:
+    Node() = default;
+    Node(int data, Node* prev, Node* next) {
+      data_ = data;
+      prev_ = prev;
+      next_ = next;
+    }
   };
 
   // ctors and dtors
@@ -29,8 +37,8 @@ class DoubleLinkedList {
                                   const DoubleLinkedList& lst);
 
  private:
-  Node* head;
-  Node* tail;
+  Node* head_;
+  Node* tail_;
 };
 
 using Node = DoubleLinkedList::Node;
