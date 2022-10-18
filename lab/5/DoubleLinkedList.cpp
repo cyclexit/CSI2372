@@ -10,6 +10,10 @@ DoubleLinkedList::~DoubleLinkedList() {
   // TODO: implement this
 }
 
+int DoubleLinkedList::count_nodes() const {
+  return len_;
+}
+
 bool DoubleLinkedList::add_to_front(int data) {
   return insert_item(0, data);
 }
@@ -83,7 +87,7 @@ void DoubleLinkedList::remove_from_back() {
   }
 }
 
-int DoubleLinkedList::operator[](int idx) const {
+int& DoubleLinkedList::operator[](int idx) const {
   Node* cur = head_;
   while (idx--) cur = cur->next_;
   return cur->data_;

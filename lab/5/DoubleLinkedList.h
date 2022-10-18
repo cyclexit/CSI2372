@@ -24,6 +24,7 @@ class DoubleLinkedList {
   ~DoubleLinkedList();
 
   // methods
+  int count_nodes() const;
   bool add_to_front(int data);
 	bool add_to_back(int data);
   bool insert_item(int idx, int data);
@@ -32,7 +33,7 @@ class DoubleLinkedList {
 	void remove_from_back();
 
   // operators
-  int operator[](int idx) const;
+  int& operator[](int idx) const;
   friend std::ostream& operator<<(std::ostream& out,
                                   const DoubleLinkedList& lst);
 
