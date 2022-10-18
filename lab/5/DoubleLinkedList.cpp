@@ -25,18 +25,34 @@ bool DoubleLinkedList::add_to_front(int data) {
     head_ = node;
     if (!tail_) tail_ = node;
   }
+  // std::cout << __FUNCTION__ << ": head_->data_ = " << head_->data_ << std::endl; // debug
+  // std::cout << __FUNCTION__ << ": tail_->data_ = " << tail_->data_ << std::endl; // debug
   ++len_;
   return true;
 }
 
 bool DoubleLinkedList::add_to_back(int data) {
-  return insert_item(len_, data);
+  Node* node = new Node(data, nullptr, nullptr);
+  if (node == nullptr) return false;
+  if (tail_) {
+    tail_->next_ = node;
+    node->prev_ = tail_;
+    tail_ = node;
+  } else {
+    tail_ = node;
+    if (!head_) head_ = node;
+  }
+  // std::cout << __FUNCTION__ << ": head_->data_ = " << head_->data_ << std::endl; // debug
+  // std::cout << __FUNCTION__ << ": tail_->data_ = " << tail_->data_ << std::endl; // debug
+  ++len_;
+  return true;
 }
 
 bool DoubleLinkedList::insert_item(int idx, int data) {
-  if (idx < 0 || idx > len_) return false;
+  if (idx < 0 || idx >= len_) return false;
 
   if (idx == 0) return add_to_front(data);
+  if (idx == len_ - 1) return add_to_back(data);
 
   Node* node = new Node(data, nullptr, nullptr);
   if (node == nullptr) return false;
@@ -81,6 +97,7 @@ void DoubleLinkedList::remove_item(int data) {
 
 void DoubleLinkedList::remove_from_front() {
   if (head_) {
+    // std::cout << __FUNCTION__ << ": head_->data_ = " << head_->data_ << std::endl; // debug
     Node* tmp = head_->next_;
     if (tail_ == head_) tail_ = tmp;
     delete head_;
@@ -91,6 +108,8 @@ void DoubleLinkedList::remove_from_front() {
 
 void DoubleLinkedList::remove_from_back() {
   if (tail_) {
+    // std::cout << __FUNCTION__ << ": head_->data_ = " << head_->data_ << std::endl; // debug
+    // std::cout << __FUNCTION__ << ": tail_->data_ = " << tail_->data_ << std::endl; // debug
     Node* tmp = tail_->prev_;
     if (tmp) tmp->next_ = nullptr;
     if (head_ == tail_) head_ = tmp;
