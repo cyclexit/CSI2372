@@ -7,7 +7,16 @@ DoubleLinkedList::DoubleLinkedList() {
 }
 
 DoubleLinkedList::~DoubleLinkedList() {
-  // TODO: implement this
+  if (head_) {
+    Node* cur = head_;
+    Node* tmp;
+    while (cur) {
+      tmp = cur;
+      cur = cur->next_;
+      delete tmp;
+    }
+    head_ = tail_ = nullptr;
+  }
 }
 
 int DoubleLinkedList::count_nodes() const {
