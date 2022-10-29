@@ -23,6 +23,7 @@ class Graph {
   bool edge_exist(int u, int v) const;
   int get_degree(int u) const;
   bool path_exist(int u, int v) const;
+  int get_node_count() const;
 
   // operators
   Graph& operator++();

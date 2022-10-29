@@ -56,6 +56,11 @@ int Graph::get_degree(int u) const {
 }
 
 bool Graph::path_exist(int u, int v) const {
+  if (u > node_count_ || v > node_count_) {
+    printf("Error: Node %d and/or %d not exist.\n", u, v);
+    return false;
+  }
+
   bool* visited = new bool[node_count_];
   for (int i = 0; i <= node_count_; ++i) {
     visited[i] = false;
@@ -73,6 +78,10 @@ bool Graph::path_exist(int u, int v) const {
     }
   }
   return false;
+}
+
+int Graph::get_node_count() const {
+  return node_count_;
 }
 
 Graph& Graph::operator++() {
