@@ -29,7 +29,7 @@ Graph::~Graph() {
 }
 
 bool Graph::add_edge(int u, int v) {
-  if (u > node_count_ || v > node_count_) {
+  if (u > node_count_ || v > node_count_ || u < 1 || v < 1) {
     printf("Error: Node %d and/or %d not exist.\n", u, v);
     return false;
   }
@@ -39,24 +39,26 @@ bool Graph::add_edge(int u, int v) {
 }
 
 void Graph::remove_edge(int u, int v) {
-  if (u > node_count_ || v > node_count_) return;
+  if (u > node_count_ || v > node_count_ || u < 1 || v < 1) return;
   edges_[u].remove_item(v);
 }
 
 bool Graph::edge_exist(int u, int v) const {
-  if (u > node_count_ || v > node_count_) {
+  if (u > node_count_ || v > node_count_ || u < 1 || v < 1) {
     printf("Error: Node %d and/or %d not exist.\n", u, v);
     return false;
   }
-  return edges_[u].find(v) || edges_[v].find(u);
+  // NOTE: assume only check the edge from u to v
+  return edges_[u].find(v);
 }
 
 int Graph::get_degree(int u) const {
+  // NOTE: assume get the out degree
   return edges_[u].count_nodes();
 }
 
 bool Graph::path_exist(int u, int v) const {
-  if (u > node_count_ || v > node_count_) {
+  if (u > node_count_ || v > node_count_ || u < 1 || v < 1) {
     printf("Error: Node %d and/or %d not exist.\n", u, v);
     return false;
   }
@@ -67,6 +69,7 @@ bool Graph::path_exist(int u, int v) const {
   }
 
   // BFS
+  // NOTE: assume only check the path from u to v
   DoubleLinkedList q;
   q.add_to_back(u);
   while (q.count_nodes() > 0) {
@@ -142,9 +145,9 @@ std::ostream& operator<<(std::ostream& out, const Graph& graph) {
   out << "}" << std::endl;
 
   // edges
-  out << "E =" << std::endl << "{";
+  out << "E =" << std::endl << "{" << std::endl;
   for (int i = 1; i <= graph.node_count_; ++i) {
-    out << i << " => ";
+    out << "  " << i << " => ";
     if (graph.edges_[i].count_nodes() > 0) {
       out << graph.edges_[i] << std::endl;
     } else {
