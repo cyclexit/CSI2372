@@ -27,3 +27,22 @@ Graph::~Graph() {
   node_count_ = 0;
   if (edges_) delete[] edges_;
 }
+
+bool Graph::add_edge(int u, int v) {
+  if (u > node_count_ || v > node_count_) {
+    printf("Error: Node %d and/or %d not exist.\n", u, v);
+    return false;
+  }
+  // NOTE: assume add the edge from u to v
+  edges_[u].add_to_back(v);
+  return true;
+}
+
+void Graph::remove_edge(int u, int v) {
+  if (u > node_count_ || v > node_count_) return;
+  edges_[u].remove_item(v);
+}
+
+bool Graph::edge_exist(int u, int v) const {
+  // TODO: implement this
+}
