@@ -44,5 +44,9 @@ void Graph::remove_edge(int u, int v) {
 }
 
 bool Graph::edge_exist(int u, int v) const {
-  // TODO: implement this
+  if (u > node_count_ || v > node_count_) {
+    printf("Error: Node %d and/or %d not exist.\n", u, v);
+    return false;
+  }
+  return edges_[u].find(v);
 }

@@ -28,6 +28,7 @@ class DoubleLinkedList {
   bool add_to_front(int data);
 	bool add_to_back(int data);
   bool insert_item(int idx, int data);
+  bool find(int data);
   void remove_item(int data);
   void remove_from_front();
 	void remove_from_back();
