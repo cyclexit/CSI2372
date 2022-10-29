@@ -48,7 +48,7 @@ bool Graph::edge_exist(int u, int v) const {
     printf("Error: Node %d and/or %d not exist.\n", u, v);
     return false;
   }
-  return edges_[u].find(v);
+  return edges_[u].find(v) || edges_[v].find(u);
 }
 
 int Graph::get_degree(int u) const {
@@ -56,5 +56,21 @@ int Graph::get_degree(int u) const {
 }
 
 bool Graph::path_exist(int u, int v) const {
+  bool* visited = new bool[node_count_];
+  for (int i = 0; i <= node_count_; ++i) {
+    visited[i] = false;
+  }
 
+  // BFS
+  DoubleLinkedList q;
+  q.add_to_back(u);
+  while (q.count_nodes() > 0) {
+    int cur = q[0]; // get front
+    visited[cur] = true;
+    for (int i = 0; i < edges_[cur].count_nodes(); ++i) {
+      if (edges_[cur][i] == v) return true;
+      if (!visited[edges_[cur][i]]) q.add_to_back(edges_[cur][i]);
+    }
+  }
+  return false;
 }
