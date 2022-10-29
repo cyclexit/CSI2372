@@ -50,3 +50,11 @@ bool Graph::edge_exist(int u, int v) const {
   }
   return edges_[u].find(v);
 }
+
+int Graph::get_degree(int u) const {
+  return node_count_;
+}
+
+bool Graph::path_exist(int u, int v) const {
+
+}
