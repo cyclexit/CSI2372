@@ -8,6 +8,9 @@
 
 class Graph {
  public:
+  // constants
+  static constexpr int kDefaultNodeCount = 1;
+
   // ctors and dtors
   Graph();
   Graph(int node_count);
@@ -31,7 +34,6 @@ class Graph {
   // bonus part
 
  private:
-  static constexpr int kDefaultNodeCount = 1;
   int node_count_; // node index: 1 to node_count_
   DoubleLinkedList* edges_; // size: node_count_ + 1; 0 is unused
 };

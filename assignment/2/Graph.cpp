@@ -76,9 +76,7 @@ bool Graph::path_exist(int u, int v) const {
 }
 
 Graph& Graph::operator++() {
-  ++node_count_;
-
-  DoubleLinkedList* tmp = new DoubleLinkedList[node_count_ + 1];
+  DoubleLinkedList* tmp = new DoubleLinkedList[node_count_ + 2];
   int edge_count;
   for (int i = 1; i <= node_count_; ++i) {
     edge_count = edges_[i].count_nodes();
@@ -88,6 +86,8 @@ Graph& Graph::operator++() {
   }
   delete[] edges_;
   edges_ = tmp;
+
+  ++node_count_;
 
   return *this;
 }
