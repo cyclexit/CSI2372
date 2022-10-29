@@ -122,3 +122,27 @@ Graph Graph::operator--(int) {
   operator--();
   return old;
 }
+
+std::ostream& operator<<(std::ostream& out, const Graph& graph) {
+  // nodes
+  out << "V = {";
+  for (int i = 1; i <= graph.node_count_; ++i) {
+    if (i > 1) out << ", ";
+    out << i;
+  }
+  out << "}" << std::endl;
+
+  // edges
+  out << "E =" << std::endl << "{";
+  for (int i = 1; i <= graph.node_count_; ++i) {
+    out << i << " => ";
+    if (graph.edges_[i].count_nodes() > 0) {
+      out << graph.edges_[i] << std::endl;
+    } else {
+      out << "None" << std::endl;
+    }
+  }
+  out << "}" << std::endl;
+
+  return out;
+}
