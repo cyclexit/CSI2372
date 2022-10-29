@@ -52,7 +52,7 @@ bool Graph::edge_exist(int u, int v) const {
 }
 
 int Graph::get_degree(int u) const {
-  return node_count_;
+  return edges_[u].count_nodes();
 }
 
 bool Graph::path_exist(int u, int v) const {
@@ -73,4 +73,27 @@ bool Graph::path_exist(int u, int v) const {
     }
   }
   return false;
+}
+
+Graph& Graph::operator++() {
+  ++node_count_;
+  DoubleLinkedList* tmp = new DoubleLinkedList[node_count_ + 1];
+
+  int edge_count;
+  for (int i = 1; i <= node_count_; ++i) {
+    edge_count = edges_[i].count_nodes();
+    for (int j = 0; j < edge_count; ++j) {
+      tmp[i].add_to_back(edges_[i][j]);
+    }
+  }
+  delete[] edges_;
+  edges_ = tmp;
+
+  return *this;
+}
+
+Graph Graph::operator++(int) {
+  Graph old(*this);
+  operator++();
+  return old;
 }
