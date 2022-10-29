@@ -11,13 +11,14 @@ class Graph {
   Graph();
   Graph(int node_count);
   Graph(const Graph& other);
+  ~Graph();
 
   // methods
   bool add_edge(int u, int v);
   void remove_edge(int u, int v);
-  bool edge_exist(int u, int v);
-  int get_degree(int u);
-  bool path_exist(int u, int v);
+  bool edge_exist(int u, int v) const;
+  int get_degree(int u) const;
+  bool path_exist(int u, int v) const;
 
   // operators
   Graph& operator++();
