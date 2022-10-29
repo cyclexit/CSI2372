@@ -1,10 +1,37 @@
 #ifndef CSI2372_ASSIGNMENT_2_GRAPH_H_
 #define CSI2372_ASSIGNMENT_2_GRAPH_H_
 
+#include <iostream>
+
 #include "DoubleLinkedList.h"
 
 class Graph {
+ public:
+  // ctors and dtors
+  Graph();
+  Graph(int node_count);
+  Graph(const Graph& other);
 
+  // methods
+  bool add_edge(int u, int v);
+  void remove_edge(int u, int v);
+  bool edge_exist(int u, int v);
+  int get_degree(int u);
+  bool path_exist(int u, int v);
+
+  // operators
+  Graph& operator++();
+  Graph operator++(int);
+  Graph& operator--();
+  Graph operator--(int);
+  friend std::ostream& operator<<(std::ostream& out, const Graph& graph);
+
+  // bonus part
+
+ private:
+  static constexpr int kDefaultNodeCount = 1;
+  int node_count_; // node index: 1 to node_count_
+  DoubleLinkedList* edges_; // size: node_count_ + 1; 0 is unused
 };
 
 #endif // CSI2372_ASSIGNMENT_2_GRAPH_H_
