@@ -74,6 +74,7 @@ bool Graph::path_exist(int u, int v) const {
   q.add_to_back(u);
   while (q.count_nodes() > 0) {
     int cur = q[0]; // get front
+    q.remove_from_front();
     visited[cur] = true;
     for (int i = 0; i < edges_[cur].count_nodes(); ++i) {
       if (edges_[cur][i] == v) return true;
