@@ -22,7 +22,9 @@ class Array {
   bool find_item(T elem);
 
   // operators
-  T& operator[](int idx);
+  T& operator[](int idx) {
+    return is_index_valid(idx) ? arr_[idx - lower_] : dummy;
+  }
 
   Array<T>& operator=(const Array<T>& other) {
     lower_ = other.lower_;
