@@ -24,7 +24,11 @@ class Array {
   // operators
   T& operator[](int idx);
 
-  Array& operator=(const Array<T>& other);
+  Array<T>& operator=(const Array<T>& other) {
+    lower_ = other.lower_;
+    upper_ = other.upper_;
+    arr_ = other.arr_;
+  }
 
   friend std::ostream& operator<<(std::ostream& out, const Array<T>& a) {
     for (int i = 0; i < a.arr_.size(); ++i) {
@@ -35,9 +39,15 @@ class Array {
   }
 
  private:
+  // range [lower_, upper_] (inclusively)
   int lower_;
   int upper_;
+  T dummy;
   std::vector<T> arr_;
+
+  bool is_index_valid(int idx) {
+    return lower_ <= idx && idx <= upper_;
+  }
 };
 
 #endif // LAB_6_ARRAY_H_
