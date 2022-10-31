@@ -8,10 +8,33 @@ template<typename T>
 class Array {
  public:
   // ctors and dtors
-  Array();
-  Array(int n);
-  Array(int lower, int upper);
-  Array(const Array<T>& other);
+  Array() {
+    lower_ = 0;
+    upper_ = 0;
+  }
+
+  Array(int n) {
+    lower_ = 0;
+    upper_ = n - 1;
+    arr_.resize(n);
+  }
+
+  Array(int lower, int upper) {
+    lower_ = lower;
+    upper_ = upper;
+    arr_.resize(upper - lower + 1);
+  }
+
+  Array(const Array<T>& other) {
+    lower_ = other.lower_;
+    upper_ = other.upper_;
+    arr_ = other.arr_;
+  }
+
+  ~Array() {
+    lower_ = 0;
+    upper_ = 0;
+  }
 
   // methods
   bool add_item(T elem);
