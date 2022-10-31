@@ -37,12 +37,52 @@ class Array {
   }
 
   // methods
-  bool add_item(T elem);
-  bool insert_item(int idx, T elem);
-  void remove_item();
-  void remove_item(T elem);
-  void erase_item(int idx);
-  bool find_item(T elem);
+  bool add_item(T elem) {
+    arr_.push_back(elem);
+    ++upper_;
+    return true;
+  }
+
+  bool insert_item(int idx, T elem) {
+    if (!is_index_valid(idx)) return false;
+    idx -= lower_;
+    arr_.insert(arr_.begin() + idx, elem);
+    ++upper_;
+    return true;
+  }
+
+  void remove_item() {
+    if (!arr_.empty()) arr_.pop_back();
+    if (upper_ > lower_) --upper_;
+  }
+
+  void remove_item(T elem) {
+    int idx = -1;
+    if (find_item(elem, idx)) {
+      idx -= lower_;
+      arr_.erase(arr_.begin() + idx);
+      --upper_;
+    }
+  }
+
+  void erase_item(int idx) {
+    if (is_index_valid(idx)) {
+      idx -= lower_;
+      arr_.erase(arr_.begin() + idx);
+      --upper_;
+    }
+  }
+
+  bool find_item(T elem, int& idx) {
+    for (int i = 0; i < arr_.size(); ++i) {
+      if (arr_[i] == elem) {
+        idx = lower_ + i;
+        return true;
+      }
+    }
+    idx = -1;
+    return false;
+  }
 
   // operators
   T& operator[](int idx) {
