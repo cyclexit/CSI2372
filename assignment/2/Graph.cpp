@@ -1,3 +1,5 @@
+#include <cassert>
+
 #include "Graph.h"
 
 Graph::Graph() {
@@ -77,10 +79,14 @@ bool Graph::path_exist(int u, int v) const {
     q.remove_from_front();
     visited[cur] = true;
     for (int i = 0; i < edges_[cur].count_nodes(); ++i) {
-      if (edges_[cur][i] == v) return true;
+      if (edges_[cur][i] == v) {
+        delete[] visited;
+        return true;
+      }
       if (!visited[edges_[cur][i]]) q.add_to_back(edges_[cur][i]);
     }
   }
+  delete[] visited;
   return false;
 }
 
@@ -158,4 +164,65 @@ std::ostream& operator<<(std::ostream& out, const Graph& graph) {
   out << "}" << std::endl;
 
   return out;
+}
+
+int Graph::connectivity_type() {
+  // TODO: implement this
+  return 0;
+}
+
+int* Graph::BFS(int start) {
+  int* res = new int[node_count_];
+  int idx = 0;
+
+  bool* visited = new bool[node_count_];
+  for (int i = 0; i <= node_count_; ++i) {
+    visited[i] = false;
+  }
+
+  DoubleLinkedList q;
+  q.add_to_back(start);
+  while (q.count_nodes() > 0) {
+    int cur = q[0];
+    q.remove_from_front();
+    visited[cur] = true;
+    res[idx++] = cur;
+    for (int i = 0; i < edges_[cur].count_nodes(); ++i) {
+      if (!visited[edges_[cur][i]]) q.add_to_back(edges_[cur][i]);
+    }
+  }
+  delete[] visited;
+
+  assert(idx == node_count_); // debug
+
+  return res;
+}
+
+int* Graph::DFS(int start) {
+  int* res = new int[node_count_];
+  int idx = 0;
+
+  bool* visited = new bool[node_count_];
+  for (int i = 0; i <= node_count_; ++i) {
+    visited[i] = false;
+  }
+
+  int cur = start;
+  while (cur != -1) {
+    res[idx++] = cur;
+    visited[cur] = true;
+    bool has_next = false;
+    for (int i = 0; i < edges_[cur].count_nodes(); ++i) {
+      if (!visited[edges_[cur][i]]) {
+        cur = edges_[cur][i];
+        has_next = true;
+        break;
+      }
+    }
+    if (!has_next) cur = -1;
+  }
+  delete[] visited;
+  assert(idx == node_count_); // debug
+
+  return res;
 }

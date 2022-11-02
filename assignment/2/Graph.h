@@ -33,6 +33,9 @@ class Graph {
   friend std::ostream& operator<<(std::ostream& out, const Graph& graph);
 
   // bonus part
+  int connectivity_type();
+  int* BFS(int start);
+  int* DFS(int start);
 
  private:
   int node_count_; // node index: 1 to node_count_
