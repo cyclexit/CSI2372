@@ -120,5 +120,26 @@ int main() {
   }
   cout << endl;
 
+  Graph g3(7); // binary tree
+  g3.add_edge(1, 2);
+  g3.add_edge(1, 3);
+  g3.add_edge(2, 4);
+  g3.add_edge(2, 5);
+  g3.add_edge(3, 6);
+  g3.add_edge(3, 7);
+
+  res = g3.DFS(1, res_len);
+  for (int i = 0; i < res_len; ++i) {
+    cout << res[i] << " ";
+  }
+  cout << endl;
+
+  res = g3.BFS(1, res_len);
+  for (int i = 0; i < res_len; ++i) {
+    cout << res[i] << " ";
+  }
+  cout << endl;
+
+
   return 0;
 }
