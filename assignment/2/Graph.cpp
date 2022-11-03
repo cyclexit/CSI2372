@@ -234,8 +234,6 @@ int* Graph::BFS(int start) {
   }
   delete[] visited;
 
-  assert(idx == node_count_); // debug
-
   return res;
 }
 
@@ -268,7 +266,6 @@ int* Graph::DFS(int start) {
     if (!has_next) cur = -1;
   }
   delete[] visited;
-  assert(idx == node_count_); // debug
 
   return res;
 }

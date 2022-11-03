@@ -95,5 +95,16 @@ int main() {
   g1--;
   cout << g1 << endl;
 
+  Graph g2(4);
+  g2.add_edge(1, 2);
+  g2.add_edge(1, 3);
+  g2.add_edge(4, 2);
+  g2.add_edge(4, 3);
+  if (g2.connectivity_type() == 1) {
+    cout << "Test - 4 vertex weakly connected ... Passed" << endl;
+  } else {
+    cout << "Test - 4 vertex weakly connected ... Failed" << endl;
+  }
+
   return 0;
 }
