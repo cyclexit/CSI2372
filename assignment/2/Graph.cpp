@@ -167,8 +167,44 @@ std::ostream& operator<<(std::ostream& out, const Graph& graph) {
 }
 
 int Graph::connectivity_type() {
-  // TODO: implement this
-  return 0;
+  bool unilaterally_connected = true;
+  bool strongly_connected = true;
+  for (int i = 1; i <= node_count_; ++i) {
+    for (int j = i + 1; j <= node_count_; ++j) {
+      bool i_to_j = path_exist(i, j);
+      bool j_to_i = path_exist(j, i);
+      if (!(i_to_j && j_to_i)) {
+        strongly_connected = false;
+      }
+      if (!(i_to_j || j_to_i)) {
+        unilaterally_connected = false;
+      }
+    }
+  }
+  if (strongly_connected) {
+    return 3;
+  } else if (unilaterally_connected) {
+    return 2;
+  }
+
+  // construct the underlying undirected graph
+  Graph undirected(node_count_);
+  for (int i = 1; i <= node_count_; ++i) {
+    for (int j = 1; j <= node_count_; ++j) {
+      if (edge_exist(i, j)) {
+        undirected.add_edge(i, j);
+        undirected.add_edge(j, i);
+      }
+    }
+  }
+  for (int i = 1; i <= node_count_; ++i) {
+    for (int j = i + 1; j <= node_count_; ++j) {
+      if (!undirected.path_exist(i, j)) {
+        return 0;
+      }
+    }
+  }
+  return 1;
 }
 
 int* Graph::BFS(int start) {
