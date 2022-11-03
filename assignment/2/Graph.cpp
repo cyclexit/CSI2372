@@ -208,6 +208,11 @@ int Graph::connectivity_type() {
 }
 
 int* Graph::BFS(int start) {
+  if (start < 1 || start > node_count_) {
+    printf("Error: Start node %d not exist.\n", start);
+    return nullptr;
+  }
+
   int* res = new int[node_count_];
   int idx = 0;
 
@@ -235,6 +240,11 @@ int* Graph::BFS(int start) {
 }
 
 int* Graph::DFS(int start) {
+  if (start < 1 || start > node_count_) {
+    printf("Error: Start node %d not exist.\n", start);
+    return nullptr;
+  }
+
   int* res = new int[node_count_];
   int idx = 0;
 
