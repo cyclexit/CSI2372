@@ -4,6 +4,10 @@
 #include <iostream>
 #include <vector>
 
+// pre-declaration
+template<typename T> class Array;
+template<typename T> std::ostream& operator<<(std::ostream& out, const Array<T>& a);
+
 template<typename T>
 class Array {
  public:
@@ -23,23 +27,9 @@ class Array {
   bool find_item(T elem, int& idx);
 
   // operators
-  T& operator[](int idx) {
-    return is_index_valid(idx) ? arr_[idx - lower_] : dummy;
-  }
-
-  Array<T>& operator=(const Array<T>& other) {
-    lower_ = other.lower_;
-    upper_ = other.upper_;
-    arr_ = other.arr_;
-  }
-
-  friend std::ostream& operator<<(std::ostream& out, const Array<T>& a) {
-    for (int i = 0; i < a.arr_.size(); ++i) {
-      if (i) out << ", ";
-      out << a.arr_[i];
-    }
-    return out;
-  }
+  T& operator[](int idx);
+  Array<T>& operator=(const Array<T>& other);
+  friend std::ostream& operator<< <> (std::ostream& out, const Array<T>& a);
 
  private:
   // range [lower_, upper_] (inclusively)

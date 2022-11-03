@@ -14,6 +14,13 @@ Array<T>::Array(int n) {
 }
 
 template<typename T>
+Array<T>::Array(int lower, int upper) {
+  lower_ = lower;
+  upper_ = upper;
+  arr_.resize(upper - lower + 1);
+}
+
+template<typename T>
 Array<T>::Array(const Array<T>& other) {
   lower_ = other.lower_;
   upper_ = other.upper_;
@@ -77,4 +84,26 @@ bool Array<T>::find_item(T elem, int& idx) {
   }
   idx = -1;
   return false;
+}
+
+template<typename T>
+T& Array<T>::operator[](int idx) {
+  return is_index_valid(idx) ? arr_[idx - lower_] : dummy;
+}
+
+template<typename T>
+Array<T>& Array<T>::operator=(const Array<T>& other) {
+  lower_ = other.lower_;
+  upper_ = other.upper_;
+  arr_ = other.arr_;
+  return *this;
+}
+
+template<typename T>
+std::ostream& operator<<(std::ostream& out, const Array<T>& a) {
+  for (int i = 0; i < a.arr_.size(); ++i) {
+    if (i) out << ", ";
+    out << a.arr_[i];
+  }
+  return out;
 }
