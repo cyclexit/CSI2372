@@ -1,4 +1,4 @@
-#include <cassert>
+#include <functional>
 
 #include "Graph.h"
 
@@ -252,21 +252,16 @@ int* Graph::DFS(int start, int& res_len) {
     visited[i] = false;
   }
 
-  // TODO: fixed this
-  int cur = start;
-  while (cur != -1) {
-    res[idx++] = cur;
+  std::function<void(int)> dfs = [&](int cur) {
     visited[cur] = true;
-    bool has_next = false;
+    res[idx++] = cur;
     for (int i = 0; i < edges_[cur].count_nodes(); ++i) {
       if (!visited[edges_[cur][i]]) {
-        cur = edges_[cur][i];
-        has_next = true;
-        break;
+        dfs(edges_[cur][i]);
       }
     }
-    if (!has_next) cur = -1;
-  }
+  };
+  dfs(start);
   delete[] visited;
 
   res_len = idx;
