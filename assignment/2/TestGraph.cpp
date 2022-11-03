@@ -106,5 +106,19 @@ int main() {
     cout << "Test - 4 vertex weakly connected ... Failed" << endl;
   }
 
+  int* res;
+  int res_len;
+  res = g2.DFS(1, res_len);
+  for (int i = 0; i < res_len; ++i) {
+    cout << res[i] << " ";
+  }
+  cout << endl;
+
+  res = g2.BFS(4, res_len);
+  for (int i = 0; i < res_len; ++i) {
+    cout << res[i] << " ";
+  }
+  cout << endl;
+
   return 0;
 }

@@ -207,7 +207,7 @@ int Graph::connectivity_type() {
   return 1;
 }
 
-int* Graph::BFS(int start) {
+int* Graph::BFS(int start, int& res_len) {
   if (start < 1 || start > node_count_) {
     printf("Error: Start node %d not exist.\n", start);
     return nullptr;
@@ -234,10 +234,11 @@ int* Graph::BFS(int start) {
   }
   delete[] visited;
 
+  res_len = idx;
   return res;
 }
 
-int* Graph::DFS(int start) {
+int* Graph::DFS(int start, int& res_len) {
   if (start < 1 || start > node_count_) {
     printf("Error: Start node %d not exist.\n", start);
     return nullptr;
@@ -251,6 +252,7 @@ int* Graph::DFS(int start) {
     visited[i] = false;
   }
 
+  // TODO: fixed this
   int cur = start;
   while (cur != -1) {
     res[idx++] = cur;
@@ -267,5 +269,6 @@ int* Graph::DFS(int start) {
   }
   delete[] visited;
 
+  res_len = idx;
   return res;
 }
