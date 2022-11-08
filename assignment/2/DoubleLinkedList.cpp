@@ -84,6 +84,17 @@ bool DoubleLinkedList::insert_item(int idx, int data) {
   return true;
 }
 
+bool DoubleLinkedList::find(int data) {
+  Node* cur = head_;
+  while (cur) {
+    if (cur->data_ == data) {
+      return true;
+    }
+    cur = cur->next_;
+  }
+  return false;
+}
+
 void DoubleLinkedList::remove_item(int data) {
   Node* cur = head_;
   // NOTE: remove the first node with data_ == data
