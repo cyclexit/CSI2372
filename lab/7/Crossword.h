@@ -36,6 +36,9 @@ class Crossword {
                      bool horizontal);
   bool solve(int row, int column, const std::string& answer);
 
+  // operators
+  friend std::ostream& operator<<(std::ostream& out, const Crossword& quiz);
+
  private:
   // constants
   static constexpr int kDefaultRows = 10;
