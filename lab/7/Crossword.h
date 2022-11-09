@@ -50,6 +50,11 @@ class Crossword {
   std::vector<Question> questions;
   std::vector<std::vector<std::string>> solved_state;
   std::vector<std::vector<std::string>> current_state;
+
+  // methods
+  void init_state(std::vector<std::vector<std::string>>& state,
+                  int rows,
+                  int columns);
 };
 
 #endif // LAB_7_CROSSWORD_H_
