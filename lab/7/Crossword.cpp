@@ -74,6 +74,31 @@ bool Crossword::add_question(const std::string& question,
   return true;
 }
 
+bool Crossword::solve(int row, int column, const std::string& answer) {
+  int idx = -1;
+  for (int i = 0; i < questions.size(); ++i) {
+    if (row == questions[i].row && column == questions[i].column) {
+      idx = i;
+      break;
+    }
+  }
+  if (idx == -1) return false;
+
+  if (questions[idx].answer == answer) {
+    if (questions[idx].horizontal) {
+      for (int i = 0; i < answer.size(); ++i) {
+        current_state[row][column + i] = answer[i];
+      }
+    } else {
+      for (int i = 0; i < answer.size(); ++i) {
+        current_state[row + i][column] = answer[i];
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
 std::ostream& operator<<(std::ostream& out, const Crossword& crossword) {
   out << "Puzzle:" << std::endl;
   for (int i = 0; i <= crossword.rows; ++i) {
@@ -89,18 +114,18 @@ std::ostream& operator<<(std::ostream& out, const Crossword& crossword) {
     out << std::endl;
   }
   // debug
-  for (int i = 0; i <= crossword.rows; ++i) {
-    if (i > 0) out << " " << i;
-    else out << " ";
-  }
-  out << std::endl;
-  for (int i = 1; i <= crossword.rows; ++i) {
-    out << i << " ";
-    for (int j = 1; j < crossword.current_state[i].size(); ++j) {
-      out << crossword.solved_state[i][j] << " ";
-    }
-    out << std::endl;
-  }
+  // for (int i = 0; i <= crossword.rows; ++i) {
+  //   if (i > 0) out << " " << i;
+  //   else out << " ";
+  // }
+  // out << std::endl;
+  // for (int i = 1; i <= crossword.rows; ++i) {
+  //   out << i << " ";
+  //   for (int j = 1; j < crossword.current_state[i].size(); ++j) {
+  //     out << crossword.solved_state[i][j] << " ";
+  //   }
+  //   out << std::endl;
+  // }
 
   out << "Questions:" << std::endl;
   for (const Question& q : crossword.questions) {
