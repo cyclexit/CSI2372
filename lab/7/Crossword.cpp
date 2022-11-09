@@ -14,7 +14,7 @@ Crossword::Crossword(int n, int m) {
   init_state(current_state, rows, columns);
 }
 
-bool Crossword::add_questions(const std::string& question,
+bool Crossword::add_question(const std::string& question,
                               const std::string& answer,
                               int row,
                               int column,
@@ -73,8 +73,17 @@ bool Crossword::add_questions(const std::string& question,
 
 std::ostream& operator<<(std::ostream& out, const Crossword& crossword) {
   out << "Puzzle:" << std::endl;
-  for (int i = 0; i < crossword.rows; ++i) {
-    out << crossword.current_state[i] << std::endl;
+  for (int i = 0; i <= crossword.rows; ++i) {
+    if (i > 0) out << " " << i;
+    else out << " ";
+  }
+  out << std::endl;
+  for (int i = 1; i <= crossword.rows; ++i) {
+    out << i << " ";
+    for (int j = 0; j < crossword.current_state[i].size(); ++j) {
+      out << crossword.current_state[i][j] << " ";
+    }
+    out << std::endl;
   }
 
   out << "Questions:" << std::endl;
@@ -88,12 +97,6 @@ void Crossword::init_state(std::vector<std::string>& state,
                            int rows,
                            int columns) {
   state.resize(rows + 1, std::string(columns + 1, ' '));
-  for (int col = 0; col < columns; ++col) {
-    if (col) state[0][col] = col + '0';
-  }
-  for (int row = 0; row < rows; ++row) {
-    if (row) state[row][0] = row + '0';
-  }
 }
 
 bool Crossword::is_same_char(char ch1, char ch2) {

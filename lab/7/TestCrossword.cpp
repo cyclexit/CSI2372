@@ -7,4 +7,9 @@ using namespace std;
 int main() {
   Crossword cw1;
   cout << cw1 << endl;
+
+  cout << cw1.add_question("What is the capital of Canada?", "Ottawa", 3, 2, true) << endl;
+  cout << cw1 << endl;
+
+  return 0;
 }

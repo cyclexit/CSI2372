@@ -29,7 +29,7 @@ class Crossword {
   Crossword(int n, int m);
 
   // methods
-  bool add_questions(const std::string& question,
+  bool add_question(const std::string& question,
                      const std::string& answer,
                      int row,
                      int column,
