@@ -141,7 +141,7 @@ void Crossword::init_state(std::vector<std::string>& state,
 }
 
 bool Crossword::is_same_char(char ch1, char ch2) {
-  return (ch1 == ch2) || (ch1 == (ch2 - 32));
+  return (ch1 == ch2) || (ch1 == (ch2 - 32)) || (ch1 == (ch2 + 32));
 }
 
 bool Crossword::is_row_valid(int row) {
