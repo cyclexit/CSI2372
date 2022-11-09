@@ -7,7 +7,7 @@
 
 struct Question {
   int row;
-  int col;
+  int column;
   bool horizontal;
   std::string description;
   std::string answer;
@@ -15,7 +15,7 @@ struct Question {
 
   friend std::ostream& operator<<(std::ostream& out, const Question& q) {
     std::string direction = q.horizontal ? "Horizontal" : "Vertical";
-    out << "(" << q.row << ", " << q.col << ") - "
+    out << "(" << q.row << ", " << q.column << ") - "
         << q.description
         << " (" << direction <<")";
     return out;
@@ -55,6 +55,8 @@ class Crossword {
   void init_state(std::vector<std::string>& state,
                   int rows,
                   int columns);
+
+  bool is_same_char(char ch1, char ch2);
 };
 
 #endif // LAB_7_CROSSWORD_H_

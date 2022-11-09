@@ -14,6 +14,21 @@ Crossword::Crossword(int n, int m) {
   init_state(current_state, rows, columns);
 }
 
+bool Crossword::add_questions(const std::string& question,
+                              const std::string& answer,
+                              int row,
+                              int column,
+                              bool horizontal) {
+  Question q;
+  q.description = question;
+  q.answer = answer;
+  q.row = row;
+  q.column = column;
+  q.horizontal = horizontal;
+  // TODO: check the condition before adding
+  return true;
+}
+
 std::ostream& operator<<(std::ostream& out, const Crossword& crossword) {
   out << "Puzzle:" << std::endl;
   for (int i = 0; i < crossword.rows; ++i) {
