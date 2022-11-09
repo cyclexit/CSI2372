@@ -8,8 +8,10 @@
 struct Question {
   int row;
   int col;
-  std::string description;
   bool horizontal;
+  std::string description;
+  std::string answer;
+  bool solved = false;
 
   friend std::ostream& operator<<(std::ostream& out, const Question& q) {
     std::string direction = q.horizontal ? "Horizontal" : "Vertical";
@@ -42,7 +44,9 @@ class Crossword {
   // members
   int rows;
   int columns;
-
+  std::vector<std::vector<std::string>> solved_state;
+  std::vector<std::vector<std::string>> current_state;
+  std::vector<Question> questions;
 };
 
 #endif // LAB_7_CROSSWORD_H_
