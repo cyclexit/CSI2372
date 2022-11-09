@@ -6,4 +6,4 @@ file(GLOB SRCS *.cpp)
 
 # add_definitions(-DENABLE_DEBUG)
 
-add_executable("testTemplateArray" ${SRCS})
+add_executable("TestCrossword" ${SRCS})
