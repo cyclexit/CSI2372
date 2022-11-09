@@ -44,9 +44,9 @@ class Crossword {
   // members
   int rows;
   int columns;
+  std::vector<Question> questions;
   std::vector<std::vector<std::string>> solved_state;
   std::vector<std::vector<std::string>> current_state;
-  std::vector<Question> questions;
 };
 
 #endif // LAB_7_CROSSWORD_H_
