@@ -83,8 +83,21 @@ std::ostream& operator<<(std::ostream& out, const Crossword& crossword) {
   out << std::endl;
   for (int i = 1; i <= crossword.rows; ++i) {
     out << i << " ";
-    for (int j = 0; j < crossword.current_state[i].size(); ++j) {
+    for (int j = 1; j < crossword.current_state[i].size(); ++j) {
       out << crossword.current_state[i][j] << " ";
+    }
+    out << std::endl;
+  }
+  // debug
+  for (int i = 0; i <= crossword.rows; ++i) {
+    if (i > 0) out << " " << i;
+    else out << " ";
+  }
+  out << std::endl;
+  for (int i = 1; i <= crossword.rows; ++i) {
+    out << i << " ";
+    for (int j = 1; j < crossword.current_state[i].size(); ++j) {
+      out << crossword.solved_state[i][j] << " ";
     }
     out << std::endl;
   }
