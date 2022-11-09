@@ -48,11 +48,11 @@ class Crossword {
   int rows;
   int columns;
   std::vector<Question> questions;
-  std::vector<std::vector<std::string>> solved_state;
-  std::vector<std::vector<std::string>> current_state;
+  std::vector<std::string> solved_state;
+  std::vector<std::string> current_state;
 
   // methods
-  void init_state(std::vector<std::vector<std::string>>& state,
+  void init_state(std::vector<std::string>& state,
                   int rows,
                   int columns);
 };
