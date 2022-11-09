@@ -25,7 +25,15 @@ bool Crossword::add_questions(const std::string& question,
   q.row = row;
   q.column = column;
   q.horizontal = horizontal;
-  // TODO: check the condition before adding
+  // check the length
+  if (horizontal && column + q.answer.size() > columns) {
+    return false;
+  }
+  if (!horizontal && row + q.answer.size() > rows) {
+    return false;
+  }
+  // check the cross
+  // update the solve_state
   return true;
 }
 
@@ -52,4 +60,8 @@ void Crossword::init_state(std::vector<std::string>& state,
   for (int row = 0; row < rows; ++row) {
     if (row) state[row][0] = row + '0';
   }
+}
+
+bool Crossword::is_same_char(char ch1, char ch2) {
+  return (ch1 == ch2) || (ch1 == (ch2 - 32));
 }

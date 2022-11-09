@@ -43,7 +43,7 @@ class Crossword {
   // constants
   static constexpr int kDefaultRows = 10;
   static constexpr int kDefaultColumns = 10;
-  
+
   // members
   int rows;
   int columns;
