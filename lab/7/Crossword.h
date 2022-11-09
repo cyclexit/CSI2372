@@ -37,7 +37,7 @@ class Crossword {
   bool solve(int row, int column, const std::string& answer);
 
   // operators
-  friend std::ostream& operator<<(std::ostream& out, const Crossword& quiz);
+  friend std::ostream& operator<<(std::ostream& out, const Crossword& crossword);
 
  private:
   // constants
