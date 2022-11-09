@@ -29,9 +29,11 @@ bool Crossword::add_question(const std::string& question,
     if (column + answer.size() > columns) {
       return false;
     }
+    // std::cout << row << " " << column << std::endl; // debug
     // check the cross
     for (int i = 0; i < answer.size(); ++i) {
-      if (answer != " " && answer[i] != solved_state[row][column + i]) {
+      if (solved_state[row][column + i] != ' '
+          && solved_state[row][column + i] != answer[i]) {
         return false;
       }
     }
@@ -42,7 +44,8 @@ bool Crossword::add_question(const std::string& question,
     }
     // check the cross
     for (int i = 0; i < answer.size(); ++i) {
-      if (answer != " " && answer[i] != solved_state[row + i][column]) {
+      if (solved_state[row + i][column] != ' '
+          && solved_state[row + i][column] != answer[i]) {
         return false;
       }
     }
