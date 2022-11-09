@@ -19,21 +19,55 @@ bool Crossword::add_questions(const std::string& question,
                               int row,
                               int column,
                               bool horizontal) {
+  if (!is_row_valid(row) || !is_column_valid(column)) {
+    return false;
+  }
+
+  // validate the question according to direction
+  if (horizontal) {
+    // check the length
+    if (column + answer.size() > columns) {
+      return false;
+    }
+    // check the cross
+    for (int i = 0; i < answer.size(); ++i) {
+      if (answer != " " && answer[i] != solved_state[row][column + i]) {
+        return false;
+      }
+    }
+  } else {
+    // check the length
+    if (row + answer.size() > rows) {
+      return false;
+    }
+    // check the cross
+    for (int i = 0; i < answer.size(); ++i) {
+      if (answer != " " && answer[i] != solved_state[row + i][column]) {
+        return false;
+      }
+    }
+  }
+
+  // add the question
   Question q;
   q.description = question;
   q.answer = answer;
   q.row = row;
   q.column = column;
   q.horizontal = horizontal;
-  // check the length
-  if (horizontal && column + q.answer.size() > columns) {
-    return false;
+  questions.push_back(q);
+
+  // update the solved_state
+  if (horizontal) {
+    for (int i = 0; i < answer.size(); ++i) {
+      solved_state[row][column + i] = answer[i];
+    }
+  } else {
+    for (int i = 0; i < answer.size(); ++i) {
+      solved_state[row + i][column] = answer[i];
+    }
   }
-  if (!horizontal && row + q.answer.size() > rows) {
-    return false;
-  }
-  // check the cross
-  // update the solve_state
+
   return true;
 }
 
@@ -64,4 +98,12 @@ void Crossword::init_state(std::vector<std::string>& state,
 
 bool Crossword::is_same_char(char ch1, char ch2) {
   return (ch1 == ch2) || (ch1 == (ch2 - 32));
+}
+
+bool Crossword::is_row_valid(int row) {
+  return (1 <= row) && (row <= rows);
+}
+
+bool Crossword::is_column_valid(int column) {
+  return (1 <= column) && (column <= columns);
 }

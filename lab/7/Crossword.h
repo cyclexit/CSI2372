@@ -55,8 +55,9 @@ class Crossword {
   void init_state(std::vector<std::string>& state,
                   int rows,
                   int columns);
-
   bool is_same_char(char ch1, char ch2);
+  bool is_row_valid(int row);
+  bool is_column_valid(int column);
 };
 
 #endif // LAB_7_CROSSWORD_H_
