@@ -33,7 +33,7 @@ bool Crossword::add_question(const std::string& question,
     // check the cross
     for (int i = 0; i < answer.size(); ++i) {
       if (solved_state[row][column + i] != ' '
-          && solved_state[row][column + i] != answer[i]) {
+          && !is_same_char(solved_state[row][column + i], answer[i])) {
         return false;
       }
     }
@@ -45,7 +45,7 @@ bool Crossword::add_question(const std::string& question,
     // check the cross
     for (int i = 0; i < answer.size(); ++i) {
       if (solved_state[row + i][column] != ' '
-          && solved_state[row + i][column] != answer[i]) {
+          && !is_same_char(solved_state[row][column + i], answer[i])) {
         return false;
       }
     }
@@ -84,14 +84,24 @@ bool Crossword::solve(int row, int column, const std::string& answer) {
   }
   if (idx == -1) return false;
 
-  if (questions[idx].answer == answer) {
+  bool ok = answer.size() == questions[idx].answer.size();
+  if (ok) {
+    for (int i = 0; i < answer.size(); ++i) {
+      if (!is_same_char(answer[i], questions[idx].answer[i])) {
+        ok = false;
+        break;
+      }
+    }
+  }
+
+  if (ok) {
     if (questions[idx].horizontal) {
       for (int i = 0; i < answer.size(); ++i) {
-        current_state[row][column + i] = answer[i];
+        current_state[row][column + i] = questions[idx].answer[i];
       }
     } else {
       for (int i = 0; i < answer.size(); ++i) {
-        current_state[row + i][column] = answer[i];
+        current_state[row + i][column] = questions[idx].answer[i];
       }
     }
     return true;
