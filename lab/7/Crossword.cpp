@@ -45,7 +45,7 @@ bool Crossword::add_question(const std::string& question,
     // check the cross
     for (int i = 0; i < answer.size(); ++i) {
       if (solved_state[row + i][column] != ' '
-          && !is_same_char(solved_state[row][column + i], answer[i])) {
+          && !is_same_char(solved_state[row + i][column], answer[i])) {
         return false;
       }
     }
