@@ -36,7 +36,7 @@ class DoubleLinkedList {
   // operators
   int& operator[](int idx);
   friend std::ostream& operator<<(std::ostream& out,
-                                  DoubleLinkedList& lst);
+                                  const DoubleLinkedList& lst);
 
  private:
   int len_;

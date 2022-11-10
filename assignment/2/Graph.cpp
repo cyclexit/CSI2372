@@ -207,14 +207,13 @@ int Graph::connectivity_type() {
   return 1;
 }
 
-int* Graph::BFS(int start, int& res_len) {
+DoubleLinkedList Graph::BFS(int start) {
   if (start < 1 || start > node_count_) {
     printf("Error: Start node %d not exist.\n", start);
-    return nullptr;
+    return DoubleLinkedList();
   }
 
-  int* res = new int[node_count_];
-  int idx = 0;
+  DoubleLinkedList res;
 
   bool* visited = new bool[node_count_];
   for (int i = 0; i <= node_count_; ++i) {
@@ -227,25 +226,23 @@ int* Graph::BFS(int start, int& res_len) {
     int cur = q[0];
     q.remove_from_front();
     visited[cur] = true;
-    res[idx++] = cur;
+    res.add_to_back(cur);
     for (int i = 0; i < edges_[cur].count_nodes(); ++i) {
       if (!visited[edges_[cur][i]]) q.add_to_back(edges_[cur][i]);
     }
   }
   delete[] visited;
 
-  res_len = idx;
   return res;
 }
 
-int* Graph::DFS(int start, int& res_len) {
+DoubleLinkedList Graph::DFS(int start) {
   if (start < 1 || start > node_count_) {
     printf("Error: Start node %d not exist.\n", start);
-    return nullptr;
+    return DoubleLinkedList();
   }
 
-  int* res = new int[node_count_];
-  int idx = 0;
+  DoubleLinkedList res;
 
   bool* visited = new bool[node_count_];
   for (int i = 0; i <= node_count_; ++i) {
@@ -254,7 +251,7 @@ int* Graph::DFS(int start, int& res_len) {
 
   std::function<void(int)> dfs = [&](int cur) {
     visited[cur] = true;
-    res[idx++] = cur;
+    res.add_to_back(cur);
     for (int i = 0; i < edges_[cur].count_nodes(); ++i) {
       if (!visited[edges_[cur][i]]) {
         dfs(edges_[cur][i]);
@@ -262,8 +259,8 @@ int* Graph::DFS(int start, int& res_len) {
     }
   };
   dfs(start);
+  std::cout << res << std::endl; // debug
   delete[] visited;
 
-  res_len = idx;
   return res;
 }

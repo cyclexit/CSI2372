@@ -149,10 +149,16 @@ int& DoubleLinkedList::operator[](int idx) {
   return cur->data_;
 }
 
-std::ostream& operator<<(std::ostream& out, DoubleLinkedList& lst) {
-  for (int i = 0; i < lst.len_; ++i) {
-    if (i) out << ", ";
-    out << lst[i];
+std::ostream& operator<<(std::ostream& out, const DoubleLinkedList& lst) {
+  Node* cur = lst.head_;
+  while (cur != nullptr) {
+    if (cur != lst.head_) out << ", ";
+    out << cur->data_;
+    cur = cur->next_;
   }
+  // for (int i = 0; i < lst.len_; ++i) {
+  //   if (i) out << ", ";
+  //   out << lst[i];
+  // }
   return out;
 }
