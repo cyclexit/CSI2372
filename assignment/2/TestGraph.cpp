@@ -106,20 +106,19 @@ int main() {
     cout << "Test - 4 vertex weakly connected ... Failed" << endl;
   }
 
-  DoubleLinkedList res = g2.DFS(1);
-  cout << res << endl;
-  // cout << g2.BFS(4) << endl;
+  cout << g2.DFS(1) << endl;
+  cout << g2.BFS(4) << endl;
 
-  // Graph g3(7); // binary tree
-  // g3.add_edge(1, 2);
-  // g3.add_edge(1, 3);
-  // g3.add_edge(2, 4);
-  // g3.add_edge(2, 5);
-  // g3.add_edge(3, 6);
-  // g3.add_edge(3, 7);
+  Graph g3(7); // binary tree
+  g3.add_edge(1, 2);
+  g3.add_edge(1, 3);
+  g3.add_edge(2, 4);
+  g3.add_edge(2, 5);
+  g3.add_edge(3, 6);
+  g3.add_edge(3, 7);
 
-  // cout << g3.DFS(1) << endl;
-  // cout << g3.BFS(1) << endl;
+  cout << g3.DFS(1) << endl;
+  cout << g3.BFS(1) << endl;
 
   return 0;
 }

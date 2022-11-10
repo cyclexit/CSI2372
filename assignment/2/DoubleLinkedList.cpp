@@ -6,6 +6,15 @@ DoubleLinkedList::DoubleLinkedList() {
   tail_ = nullptr;
 }
 
+DoubleLinkedList::DoubleLinkedList(const DoubleLinkedList& other) {
+  len_ = other.len_;
+  Node* cur = other.head_;
+  while (cur != nullptr) {
+    add_to_back(cur->data_);
+    cur = cur->next_;
+  }
+}
+
 DoubleLinkedList::~DoubleLinkedList() {
   if (head_) {
     Node* cur = head_;
@@ -156,9 +165,5 @@ std::ostream& operator<<(std::ostream& out, const DoubleLinkedList& lst) {
     out << cur->data_;
     cur = cur->next_;
   }
-  // for (int i = 0; i < lst.len_; ++i) {
-  //   if (i) out << ", ";
-  //   out << lst[i];
-  // }
   return out;
 }

@@ -259,7 +259,6 @@ DoubleLinkedList Graph::DFS(int start) {
     }
   };
   dfs(start);
-  std::cout << res << std::endl; // debug
   delete[] visited;
 
   return res;

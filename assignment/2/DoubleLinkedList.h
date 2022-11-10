@@ -21,6 +21,7 @@ class DoubleLinkedList {
 
   // ctors and dtors
   DoubleLinkedList();
+  DoubleLinkedList(const DoubleLinkedList& other);
   ~DoubleLinkedList();
 
   // methods
