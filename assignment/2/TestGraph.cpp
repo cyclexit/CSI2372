@@ -106,19 +106,8 @@ int main() {
     cout << "Test - 4 vertex weakly connected ... Failed" << endl;
   }
 
-  int* res;
-  int res_len;
-  res = g2.DFS(1, res_len);
-  for (int i = 0; i < res_len; ++i) {
-    cout << res[i] << " ";
-  }
-  cout << endl;
-
-  res = g2.BFS(4, res_len);
-  for (int i = 0; i < res_len; ++i) {
-    cout << res[i] << " ";
-  }
-  cout << endl;
+  cout << "g2.DFS(1): " << g2.DFS(1) << endl;
+  cout << "g2.BFS(4): " << g2.BFS(4) << endl;
 
   Graph g3(7); // binary tree
   g3.add_edge(1, 2);
@@ -128,18 +117,11 @@ int main() {
   g3.add_edge(3, 6);
   g3.add_edge(3, 7);
 
-  res = g3.DFS(1, res_len);
-  for (int i = 0; i < res_len; ++i) {
-    cout << res[i] << " ";
-  }
-  cout << endl;
+  cout << "g3.DFS(1): " << g3.DFS(1) << endl;
+  cout << "g3.BFS(1): " << g3.BFS(1) << endl;
 
-  res = g3.BFS(1, res_len);
-  for (int i = 0; i < res_len; ++i) {
-    cout << res[i] << " ";
-  }
-  cout << endl;
-
+  auto res = g3.DFS(2);
+  cout << "g3.DFS(2): " << res << endl;
 
   return 0;
 }

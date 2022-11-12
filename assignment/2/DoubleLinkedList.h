@@ -21,6 +21,7 @@ class DoubleLinkedList {
 
   // ctors and dtors
   DoubleLinkedList();
+  DoubleLinkedList(const DoubleLinkedList& other);
   ~DoubleLinkedList();
 
   // methods
@@ -35,8 +36,9 @@ class DoubleLinkedList {
 
   // operators
   int& operator[](int idx);
+  DoubleLinkedList operator=(const DoubleLinkedList& other);
   friend std::ostream& operator<<(std::ostream& out,
-                                  DoubleLinkedList& lst);
+                                  const DoubleLinkedList& lst);
 
  private:
   int len_;

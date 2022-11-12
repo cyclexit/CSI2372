@@ -34,8 +34,8 @@ class Graph {
 
   // bonus part
   int connectivity_type();
-  int* BFS(int start, int& res_len);
-  int* DFS(int start, int& res_len);
+  DoubleLinkedList BFS(int start);
+  DoubleLinkedList DFS(int start);
 
  private:
   int node_count_; // node index: 1 to node_count_
