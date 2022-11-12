@@ -158,7 +158,6 @@ int& DoubleLinkedList::operator[](int idx) {
   return cur->data_;
 }
 
-<<<<<<< HEAD
 DoubleLinkedList DoubleLinkedList::operator=(const DoubleLinkedList& other) {
   DoubleLinkedList tmp;
   tmp.len_ = other.len_;
@@ -176,12 +175,6 @@ std::ostream& operator<<(std::ostream& out, const DoubleLinkedList& lst) {
     if (cur != lst.head_) out << ", ";
     out << cur->data_;
     cur = cur->next_;
-=======
-std::ostream& operator<<(std::ostream& out, DoubleLinkedList& lst) {
-  for (int i = 0; i < lst.len_; ++i) {
-    if (i) out << ", ";
-    out << lst[i];
->>>>>>> master
   }
   return out;
 }
