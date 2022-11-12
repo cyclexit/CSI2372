@@ -36,9 +36,14 @@ class DoubleLinkedList {
 
   // operators
   int& operator[](int idx);
+<<<<<<< HEAD
   DoubleLinkedList operator=(const DoubleLinkedList& other);
   friend std::ostream& operator<<(std::ostream& out,
                                   const DoubleLinkedList& lst);
+=======
+  friend std::ostream& operator<<(std::ostream& out,
+                                  DoubleLinkedList& lst);
+>>>>>>> master
 
  private:
   int len_;
@@ -49,4 +54,8 @@ class DoubleLinkedList {
 
 using Node = DoubleLinkedList::Node;
 
+<<<<<<< HEAD
 #endif // LAB_5_DOUBLE_LINKED_LIST_H_
+=======
+#endif // LAB_5_DOUBLE_LINKED_LIST_H_
+>>>>>>> master
