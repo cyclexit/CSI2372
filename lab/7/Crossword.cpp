@@ -111,7 +111,7 @@ bool Crossword::solve(int row, int column, const std::string& answer) {
 
 std::ostream& operator<<(std::ostream& out, const Crossword& crossword) {
   out << "Puzzle:" << std::endl;
-  for (int i = 0; i <= crossword.rows; ++i) {
+  for (int i = 0; i <= crossword.columns; ++i) {
     if (i > 0) out << " " << i;
     else out << " ";
   }
