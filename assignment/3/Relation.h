@@ -29,7 +29,6 @@ class Relation {
   bool add_element(const std::pair<T, T>& r);
   void remove_element(const std::pair<T, T>& r);
   bool is_member(const std::pair<T, T>& r) const;
-  bool equal(const Relation<T>& other) const;
   bool reflexive() const;
   bool irreflexive() const;
   bool symmetric() const;
