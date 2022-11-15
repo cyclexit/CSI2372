@@ -20,6 +20,12 @@ size_t Relation<T>::cardinality() const {
 }
 
 template<typename T>
+bool Relation<T>::add_to_set(const T& elem) {
+  auto ret = elems_.insert(elem);
+  return ret.second;
+}
+
+template<typename T>
 bool Relation<T>::add_element(const std::pair<T, T>& r) {
   if (elems_.find(r.first) == elems_.end()
       || elems_.find(r.second) == elems_.end()) {
@@ -39,5 +45,5 @@ void Relation<T>::remove_element(const std::pair<T, T>& r) {
 
 template<typename T>
 bool Relation<T>::is_member(const std::pair<T, T>& r) const {
-  return relations_.count(r) > 0;
+  return relations_.find(r) != relations_.end();
 }

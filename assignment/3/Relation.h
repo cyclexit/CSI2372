@@ -25,6 +25,7 @@ class Relation {
 
   // methods
   size_t cardinality() const;
+  bool add_to_set(const T& elem);
   bool add_element(const std::pair<T, T>& r);
   void remove_element(const std::pair<T, T>& r);
   bool is_member(const std::pair<T, T>& r) const;
