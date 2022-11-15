@@ -16,6 +16,10 @@ size_t Relation<T>::cardinality() const {
 
 template<typename T>
 bool Relation<T>::add_element(const std::pair<T, T>& r) {
+  if (elems_.find(r.first) == elems_.end()
+      || elems_.find(r.second) == elems_.end()) {
+    return false;
+  }
   auto ret = relations_.insert(r);
   return ret.second;
 }
