@@ -28,7 +28,7 @@ class Mapping {
   // operators
   std::set<T2> operator[](T1 k);
   Mapping<T1, T2>& operator=(const Mapping<T1, T2>& other);
-  friend std::ostream& operator<<(std::ostream& out, const Mapping<T1, T2>& m);
+  friend std::ostream& operator<< <> (std::ostream& out, const Mapping<T1, T2>& m);
 
  private:
   std::map<T1, std::set<T2>> my_map_;

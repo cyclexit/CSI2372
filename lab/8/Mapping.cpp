@@ -28,7 +28,7 @@ void Mapping<T1, T2>::clear_item(T1 k) {
 template<typename T1, typename T2>
 std::set<T2> Mapping<T1, T2>::find_item(T1 k) {
   auto map_itr = my_map_.find(k);
-  return map_itr == my_map_.end() ? {} : map_itr->second;
+  return map_itr == my_map_.end() ? std::set<T2>() : map_itr->second;
 }
 
 template<typename T1, typename T2>
