@@ -22,7 +22,7 @@ class Mapping {
   // methods
   void add_item(T1 k, T2 v);
   void remove_item(T1 k, T2 v);
-  void clear(T1 k);
+  void clear_item(T1 k);
   std::set<T2> find_item(T1 k);
 
   // operators
