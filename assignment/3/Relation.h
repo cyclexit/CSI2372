@@ -19,6 +19,7 @@ class Relation {
  public:
   // ctors and dtors
   Relation() = default;
+  Relation(const std::set<T>& elems);
   Relation(const Relation<T>& other);
   ~Relation() = default;
 

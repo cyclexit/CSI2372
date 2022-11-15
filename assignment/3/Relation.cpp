@@ -4,6 +4,11 @@
 #include "Relation.h"
 
 template<typename T>
+Relation<T>::Relation(const std::set<T>& elems) {
+  elems_ = elems;
+}
+
+template<typename T>
 Relation<T>::Relation(const Relation<T>& other) {
   elems_ = other.elems_;
   relations_ = other.relations_;
