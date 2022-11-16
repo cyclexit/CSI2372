@@ -138,3 +138,30 @@ Relation<T> Relation<T>::combination(const Relation<T>& other) const {
   }
   return res;
 }
+
+template<typename T>
+bool Relation<T>::operator==(const Relation<T>& other) const {
+  return (elems_ == other.elems_) && (relations_ == other.relations_);
+}
+
+template<typename T>
+std::set<T> Relation<T>::operator[](T key) {
+  std::set<T> res;
+  for (auto p : relations_) {
+    if (p.first == key) {
+      res.insert(p.second);
+    }
+  }
+  return res;
+}
+
+template<typename T>
+std::ostream& operator<<(std::ostream& out, const Relation<T>& rel) {
+  out << "{";
+  for (auto itr = rel.relations_.begin(); itr != rel.relations_.end(); ++itr) {
+    if (itr != rel.relations_.begin()) out << ", ";
+    out << "(" << itr->first << ", " << itr->second << ")";
+  }
+  out << "}";
+  return out;
+}
