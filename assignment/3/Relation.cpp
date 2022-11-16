@@ -114,3 +114,27 @@ bool Relation<T>::is_function() const {
   }
   return true;
 }
+
+template<typename T>
+Relation<T> Relation<T>::inverse() const {
+  Relation<T> res;
+  for (auto p : relations_) {
+    res.add_element({p.second, p.first});
+  }
+  return res;
+}
+
+template<typename T>
+Relation<T> Relation<T>::combination(const Relation<T>& other) const {
+  Relation res;
+  if (elems_ == other.elems_) {
+    for (auto p1 : relations_) {
+      for (auto p2 : other.relations_) {
+        if (p1.second == p2.first) {
+          res.add_element({p1.first, p2.second});
+        }
+      }
+    }
+  }
+  return res;
+}
