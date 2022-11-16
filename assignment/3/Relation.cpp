@@ -88,3 +88,29 @@ bool Relation<T>::asymmetric() const {
   }
   return true;
 }
+
+template<typename T>
+bool Relation<T>::transitive() const {
+  for (auto p : relations_) {
+    for (int x : elems_) {
+      if (is_member({p.second, x})) {
+        if (!is_member({p.first, x})) {
+          return false;
+        }
+      }
+    }
+  }
+  return true;
+}
+
+template<typename T>
+bool Relation<T>::is_function() const {
+  for (auto p1 : relations_) {
+    for (auto p2 : relations_) {
+      if ((p1.first == p2.first) && (p1.second != p2.second)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
