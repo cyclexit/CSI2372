@@ -67,3 +67,24 @@ bool Relation<T>::irreflexive() const {
   }
   return true;
 }
+
+template<typename T>
+bool Relation<T>::symmetric() const {
+  for (auto p : relations_) {
+    if (!is_member({p.second, p.first})) {
+      return false;
+    }
+  }
+  return true;
+}
+
+template<typename T>
+bool Relation<T>::asymmetric() const {
+  for (auto p : relations_) {
+    if (p.first == p.second) continue;
+    if (is_member({p.second, p.first})) {
+      return false;
+    }
+  }
+  return true;
+}
