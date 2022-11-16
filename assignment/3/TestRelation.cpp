@@ -175,5 +175,10 @@ int main() {
 
   if (T.is_function()) cout << "is_function - Test 2 - Passed." << endl;
   else cout << "is_function - Test 2 - Failed!" << endl;
+
+  cout << R << endl;
+  cout << S << endl;
+  cout << T << endl;
+
   return 0;
 }
