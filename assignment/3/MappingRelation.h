@@ -22,7 +22,7 @@ class MappingRelation {
 
   // methods
   bool add_to_domain(Domain d);
-  bool add_to_rangeg(Range r);
+  bool add_to_range(Range r);
 
  private:
   std::set<Domain> domain_;
