@@ -12,7 +12,7 @@ template<typename T>
 class Relation;
 
 template<typename T>
-std::ostream& operator<< <> (std::ostream& out, const Relation<T>& rel);
+std::ostream& operator<<(std::ostream& out, const Relation<T>& rel);
 
 template<typename T>
 class Relation {
