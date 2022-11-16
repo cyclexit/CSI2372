@@ -47,3 +47,23 @@ template<typename T>
 bool Relation<T>::is_member(const std::pair<T, T>& r) const {
   return relations_.find(r) != relations_.end();
 }
+
+template<typename T>
+bool Relation<T>::reflexive() const {
+  for (const T& e : elems_) {
+    if (!is_member({e, e})) {
+      return false;
+    }
+  }
+  return true;
+}
+
+template<typename T>
+bool Relation<T>::irreflexive() const {
+  for (const T& e : elems_) {
+    if (is_member({e, e})) {
+      return false;
+    }
+  }
+  return true;
+}
