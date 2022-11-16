@@ -12,6 +12,9 @@ template<typename Domain, typename Range>
 class MappingRelation;
 
 template<typename Domain, typename Range>
+std::ostream& operator<<(std::ostream& out, const MappingRelation<Domain, Range>& mr);
+
+template<typename Domain, typename Range>
 class MappingRelation {
  public:
   // ctors and dtors
@@ -23,6 +26,21 @@ class MappingRelation {
   // methods
   bool add_to_domain(Domain d);
   bool add_to_range(Range r);
+  bool add_element(const std::pair<Domain, Range>& r);
+  void remove_element(const std::pair<Domain, Range>& r);
+  bool is_member(const std::pair<Domain, Range>& r) const;
+  bool is_function() const;
+  MappingRelation<Domain, Range> intersection(const MappingRelation<Domain, Range>& other) const;
+  MappingRelation<Range, Domain> inverse() const; // bonus
+  MappingRelation<Domain, Range> combination(const MappingRelation<Domain, Range>& other) const; // bonus
+
+
+  // operators
+  bool operator==(const MappingRelation<Domain, Range>& other) const;
+  MappingRelation<Domain, Range> operator+(const MappingRelation<Domain, Range>& other) const;
+  MappingRelation<Domain, Range> operator-(const MappingRelation<Domain, Range>& other) const;
+  std::set<Range> operator[](Domain d) const;
+  friend std::ostream& operator<< <> (std::ostream& out, const MappingRelation<Domain, Range>& mr);
 
  private:
   std::set<Domain> domain_;
