@@ -34,7 +34,6 @@ class MappingRelation {
   MappingRelation<Range, Domain> inverse() const; // bonus
   MappingRelation<Domain, Range> combination(const MappingRelation<Domain, Range>& other) const; // bonus
 
-
   // operators
   bool operator==(const MappingRelation<Domain, Range>& other) const;
   MappingRelation<Domain, Range> operator+(const MappingRelation<Domain, Range>& other) const;

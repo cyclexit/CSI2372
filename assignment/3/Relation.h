@@ -40,7 +40,7 @@ class Relation {
 
   // operators
   bool operator==(const Relation<T>& other) const;
-  std::set<T> operator[](T key);
+  std::set<T> operator[](T key) const;
   friend std::ostream& operator<< <> (std::ostream& out, const Relation<T>& rel);
 
  private:

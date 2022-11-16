@@ -145,7 +145,7 @@ bool Relation<T>::operator==(const Relation<T>& other) const {
 }
 
 template<typename T>
-std::set<T> Relation<T>::operator[](T key) {
+std::set<T> Relation<T>::operator[](T key) const {
   std::set<T> res;
   for (auto p : relations_) {
     if (p.first == key) {
