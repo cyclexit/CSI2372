@@ -99,3 +99,16 @@ MappingRelation<Domain, Range> MappingRelation<Domain, Range>::operator+(const M
   }
   return res;
 }
+
+template<typename Domain, typename Range>
+MappingRelation<Domain, Range> MappingRelation<Domain, Range>::operator-(const MappingRelation<Domain, Range>& other) const {
+  MappingRelation<Domain, Range> res;
+  for (const auto& p : relations_) {
+    if (!other.is_member(p)) {
+      res.add_to_domain(p.first);
+      res.add_to_range(p.second);
+      res.add_element(p);
+    }
+  }
+  return res;
+}
