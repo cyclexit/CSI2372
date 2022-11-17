@@ -38,3 +38,11 @@ bool MappingRelation<Domain, Range>::add_element(const std::pair<Domain, Range>&
   auto res = relations_.insert(r);
   return res.second;
 }
+
+template<typename Domain, typename Range>
+void MappingRelation<Domain, Range>::remove_element(const std::pair<Domain, Range>& r) {
+  auto itr = relations_.find(r);
+  if (itr != relations_.end()) {
+    relations_.erase(itr);
+  }
+}
