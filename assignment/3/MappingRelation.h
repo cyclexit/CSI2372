@@ -24,8 +24,8 @@ class MappingRelation {
   ~MappingRelation() = default;
 
   // methods
-  bool add_to_domain(Domain d);
-  bool add_to_range(Range r);
+  bool add_to_domain(const Domain& d);
+  bool add_to_range(const Range& r);
   bool add_element(const std::pair<Domain, Range>& r);
   void remove_element(const std::pair<Domain, Range>& r);
   bool is_member(const std::pair<Domain, Range>& r) const;

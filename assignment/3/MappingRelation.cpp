@@ -16,3 +16,25 @@ MappingRelation<Domain, Range>::MappingRelation(std::set<Domain> domain,
   domain_ = domain;
   range_ = range;
 }
+
+template<typename Domain, typename Range>
+bool MappingRelation<Domain, Range>::add_to_domain(const Domain& d) {
+  auto res = domain_.insert(d);
+  return res.second;
+}
+
+template<typename Domain, typename Range>
+bool MappingRelation<Domain, Range>::add_to_range(const Range& r) {
+  auto res = range_.insert(r);
+  return res.second;
+}
+
+template<typename Domain, typename Range>
+bool MappingRelation<Domain, Range>::add_element(const std::pair<Domain, Range>& r) {
+  if (domain_.find(r.first) == domain_.end()
+      || range_.find(r.second) == range_.end()) {
+    return false;
+  }
+  auto res = relations_.insert(r);
+  return res.second;
+}
