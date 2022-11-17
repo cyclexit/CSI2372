@@ -112,3 +112,25 @@ MappingRelation<Domain, Range> MappingRelation<Domain, Range>::operator-(const M
   }
   return res;
 }
+
+template<typename Domain, typename Range>
+std::set<Range> MappingRelation<Domain, Range>::operator[](Domain d) const {
+  std::set<Range> res;
+  for (const auto& p : relations_) {
+    if (p.first == d) {
+      res.insert(p.second);
+    }
+  }
+  return res;
+}
+
+template<typename Domain, typename Range>
+std::ostream& operator<<(std::ostream& out, const MappingRelation<Domain, Range>& mr) {
+  out << "{";
+  for (auto itr = mr.relations_.begin(); itr != mr.relations_.end(); ++itr) {
+    if (itr != mr.relations_.begin()) out << ", ";
+    out << "(" << itr->first << ", " << itr->second << ")";
+  }
+  out << "}";
+  return out;
+}
