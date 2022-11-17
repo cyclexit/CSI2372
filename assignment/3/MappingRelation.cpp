@@ -76,3 +76,26 @@ MappingRelation<Domain, Range> MappingRelation<Domain, Range>::intersection(cons
   }
   return res;
 }
+
+template<typename Domain, typename Range>
+bool MappingRelation<Domain, Range>::operator==(const MappingRelation<Domain, Range>& other) const {
+  return (domain_ == other.domain_)
+         && (range_ = other.range_)
+         && (relations_ == other.relations_);
+}
+
+template<typename Domain, typename Range>
+MappingRelation<Domain, Range> MappingRelation<Domain, Range>::operator+(const MappingRelation<Domain, Range>& other) const {
+  MappingRelation<Domain, Range> res;
+  for (const auto& p : relations_) {
+    res.add_to_domain(p.first);
+    res.add_to_range(p.second);
+    res.add_element(p);
+  }
+  for (const auto& p : other.relations_) {
+    res.add_to_domain(p.first);
+    res.add_to_range(p.second);
+    res.add_element(p);
+  }
+  return res;
+}
