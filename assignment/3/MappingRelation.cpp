@@ -46,3 +46,20 @@ void MappingRelation<Domain, Range>::remove_element(const std::pair<Domain, Rang
     relations_.erase(itr);
   }
 }
+
+template<typename Domain, typename Range>
+bool MappingRelation<Domain, Range>::is_member(const std::pair<Domain, Range>& r) const {
+  return relations_.find(r) != relations_.end();
+}
+
+template<typename Domain, typename Range>
+bool MappingRelation<Domain, Range>::is_function() const {
+  for (auto p1 : relations_) {
+    for (auto p2 : relations_) {
+      if ((p1.first == p2.first) && (p1.second != p2.second)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
