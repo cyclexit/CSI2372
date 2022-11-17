@@ -21,7 +21,6 @@ using MR = MappingRelation<Domain, Range>;
 template<typename Domain, typename Range>
 class MappingRelation {
  public:
-
   // ctors and dtors
   MappingRelation() = default;
   MappingRelation(const MR<Domain, Range>& other);
@@ -36,7 +35,7 @@ class MappingRelation {
   bool is_member(const std::pair<Domain, Range>& r) const;
   bool is_function() const;
   MR<Domain, Range> intersection(const MR<Domain, Range>& other) const;
-  MappingRelation<Range, Domain> inverse() const; // bonus
+  MR<Range, Domain> inverse() const; // bonus
   MR<Domain, Range> combination(const MR<Domain, Range>& other) const; // bonus
 
   // operators
