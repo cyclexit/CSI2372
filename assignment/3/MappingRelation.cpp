@@ -30,26 +30,26 @@ bool MappingRelation<Domain, Range>::add_to_range(const Range& r) {
 }
 
 template<typename Domain, typename Range>
-bool MappingRelation<Domain, Range>::add_element(const std::pair<Domain, Range>& r) {
-  if (domain_.find(r.first) == domain_.end()
-      || range_.find(r.second) == range_.end()) {
+bool MappingRelation<Domain, Range>::add_element(const Domain& d, const Range& r) {
+  if (domain_.find(d) == domain_.end()
+      || range_.find(r) == range_.end()) {
     return false;
   }
-  auto res = relations_.insert(r);
+  auto res = relations_.insert({d, r});
   return res.second;
 }
 
 template<typename Domain, typename Range>
-void MappingRelation<Domain, Range>::remove_element(const std::pair<Domain, Range>& r) {
-  auto itr = relations_.find(r);
+void MappingRelation<Domain, Range>::remove_element(const Domain& d, const Range& r) {
+  auto itr = relations_.find({d, r});
   if (itr != relations_.end()) {
     relations_.erase(itr);
   }
 }
 
 template<typename Domain, typename Range>
-bool MappingRelation<Domain, Range>::is_member(const std::pair<Domain, Range>& r) const {
-  return relations_.find(r) != relations_.end();
+bool MappingRelation<Domain, Range>::is_member(const Domain& d, const Range& r) const {
+  return relations_.find({d, r}) != relations_.end();
 }
 
 template<typename Domain, typename Range>
@@ -71,7 +71,7 @@ MappingRelation<Domain, Range> MappingRelation<Domain, Range>::intersection(cons
     if (other.is_member(p)) {
       res.add_to_domain(p.first);
       res.add_to_range(p.second);
-      res.add_element(p);
+      res.add_element(p.first, p.second);
     }
   }
   return res;
@@ -84,7 +84,7 @@ MappingRelation<Range, Domain> MappingRelation<Domain, Range>::inverse() const {
   res.domain_ = range_;
   res.range_ = domain_;
   for (const auto& p : relations_) {
-    res.add_element({p.second, p.first});
+    res.add_element(p.second, p.first);
   }
   return res;
 }
@@ -102,12 +102,12 @@ MappingRelation<Domain, Range> MappingRelation<Domain, Range>::operator+(const M
   for (const auto& p : relations_) {
     res.add_to_domain(p.first);
     res.add_to_range(p.second);
-    res.add_element(p);
+    res.add_element(p.first, p.second);
   }
   for (const auto& p : other.relations_) {
     res.add_to_domain(p.first);
     res.add_to_range(p.second);
-    res.add_element(p);
+    res.add_element(p.first, p.second);
   }
   return res;
 }
@@ -119,7 +119,7 @@ MappingRelation<Domain, Range> MappingRelation<Domain, Range>::operator-(const M
     if (!other.is_member(p)) {
       res.add_to_domain(p.first);
       res.add_to_range(p.second);
-      res.add_element(p);
+      res.add_element(p.first, p.second);
     }
   }
   return res;

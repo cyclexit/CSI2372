@@ -26,9 +26,9 @@ class MappingRelation {
   // methods
   bool add_to_domain(const Domain& d);
   bool add_to_range(const Range& r);
-  bool add_element(const std::pair<Domain, Range>& r);
-  void remove_element(const std::pair<Domain, Range>& r);
-  bool is_member(const std::pair<Domain, Range>& r) const;
+  bool add_element(const Domain& d, const Range& r);
+  void remove_element(const Domain& d, const Range& r);
+  bool is_member(const Domain& d, const Range& r) const;
   bool is_function() const;
   MappingRelation<Domain, Range> intersection(const MappingRelation<Domain, Range>& other) const;
   MappingRelation<Range, Domain> inverse() const; // bonus
