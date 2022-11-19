@@ -36,10 +36,8 @@ bool MappingRelation<Domain, Range>::add_to_range(const Range& r) {
 
 template<typename Domain, typename Range>
 bool MappingRelation<Domain, Range>::add_element(const Domain& d, const Range& r) {
-  if (domain_.find(d) == domain_.end()
-      || range_.find(r) == range_.end()) {
-    return false;
-  }
+  domain_.insert(d);
+  range_.insert(r);
   auto res = relations_.insert({d, r});
   return res.second;
 }
@@ -74,8 +72,6 @@ MappingRelation<Domain, Range> MappingRelation<Domain, Range>::intersection(cons
   MappingRelation<Domain, Range> res;
   for (const auto& p : relations_) {
     if (other.is_member(p)) {
-      res.add_to_domain(p.first);
-      res.add_to_range(p.second);
       res.add_element(p.first, p.second);
     }
   }
@@ -85,9 +81,7 @@ MappingRelation<Domain, Range> MappingRelation<Domain, Range>::intersection(cons
 // bonus
 template<typename Domain, typename Range>
 MappingRelation<Range, Domain> MappingRelation<Domain, Range>::inverse() const {
-  MappingRelation<Range, Domain> res;
-  res.domain_ = range_;
-  res.range_ = domain_;
+  MappingRelation<Range, Domain> res(range_, domain_);
   for (const auto& p : relations_) {
     res.add_element(p.second, p.first);
   }
@@ -105,13 +99,9 @@ template<typename Domain, typename Range>
 MappingRelation<Domain, Range> MappingRelation<Domain, Range>::operator+(const MappingRelation<Domain, Range>& other) const {
   MappingRelation<Domain, Range> res;
   for (const auto& p : relations_) {
-    res.add_to_domain(p.first);
-    res.add_to_range(p.second);
     res.add_element(p.first, p.second);
   }
   for (const auto& p : other.relations_) {
-    res.add_to_domain(p.first);
-    res.add_to_range(p.second);
     res.add_element(p.first, p.second);
   }
   return res;
@@ -122,8 +112,6 @@ MappingRelation<Domain, Range> MappingRelation<Domain, Range>::operator-(const M
   MappingRelation<Domain, Range> res;
   for (const auto& p : relations_) {
     if (!other.is_member(p)) {
-      res.add_to_domain(p.first);
-      res.add_to_range(p.second);
       res.add_element(p.first, p.second);
     }
   }
