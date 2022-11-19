@@ -1,71 +1,104 @@
-#include <bits/stdc++.h>
-
+#include <iostream>
 #include "Mapping.cpp"
 
 using namespace std;
 
-int main() {
-  Mapping<string, int> m1;
+int main()
+{
+	Mapping <string, double> marks;
 
-  cout << "after 1st add:" << endl;
-  m1.add_item("Mike", 35);
-  m1.add_item("Mike", 19);
-  m1.add_item("Mike", 60);
-  cout << m1 << endl;
-  cout << endl;
+	marks.add_item("Albert Wesker", 15.0);
+	marks.add_item("Albert Wesker", 20.0);
+	marks.add_item("Albert Wesker", 30.0);
 
-  cout << "after 2nd add:" << endl;
-  m1.add_item("Nadia", 17);
-  m1.add_item("Nadia", 80);
-  m1.add_item("Nadia", 15);
-  cout << m1 << endl;
-  cout << endl;
+	marks.add_item("Chris Redfield", 8.72);
+	marks.add_item("Chris Redfield", 16.5);
+	marks.add_item("Chris Redfield", 23.5);
+	marks.add_item("Chris Redfield", 32.75);
+	
 
-  cout << "after 1st remove (exist):" << endl;
-  m1.remove_item("Mike", 19);
-  cout << m1 << endl;
-  cout << endl;
+	//Testing find_item
+	set <double> sd = marks.find_item("Albert Wesker");
+	if (sd.size() == 3 && sd.find(15.0) != sd.end() && sd.find(20.0) != sd.end() && sd.find(30.0) != sd.end())  cout << "find_item - Test 1 - Passed." << endl;
+	else cout << "find_item - Test 1 - Failed!" << endl;
 
-  cout << "after 1st remove (not-exist):" << endl;
-  m1.remove_item("Mike", 19);
-  cout << m1 << endl;
-  cout << endl;
+	sd = marks.find_item("Jill Valentine");
+	if (sd.size() == 0) cout << "find_item - Test 2 - Passed." << endl;
+	else cout << "find_item - Test 2 - Failed!" << endl;
 
-  cout << "after 1st clear (exist):" << endl;
-  m1.clear_item("Nadia");
-  cout << m1 << endl;
-  cout << endl;
+	sd = marks.find_item("Chris Redfield");
+	if (sd.find(32.75) != sd.end() && sd.size() == 4) cout << "find_item - Test 3 - Passed." << endl;
+	else cout << "find_item - Test 3 - Failed!" << endl;
 
-  cout << "after 1st clear (not-exist):" << endl;
-  m1.clear_item("Nadia");
-  cout << m1 << endl;
-  cout << endl;
+	//Testing add_item
+	marks.add_item("Jill Valentine", 14.5);
+	sd = marks.find_item("Jill Valentine");
+	if (sd.find(14.5) != sd.end()) cout << "add_item - Test 1 - Passed." << endl;
+	else cout << "add_item - Test 1 - Failed!" << endl;
 
-  cout << "find_item(\"Mike\"):" << endl;
-  auto res = m1.find_item("Mike");
-  for (auto itr = res.begin(); itr != res.end(); ++itr) {
-    if (itr != res.begin()) cout << ", ";
-    cout << *itr;
-  }
-  cout << endl << endl;
+	marks.add_item("Chris Redfield", 8.72);
+	sd = marks.find_item("Chris Redfield");
+	if (sd.size() == 4) cout << "add_item - Test 2 - Passed." << endl;
+	else cout << "add_item - Test 2 - Failed!" << endl;
 
-  cout << "Copy m1 to m2:" << endl;
-  Mapping<string, int> m2(m1);
-  m2.add_item("Jack", 10);
-  cout << m2 << endl;
-  cout << endl;
+	//Testing remove_item
+	marks.remove_item("Albert Wesker", 30.0);
+	sd = marks.find_item("Albert Wesker");
+	if (sd.find(30.0) == sd.end() && sd.size() == 2) cout << "remove_iterm - Test 1 - Passed." << endl;
+	else cout << "remove_item - Test 1 - Failed!" << endl;
 
-  cout << "operator[\"Jack\"]" << endl;
-  auto res2 = m2["Jack"];
-  for (auto itr = res2.begin(); itr != res2.end(); ++itr) {
-    if (itr != res2.begin()) cout << ", ";
-    cout << *itr;
-  }
-  cout << endl << endl;
+	marks.remove_item("Chris Redfield", 9.51);
+	sd = marks.find_item("Chris Redfield");
+	if (sd.size() == 4) cout << "remove_item - Test 2 - Passed." << endl;
+	else cout << "remove_item - Test 2 - Failed!" << endl;
 
-  cout << "Assign m1 to m2:" << endl;
-  m2 = m1;
-  cout << m2 << endl;
+	//Testing clear_item
+	marks.clear_item("Jill Valentine");
+	sd = marks.find_item("Jill Valentine");
+	if (sd.size() == 0) cout << "clear_item - Test 1 - Passed." << endl;
+	else cout << "clear_item - Test 1 - Failed!" << endl;
 
-  return 0;
+	marks.clear_item("Albert Wesker");
+	sd = marks.find_item("Albert Wesker");
+	if (sd.size() == 0) cout << "clear_item - Test 2 - Passed." << endl;
+	else cout << "clear_item - Test 2 - Failed!" << endl;
+
+	marks.add_item("Albert Wesker", 15.0);
+	marks.add_item("Albert Wesker", 20.0);
+	marks.add_item("Albert Wesker", 30.0);
+
+	//Testing operator []
+	sd = marks["Albert Wesker"];
+	if (sd.size() == 3 && sd.find(15.0) != sd.end() && sd.find(20.0) != sd.end() && sd.find(30.0) != sd.end()) cout << "operator [] - Test 1 - Passed." << endl;
+	else cout << "operator [] - Test 1 - Failed!" << endl;
+
+	sd = marks["Leon Scott Kennedy"];
+	if (sd.size() == 0) cout << "operator [] - Test 2 - Passed." << endl;
+	else cout << "operator [] - Test 2 - Failed!" << endl;
+
+	//Testing operator =
+	Mapping <string, double> marks2 = marks;
+	sd = marks2["Albert Wesker"];
+	if (sd.size() == 3 && sd.find(15.0) != sd.end() && sd.find(20.0) != sd.end() && sd.find(30.0) != sd.end()) cout << "operator = - Test 1 - Passed." << endl;
+	else cout << "operator = - Test 1 - Failed!" << endl;
+
+	sd = marks2["Claire Redfield"];
+	if (sd.size() == 0) cout << "operator = - Test 2 - Passed." << endl;
+	else cout << "operator = - Test 2 - Failed!" << endl;
+
+	//Testing operator <<
+	marks2.clear_item("Albert Wesker");
+	marks.add_item("Jill Valentine", 14.85);
+	marks.add_item("Jill Valentine", 18.27);
+	Mapping <string, double> marks3;
+
+	cout << marks << endl;
+	cout << marks2 << endl;
+	cout << marks3 << endl;
+
+	//Should print
+	//[ Albert Wesker : { 15, 20, 30 }, Chris Redfield : { 8.72, 16.5, 23.5, 32.75 }, Jill Valentine : { 14.85, 18.27 } ]
+	//[ Chris Redfield : { 8.72, 16.5, 23.5, 32.75 } ]
+	//[  ]
+	return 0;
 }
