@@ -26,8 +26,6 @@ class MappingRelation {
 
   // methods
   size_t cardinality() const;
-  bool add_to_domain(const Domain& d);
-  bool add_to_range(const Range& r);
   bool add_element(const Domain& d, const Range& r);
   void remove_element(const Domain& d, const Range& r);
   bool is_member(const Domain& d, const Range& r) const;
