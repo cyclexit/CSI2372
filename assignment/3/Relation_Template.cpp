@@ -117,7 +117,7 @@ bool Relation<T>::is_function() const {
 
 template<typename T>
 Relation<T> Relation<T>::inverse() const {
-  Relation<T> res;
+  Relation<T> res(elems_);
   for (auto p : relations_) {
     res.add_element(p.second, p.first);
   }
@@ -126,7 +126,7 @@ Relation<T> Relation<T>::inverse() const {
 
 template<typename T>
 Relation<T> Relation<T>::combination(const Relation<T>& other) const {
-  Relation<T> res;
+  Relation<T> res(elems_);
   if (elems_ == other.elems_) {
     for (auto p1 : relations_) {
       for (auto p2 : other.relations_) {
