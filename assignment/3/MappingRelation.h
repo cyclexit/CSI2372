@@ -7,6 +7,7 @@
 #include <iostream>
 #include <set>
 #include <utility>
+#include <vector>
 
 template<typename Domain, typename Range>
 class MappingRelation;
@@ -24,6 +25,7 @@ class MappingRelation {
   ~MappingRelation() = default;
 
   // methods
+  size_t cardinality() const;
   bool add_to_domain(const Domain& d);
   bool add_to_range(const Range& r);
   bool add_element(const Domain& d, const Range& r);
@@ -38,7 +40,7 @@ class MappingRelation {
   bool operator==(const MappingRelation<Domain, Range>& other) const;
   MappingRelation<Domain, Range> operator+(const MappingRelation<Domain, Range>& other) const;
   MappingRelation<Domain, Range> operator-(const MappingRelation<Domain, Range>& other) const;
-  std::set<Range> operator[](Domain d) const;
+  std::vector<Range> operator[](Domain d) const;
   friend std::ostream& operator<< <> (std::ostream& out, const MappingRelation<Domain, Range>& mr);
 
  private:

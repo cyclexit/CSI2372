@@ -18,6 +18,11 @@ MappingRelation<Domain, Range>::MappingRelation(std::set<Domain> domain,
 }
 
 template<typename Domain, typename Range>
+size_t MappingRelation<Domain, Range>::cardinality() const {
+  return relations_.size();
+}
+
+template<typename Domain, typename Range>
 bool MappingRelation<Domain, Range>::add_to_domain(const Domain& d) {
   auto res = domain_.insert(d);
   return res.second;
@@ -126,11 +131,11 @@ MappingRelation<Domain, Range> MappingRelation<Domain, Range>::operator-(const M
 }
 
 template<typename Domain, typename Range>
-std::set<Range> MappingRelation<Domain, Range>::operator[](Domain d) const {
-  std::set<Range> res;
+std::vector<Range> MappingRelation<Domain, Range>::operator[](Domain d) const {
+  std::vector<Range> res;
   for (const auto& p : relations_) {
     if (p.first == d) {
-      res.insert(p.second);
+      res.push_back(p.second);
     }
   }
   return res;
