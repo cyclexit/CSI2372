@@ -59,7 +59,7 @@ template<typename Domain, typename Range>
 MappingRelation<Domain, Range> MappingRelation<Domain, Range>::intersection(const MappingRelation<Domain, Range>& other) const {
   MappingRelation<Domain, Range> res;
   for (const auto& p : relations_) {
-    if (other.is_member(p)) {
+    if (other.is_member(p.first, p.second)) {
       res.add_element(p.first, p.second);
     }
   }
@@ -79,7 +79,7 @@ MappingRelation<Range, Domain> MappingRelation<Domain, Range>::inverse() const {
 template<typename Domain, typename Range>
 bool MappingRelation<Domain, Range>::operator==(const MappingRelation<Domain, Range>& other) const {
   return (domain_ == other.domain_)
-         && (range_ = other.range_)
+         && (range_ == other.range_)
          && (relations_ == other.relations_);
 }
 
@@ -99,7 +99,7 @@ template<typename Domain, typename Range>
 MappingRelation<Domain, Range> MappingRelation<Domain, Range>::operator-(const MappingRelation<Domain, Range>& other) const {
   MappingRelation<Domain, Range> res;
   for (const auto& p : relations_) {
-    if (!other.is_member(p)) {
+    if (!other.is_member(p.first, p.second)) {
       res.add_element(p.first, p.second);
     }
   }
