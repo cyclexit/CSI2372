@@ -7,7 +7,7 @@ project("assignment3")
 # add_definitions(-DENABLE_DEBUG)
 
 add_executable(
-    "TestRelation"
+    "TestRelation_Template"
     "Relation_Template.cpp"
     "TestRelation_Template.cpp"
 )

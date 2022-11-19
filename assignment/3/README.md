@@ -18,8 +18,8 @@
     cd build
     make
     # run the test
-    ./TestRelation
+    ./TestRelation_Template
     ./TestMappingRelation
     ```
 
-The default binary names are `TestRelation` and `TestMappingRelation`. You can change it in `CMakeLists.txt` if you want.
+The default binary names are `TestRelation_Template` and `TestMappingRelation`. You can change it in `CMakeLists.txt` if you want.
