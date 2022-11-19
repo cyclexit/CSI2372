@@ -8,8 +8,8 @@ project("assignment3")
 
 add_executable(
     "TestRelation"
-    "Relation.cpp"
-    "TestRelation.cpp"
+    "Relation_Template.cpp"
+    "TestRelation_Template.cpp"
 )
 
 add_executable(

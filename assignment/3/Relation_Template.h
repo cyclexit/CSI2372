@@ -7,6 +7,7 @@
 #include <iostream>
 #include <set>
 #include <utility>
+#include <vector>
 
 template<typename T>
 class Relation;
@@ -26,9 +27,9 @@ class Relation {
   // methods
   size_t cardinality() const;
   bool add_to_set(const T& elem);
-  bool add_element(const std::pair<T, T>& r);
-  void remove_element(const std::pair<T, T>& r);
-  bool is_member(const std::pair<T, T>& r) const;
+  bool add_element(const T& a, const T& b);
+  void remove_element(const T& a, const T& b);
+  bool is_member(const T& a, const T& b) const;
   bool reflexive() const;
   bool irreflexive() const;
   bool symmetric() const;
@@ -40,7 +41,7 @@ class Relation {
 
   // operators
   bool operator==(const Relation<T>& other) const;
-  std::set<T> operator[](T key) const;
+  std::vector<T> operator[](T key) const;
   friend std::ostream& operator<< <> (std::ostream& out, const Relation<T>& rel);
 
  private:
