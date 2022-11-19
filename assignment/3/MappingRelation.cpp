@@ -77,6 +77,20 @@ MappingRelation<Range, Domain> MappingRelation<Domain, Range>::inverse() const {
 }
 
 template<typename Domain, typename Range>
+template<typename Range2>
+MappingRelation<Domain, Range2> MappingRelation<Domain, Range>::combination(const MappingRelation<Range, Range2>& other) const {
+  MappingRelation<Domain, Range2> res;
+  for (const auto& p1 : relations_) {
+    for (const auto& p2 : other.relations_) {
+      if (p1.second == p2.first) {
+        res.add_element(p1.first, p2.second);
+      }
+    }
+  }
+  return res;
+}
+
+template<typename Domain, typename Range>
 bool MappingRelation<Domain, Range>::operator==(const MappingRelation<Domain, Range>& other) const {
   return (domain_ == other.domain_)
          && (range_ == other.range_)

@@ -32,7 +32,8 @@ class MappingRelation {
   bool is_function() const;
   MappingRelation<Domain, Range> intersection(const MappingRelation<Domain, Range>& other) const;
   MappingRelation<Range, Domain> inverse() const; // bonus
-  MappingRelation<Domain, Range> combination(const MappingRelation<Domain, Range>& other) const; // bonus
+  template<typename Range2>
+  MappingRelation<Domain, Range2> combination(const MappingRelation<Range, Range2>& other) const; // bonus
 
   // operators
   bool operator==(const MappingRelation<Domain, Range>& other) const;
