@@ -235,5 +235,8 @@ int main()
 	nations-inverse = { (Argentina, Lionel Messi), (Brazil, Neymar), (Egypt, Mohamed Salah), (France, Antoine Griezmann), (Germany, Joshua Kimmich), (Germany, Thomas Muller), (Portugal, Christiano Ronaldo) }
 	ages = {  }
 	*/
+
+	cout << nations.combination(numbers) << endl;
+
 	return 0;
 }

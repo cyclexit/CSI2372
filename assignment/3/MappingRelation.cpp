@@ -81,10 +81,9 @@ template<typename Range2>
 MappingRelation<Domain, Range2> MappingRelation<Domain, Range>::combination(const MappingRelation<Range, Range2>& other) const {
   MappingRelation<Domain, Range2> res;
   for (const auto& p1 : relations_) {
-    for (const auto& p2 : other.relations_) {
-      if (p1.second == p2.first) {
-        res.add_element(p1.first, p2.second);
-      }
+    std::vector<Range2> tmp = other[p1.second];
+    for (const auto& second : tmp) {
+      res.add_element(p1.first, second);
     }
   }
   return res;
