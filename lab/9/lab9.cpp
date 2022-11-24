@@ -87,10 +87,17 @@ int main() {
   for (auto itr = payload_begin; itr != payload_end; ++itr, ++idx) {
     std::stringstream ss(*itr);
     // std::cout << ss.str() << std::endl;
-    ss.read((char *) &all_students[idx].student_id, sizeof(int));
-    std::cout << all_students[idx].student_id << std::endl;
-    ss.read((char *) &all_students[idx].labs_mark, sizeof(double));
-    std::cout << all_students[idx].labs_mark << std::endl;
+    ss.read((char *) &all_students[idx].student_id, sizeof(Student::student_id));
+    // std::cout << all_students[idx].student_id << std::endl;
+    ss.read((char *) &all_students[idx].labs_mark, sizeof(Student::labs_mark));
+    // std::cout << all_students[idx].labs_mark << std::endl;
+    for (int i = 0; i < Student::kTotalAssignments; ++i) {
+      ss.read((char *) &all_students[idx].assignment_marks[i], sizeof(decltype(Student::assignment_marks)::value_type));
+      // std::cout << "Assignmen " << i + 1 << ": " << all_students[idx].assignment_marks[i] << std::endl;
+    }
+    ss.read((char *) &all_students[idx].term_test_mark, sizeof(Student::term_test_mark));
+    ss.read((char *) &all_students[idx].midterm_mark, sizeof(Student::midterm_mark));
+    ss.read((char *) &all_students[idx].final_mark, sizeof(Student::final_mark));
   }
 
   // std::cout << all_students.size() << std::endl;
