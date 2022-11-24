@@ -175,16 +175,34 @@ int main() {
   std::ofstream fout;
   fout.open(kOutputFilePath, std::ios::binary);
   for (const auto& s : all_students) {
-    fout << s.first_name.size() << s.first_name
-         << s.last_name.size() << s.last_name
-         << s.student_id;
-    fout << s.labs_mark;
+    int len = s.first_name.size();
+    fout.write((char *) &len, sizeof(len));
+    fout.write(s.first_name.c_str(), s.first_name.size());
+    
+    len = s.last_name.size();
+    fout.write((char *) &len, sizeof(len));
+    fout.write(s.last_name.c_str(), s.last_name.size());
+    
+    fout.write((char *) &s.student_id, sizeof(s.student_id));
+
+    fout.write((char *) &s.labs_mark, sizeof(s.labs_mark));
+
+    double converted_assignment_mark = -1.0;
     for (int i = 0; i < Student::kTotalAssignments; ++i) {
-      std::cout << s.converted_assignment_mark(i) << std::endl; // debug
-      fout << s.converted_assignment_mark(i);
+      converted_assignment_mark = s.converted_assignment_mark(i);
+      fout.write((char *) &converted_assignment_mark, sizeof(converted_assignment_mark));
     }
-    fout << s.term_test_mark << s.midterm_mark << s.final_mark;
-    fout << s.total_mark() << s.letter_grade();
+
+    fout.write((char *) &s.term_test_mark, sizeof(s.term_test_mark));
+    fout.write((char *) &s.midterm_mark, sizeof(s.midterm_mark));
+    fout.write((char *) &s.final_mark, sizeof(s.final_mark));
+
+    double total_mark = s.total_mark();
+    fout.write((char *) &total_mark, sizeof(total_mark));
+
+    std::string letter_grade = s.letter_grade();
+    assert(letter_grade.size() == 2);
+    fout.write(letter_grade.c_str(), letter_grade.size());
   }
   fout.close();
 
