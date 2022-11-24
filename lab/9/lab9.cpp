@@ -11,7 +11,8 @@ static const std::string kOutputFilePath = "./CSI2372_Final.info";
 
 struct Student {
   static constexpr int kTotalAssignments = 5;
-  static constexpr double kAssignmentFullMark = 30.0;
+  static constexpr double kAssignmentOriginalFullMark = 30.0;
+  static constexpr double kAssignmentConvertedFullMark = 5.0;
 
   std::string first_name;
   std::string last_name;
@@ -37,7 +38,7 @@ struct Student {
     double res = 0.0;
     res += labs_mark;
     for (int i = 0; i < Student::kTotalAssignments; ++i) {
-      res += assignment_marks[i] / kAssignmentFullMark;
+      res += assignment_marks[i] / kAssignmentOriginalFullMark * kAssignmentConvertedFullMark;
     }
     res += term_test_mark;
     res += midterm_mark;
@@ -167,6 +168,20 @@ int main() {
   }
 
   // output to the output file
-
+  std::ofstream fout;
+  fout.open(kOutputFilePath, std::ios::binary);
+  for (const auto& s : all_students) {
+    fout << s.first_name.size() << s.first_name
+         << s.last_name.size() << s.last_name
+         << s.student_id;
+    fout << s.labs_mark;
+    for (auto a_mark : s.assignment_marks) {
+      std::cout << a_mark / Student::kAssignmentOriginalFullMark * Student::kAssignmentConvertedFullMark << std::endl; // debug
+      fout << a_mark / Student::kAssignmentOriginalFullMark * Student::kAssignmentConvertedFullMark;
+    }
+    fout << s.term_test_mark << s.midterm_mark << s.final_mark;
+    fout << s.total_mark() << s.letter_grade();
+  }
+  fout.close();
   return 0;
 }
