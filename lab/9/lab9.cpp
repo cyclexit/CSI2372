@@ -33,7 +33,7 @@ struct Student {
             + sizeof(decltype(final_mark));
   }
 
-  double total_mark() {
+  double total_mark() const {
     double res = 0.0;
     res += labs_mark;
     for (int i = 0; i < Student::kTotalAssignments; ++i) {
@@ -45,7 +45,7 @@ struct Student {
     return res;
   }
 
-  std::string letter_grade() {
+  std::string letter_grade() const {
     std::string res;
     double total = total_mark();
     if (total >= 90) {
@@ -78,13 +78,15 @@ struct Student {
   friend std::ostream& operator<<(std::ostream& out, const Student& s) {
     out << "first_name: " << s.first_name << std::endl;
     out << "last_name: " << s.last_name << std::endl;
-    out << "labs_mask: " << s.labs_mark << std::endl;
+    out << "labs_mark: " << s.labs_mark << std::endl;
     for (int i = 0; i < Student::kTotalAssignments; ++i) {
       out << "assignment " << i + 1 << ": " << s.assignment_marks[i] << std::endl;
     }
     out << "term_test_mark: " << s.term_test_mark << std::endl;
     out << "midterm_mark: " << s.midterm_mark << std::endl;
     out << "final_mark: " << s.final_mark << std::endl;
+    out << "total_mark: " << s.total_mark() << std::endl;
+    out << "letter_grade: " << s.letter_grade() << std::endl;
 
     return out;
   }
