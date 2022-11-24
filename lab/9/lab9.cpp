@@ -30,6 +30,20 @@ struct Student {
             + sizeof(decltype(term_test_mark)) + sizeof(decltype(midterm_mark))
             + sizeof(decltype(final_mark));
   }
+
+  friend std::ostream& operator<<(std::ostream& out, const Student& s) {
+    out << "first_name: " << s.first_name << std::endl;
+    out << "last_name: " << s.last_name << std::endl;
+    out << "labs_mask: " << s.labs_mark << std::endl;
+    for (int i = 0; i < Student::kTotalAssignments; ++i) {
+      out << "assignment " << i + 1 << ": " << s.assignment_marks[i] << std::endl;
+    }
+    out << "term_test_mark: " << s.term_test_mark << std::endl;
+    out << "midterm_mark: " << s.midterm_mark << std::endl;
+    out << "final_mark: " << s.final_mark << std::endl;
+
+    return out;
+  }
 };
 
 int main() {
@@ -100,27 +114,11 @@ int main() {
     ss.read((char *) &all_students[idx].final_mark, sizeof(Student::final_mark));
   }
 
-  // std::cout << all_students.size() << std::endl;
-  // for (auto s : all_students) {
-  //   std::cout << s.first_name << " " << s.last_name << std::endl;
-  // }
+  // print the reading results
+  std::cout << "Total students: " << all_students.size() << std::endl;
+  for (int i = 0; i < all_students.size(); ++i) {
+    std::cout << all_students[i] << std::endl;
+  }
 
-  // std::cout << Student::payload_byte_len() << std::endl;
-
-  // stringstream ss(data);
-  // std::cout << "Tokens: " << std::endl;
-  // int cnt = 0;
-  // while (getline(ss, data, ';')) {
-  //   std::cout << ++cnt << ": " << data << std::endl << "\tsize = " << data.size() << std::endl;
-  //   if (cnt == 3 || (cnt > 3 && cnt % 3 == 2)) {
-  //     stringstream tmp_ss(data);
-
-  //     int id;
-  //     tmp_ss.read((char *)&id, sizeof(decltype(id)));
-  //     std::cout << "\t" << "id = " << id << std::endl;
-
-  //     std::cout << std::endl;
-  //   }
-  // }
   return 0;
 }
