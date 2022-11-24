@@ -1,3 +1,4 @@
+#include <cassert>
 #include <fstream>
 #include <iostream>
 #include <regex>
@@ -10,6 +11,7 @@ static const std::string kOutputFilePath = "./CSI2372_Final.info";
 
 struct Student {
   static constexpr int kTotalAssignments = 5;
+  static constexpr double kAssignmentFullMark = 30.0;
 
   std::string first_name;
   std::string last_name;
@@ -29,6 +31,48 @@ struct Student {
             + sizeof(decltype(assignment_marks)::value_type) * kTotalAssignments
             + sizeof(decltype(term_test_mark)) + sizeof(decltype(midterm_mark))
             + sizeof(decltype(final_mark));
+  }
+
+  double total_mark() {
+    double res = 0.0;
+    res += labs_mark;
+    for (int i = 0; i < Student::kTotalAssignments; ++i) {
+      res += assignment_marks[i] / kAssignmentFullMark;
+    }
+    res += term_test_mark;
+    res += midterm_mark;
+    res += final_mark;
+    return res;
+  }
+
+  std::string letter_grade() {
+    std::string res;
+    double total = total_mark();
+    if (total >= 90) {
+      res = "A+";
+    } else if (85 <= total && total < 90) {
+      res = "A ";
+    } else if (80 <= total && total < 85) {
+      res = "A-";
+    } else if (75 <= total && total < 80) {
+      res = "B+";
+    } else if (70 <= total && total < 75) {
+      res = "B ";
+    } else if (65 <= total && total < 70) {
+      res = "C+";
+    } else if (60 <= total && total < 65) {
+      res = "C ";
+    } else if (55 <= total && total < 60) {
+      res = "D+";
+    } else if (50 <= total && total < 55) {
+      res = "D ";
+    } else if (40 <= total && total < 50) {
+      res = "E ";
+    } else {
+      res = "F ";
+    }
+    assert(res.size() == 2);
+    return res;
   }
 
   friend std::ostream& operator<<(std::ostream& out, const Student& s) {
@@ -119,6 +163,8 @@ int main() {
   for (int i = 0; i < all_students.size(); ++i) {
     std::cout << all_students[i] << std::endl;
   }
+
+  // output to the output file
 
   return 0;
 }
