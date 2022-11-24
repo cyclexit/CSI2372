@@ -34,11 +34,15 @@ struct Student {
             + sizeof(decltype(final_mark));
   }
 
+  double converted_assignment_mark(int idx) const {
+    return assignment_marks[idx] / kAssignmentOriginalFullMark * kAssignmentConvertedFullMark;
+  }
+
   double total_mark() const {
     double res = 0.0;
     res += labs_mark;
     for (int i = 0; i < Student::kTotalAssignments; ++i) {
-      res += assignment_marks[i] / kAssignmentOriginalFullMark * kAssignmentConvertedFullMark;
+      res += converted_assignment_mark(i);
     }
     res += term_test_mark;
     res += midterm_mark;
@@ -175,13 +179,14 @@ int main() {
          << s.last_name.size() << s.last_name
          << s.student_id;
     fout << s.labs_mark;
-    for (auto a_mark : s.assignment_marks) {
-      std::cout << a_mark / Student::kAssignmentOriginalFullMark * Student::kAssignmentConvertedFullMark << std::endl; // debug
-      fout << a_mark / Student::kAssignmentOriginalFullMark * Student::kAssignmentConvertedFullMark;
+    for (int i = 0; i < Student::kTotalAssignments; ++i) {
+      std::cout << s.converted_assignment_mark(i) << std::endl; // debug
+      fout << s.converted_assignment_mark(i);
     }
     fout << s.term_test_mark << s.midterm_mark << s.final_mark;
     fout << s.total_mark() << s.letter_grade();
   }
   fout.close();
+
   return 0;
 }
