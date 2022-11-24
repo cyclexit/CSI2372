@@ -6,14 +6,7 @@
 
 ## Compile and Run
 
-* Require Linux system.
-* Require [cmake](https://cmake.org).
-
 ```bash
-mkdir build
-cmake -S . -B ./build
-cd build
-make
-# run the test
-./TestMapping
+g++ ./lab9.cpp -o lab9
+./lab9
 ```
