@@ -47,22 +47,15 @@ int main() {
   fin.close();
 
   // decode the data
-  std::regex names_pattern("\\w+;\\w+");
+  std::vector<Student> all_students;
+  // get first name and last name
+  std::regex names_pattern("\\w+;\\w+;");
   std::sregex_iterator names_begin(
     data.begin(),
     data.end(),
     names_pattern
   );
   std::sregex_iterator names_end;
-  std::sregex_token_iterator payload_begin(
-    data.begin(),
-    data.end(),
-    names_pattern,
-    -1
-  );
-  std::sregex_token_iterator payload_end;
-
-  std::vector<Student> all_students;
   for (auto itr = names_begin; itr != names_end; ++itr) {
     std::smatch names_match = *itr;
     std::stringstream ss(names_match.str());
@@ -81,10 +74,29 @@ int main() {
 
     all_students.push_back(cur);
   }
-  std::cout << all_students.size() << std::endl;
-  for (auto s : all_students) {
-    std::cout << s.first_name << " " << s.last_name << std::endl;
+  // get payload part
+  std::sregex_token_iterator payload_begin(
+    data.begin(),
+    data.end(),
+    names_pattern,
+    -1
+  );
+  ++payload_begin; // skip the empty token
+  std::sregex_token_iterator payload_end;
+  int idx = 0;
+  for (auto itr = payload_begin; itr != payload_end; ++itr, ++idx) {
+    std::stringstream ss(*itr);
+    // std::cout << ss.str() << std::endl;
+    ss.read((char *) &all_students[idx].student_id, sizeof(int));
+    std::cout << all_students[idx].student_id << std::endl;
+    ss.read((char *) &all_students[idx].labs_mark, sizeof(double));
+    std::cout << all_students[idx].labs_mark << std::endl;
   }
+
+  // std::cout << all_students.size() << std::endl;
+  // for (auto s : all_students) {
+  //   std::cout << s.first_name << " " << s.last_name << std::endl;
+  // }
 
   // std::cout << Student::payload_byte_len() << std::endl;
 
