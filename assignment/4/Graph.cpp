@@ -34,14 +34,15 @@ void Graph::remove_edge(int u, int v) {
   if (vu_itr != edges_[v].end()) edges_[v].erase(vu_itr);
 }
 
-// bool Graph::edge_exist(int u, int v) const {
-//   if (!is_node_valid(u) || !is_node_valid(v)) {
-//     printf("Error: Node %d and/or %d not exist.\n", u, v);
-//     return false;
-//   }
-//   // NOTE: assume only check the edge from u to v
-//   return edges_[u].find(v);
-// }
+bool Graph::edge_exist(int u, int v) const {
+  if (!is_node_valid(u) || !is_node_valid(v)) {
+    printf("Error: Node %d and/or %d not exist.\n", u, v);
+    return false;
+  }
+  auto uv_itr = std::find(edges_[u].begin(), edges_[u].end(), v);
+  auto vu_itr = std::find(edges_[v].begin(), edges_[v].end(), u);
+  return (uv_itr != edges_[u].end()) && (vu_itr != edges_[v].end());
+}
 
 int Graph::get_degree(int u) const {
   return edges_[u].size();
