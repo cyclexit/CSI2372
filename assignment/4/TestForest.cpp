@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 #include "Forest.h"
 
@@ -59,18 +59,18 @@ int main() {
   f1--;
   cout << f1 << endl;
 
-  Graph f2(4);
+  Forest f2(4);
   f2.add_edge(1, 2);
   f2.add_edge(1, 3);
   f2.add_edge(4, 2);
-  f2.add_edge(4, 3);
+  assert(f2.add_edge(4, 3) == false); // NOTE: should print an error message
 
   cout << "\nf2 looks like:" << endl;
   cout << f2 << endl;
   cout << "f2.DFS(1): " << f2.DFS(1) << endl;
   cout << "f2.BFS(4): " << f2.BFS(4) << endl;
 
-  Graph f3(7); // binary tree
+  Forest f3(7); // binary tree
   f3.add_edge(1, 2);
   f3.add_edge(1, 3);
   f3.add_edge(2, 4);

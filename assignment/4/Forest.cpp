@@ -1,5 +1,17 @@
 #include "Forest.h"
 
+Forest::Forest() {
+  edges_.resize(kDefaultNodeCount + 1);
+}
+
+Forest::Forest(int node_count) {
+  edges_.resize(node_count + 1);
+}
+
+Forest::Forest(const Forest& other) {
+  edges_ = other.edges_;
+}
+
 bool Forest::add_edge(int u, int v) {
   if (!is_node_valid(u) || !is_node_valid(v)) {
     printf("Error: Node %d and/or %d not exist.\n", u, v);

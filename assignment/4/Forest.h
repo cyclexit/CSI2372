@@ -5,6 +5,12 @@
 
 class Forest : public Graph {
  public:
+  // ctors and dtors
+  Forest();
+  Forest(int node_count);
+  Forest(const Forest& other);
+  ~Forest() = default;
+
   // methods
   bool add_edge(int u, int v) override;
 };
