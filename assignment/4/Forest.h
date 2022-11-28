@@ -1,0 +1,6 @@
+#ifndef CSI2372_ASSIGNMENT_4_FOREST_H_
+#define CSI2372_ASSIGNMENT_4_FOREST_H_
+
+#include "Graph.h"
+
+#endif // CSI2372_ASSIGNMENT_4_FOREST_H_
