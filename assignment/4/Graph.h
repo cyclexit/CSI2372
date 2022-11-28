@@ -11,22 +11,22 @@ class Graph {
   Graph();
   Graph(int node_count);
   Graph(const Graph& other);
-  ~Graph() = default;
+  virtual ~Graph() = default;
 
   // methods
-  bool add_edge(int u, int v);
-  void remove_edge(int u, int v);
-  bool edge_exist(int u, int v) const;
-  int get_degree(int u) const;
-  bool path_exist(int u, int v) const;
-  std::vector<int> BFS(int start) const;
-  std::vector<int> DFS(int start) const;
+  virtual bool add_edge(int u, int v);
+  virtual void remove_edge(int u, int v);
+  virtual bool edge_exist(int u, int v) const;
+  virtual int get_degree(int u) const;
+  virtual bool path_exist(int u, int v) const;
+  virtual std::vector<int> BFS(int start) const;
+  virtual std::vector<int> DFS(int start) const;
 
   // operators
-  Graph& operator++();
-  Graph operator++(int);
-  Graph& operator--();
-  Graph operator--(int);
+  virtual Graph& operator++();
+  virtual Graph operator++(int);
+  virtual Graph& operator--();
+  virtual Graph operator--(int);
   friend std::ostream& operator<<(std::ostream& out, const Graph& graph);
 
  private:
