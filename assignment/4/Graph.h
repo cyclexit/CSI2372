@@ -10,7 +10,7 @@ class Graph {
   Graph();
   Graph(int node_count);
   Graph(const Graph& other);
-  ~Graph();
+  ~Graph() = default;
 
   // methods
   bool add_edge(int u, int v);
@@ -33,7 +33,7 @@ class Graph {
   static constexpr int kDefaultNodeCount = 1;
 
   // data
-  std::vector<int> edges_; // size: node_count_ + 1; 0 is unused
+  std::vector<int> edges_; // 0 is unused
 };
 
 #endif // CSI2372_ASSIGNMENT_4_GRAPH_H_
