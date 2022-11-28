@@ -165,7 +165,7 @@ std::ostream& operator<<(std::ostream& out, const Graph& graph) {
       out << "None" << std::endl;
     }
   }
-  out << "}" << std::endl;
+  out << "}";
 
   return out;
 }

@@ -76,6 +76,7 @@ int main() {
   g2.add_edge(4, 2);
   g2.add_edge(4, 3);
 
+  cout << "\ng2 looks like:" << endl;
   cout << g2 << endl;
   cout << "g2.DFS(1): " << g2.DFS(1) << endl;
   cout << "g2.BFS(4): " << g2.BFS(4) << endl;
@@ -88,6 +89,7 @@ int main() {
   g3.add_edge(3, 6);
   g3.add_edge(3, 7);
 
+  cout << "\ng3 looks like:" << endl;
   cout << g3 << endl;
   cout << "g3.DFS(1): " << g3.DFS(1) << endl;
   cout << "g3.BFS(1): " << g3.BFS(1) << endl;
