@@ -7,13 +7,13 @@ project("assignment4")
 # add_definitions(-DENABLE_DEBUG)
 
 add_executable(
-    "TestRelation_Template"
-    "Relation_Template.cpp"
-    "TestRelation_Template.cpp"
+    "TestGraph"
+    "Graph.cpp"
+    "TestGraph.cpp"
 )
 
-add_executable(
-    "TestMappingRelation"
-    "MappingRelation.cpp"
-    "TestMappingRelation.cpp"
-)
+# add_executable(
+#     "TestMappingRelation"
+#     "MappingRelation.cpp"
+#     "TestMappingRelation.cpp"
+# )

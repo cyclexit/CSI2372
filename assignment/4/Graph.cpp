@@ -136,7 +136,7 @@ Graph& Graph::operator--() {
   return *this;
 }
 
-Graph Graph::operator++(int) {
+Graph Graph::operator--(int) {
   Graph old(*this);
   operator--();
   return old;
@@ -153,11 +153,11 @@ std::ostream& operator<<(std::ostream& out, const Graph& graph) {
 
   // edges
   out << "E =" << std::endl << "{" << std::endl;
-  for (int i = 1; i <= graph.edges_.size(); ++i) {
+  for (int i = 1; i < graph.edges_.size(); ++i) {
     out << "  " << i << " => ";
     if (graph.edges_[i].size() > 0) {
       for (int j = 0; j < graph.edges_[i].size(); ++j) {
-        if (i > 0) out << ", ";
+        if (j > 0) out << ", ";
         out << graph.edges_[i][j];
       }
       out << std::endl;
