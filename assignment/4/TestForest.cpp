@@ -53,7 +53,7 @@ int main() {
   }
 
   // add 2->1
-  f1.add_edge(2, 1); // NOTE: should see an error message
+  f1.add_edge(2, 1);
 
   cout << f1 << endl;
   f1--;
@@ -65,7 +65,7 @@ int main() {
   f2.add_edge(4, 2);
   f2.add_edge(4, 3);
 
-  cout << "\ng2 looks like:" << endl;
+  cout << "\nf2 looks like:" << endl;
   cout << f2 << endl;
   cout << "f2.DFS(1): " << f2.DFS(1) << endl;
   cout << "f2.BFS(4): " << f2.BFS(4) << endl;
@@ -78,7 +78,7 @@ int main() {
   f3.add_edge(3, 6);
   f3.add_edge(3, 7);
 
-  cout << "\ng3 looks like:" << endl;
+  cout << "\nf3 looks like:" << endl;
   cout << f3 << endl;
   cout << "f3.DFS(1): " << f3.DFS(1) << endl;
   cout << "f3.BFS(1): " << f3.BFS(1) << endl;
