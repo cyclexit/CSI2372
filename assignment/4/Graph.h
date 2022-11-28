@@ -40,6 +40,20 @@ class Graph {
   bool is_node_valid(int node) const {
     return (1 <= node) && (node <= edges_.size() - 1);
   }
+
+  void remove_all_edges(int u, int v) {
+    auto itr = std::find(edges_[u].begin(), edges_[u].end(), v);
+    while (itr != edges_[u].end()) {
+      edges_[u].erase(itr);
+      itr = std::find(edges_[u].begin(), edges_[u].end(), v);
+    }
+
+    itr = std::find(edges_[v].begin(), edges_[v].end(), u);
+    while (itr != edges_[v].end()) {
+      edges_[v].erase(itr);
+      itr = std::find(edges_[v].begin(), edges_[v].end(), u);
+    }
+  }
 };
 
 #endif // CSI2372_ASSIGNMENT_4_GRAPH_H_

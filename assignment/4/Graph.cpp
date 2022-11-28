@@ -26,6 +26,7 @@ bool Graph::add_edge(int u, int v) {
   return true;
 }
 
+// NOTE: just remove one edge between u and v
 void Graph::remove_edge(int u, int v) {
   if (!is_node_valid(u) || !is_node_valid(v)) return;
 
@@ -113,4 +114,30 @@ std::vector<int> Graph::DFS(int start) const {
   };
   dfs(start);
   return res;
+}
+
+Graph& Graph::operator++() {
+  edges_.push_back({});
+  return *this;
+}
+
+Graph Graph::operator++(int) {
+  Graph old(*this);
+  operator++();
+  return old;
+}
+
+Graph& Graph::operator--() {
+  int last = edges_.size() - 1;
+  for (int i = 1 ; i < last; ++i) {
+    remove_all_edges(i, last);
+  }
+  edges_.pop_back();
+  return *this;
+}
+
+Graph Graph::operator++(int) {
+  Graph old(*this);
+  operator--();
+  return old;
 }
