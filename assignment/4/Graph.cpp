@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <functional>
 #include <queue>
 
 #include "Graph.h"
@@ -74,6 +75,10 @@ bool Graph::path_exist(int u, int v) const {
 }
 
 std::vector<int> Graph::BFS(int start) const {
+  if (!is_node_valid(start)) {
+    printf("Error: Start node %d not exist.\n", start);
+    return {};
+  }
   std::vector<int> res;
   std::vector<bool> visited(edges_.size(), false);
   std::queue<int> q;
@@ -90,5 +95,21 @@ std::vector<int> Graph::BFS(int start) const {
   return res;
 }
 std::vector<int> Graph::DFS(int start) const {
-
+  if (!is_node_valid(start)) {
+    printf("Error: Start node %d not exist.\n", start);
+    return {};
+  }
+  std::vector<int> res;
+  std::vector<bool> visited(edges_.size(), false);
+  std::function<void(int)> dfs = [&](int cur) {
+    visited[cur] = true;
+    res.push_back(cur);
+    for (int i = 0; i < edges_[cur].size(); ++i) {
+      if (!visited[edges_[cur][i]]) {
+        dfs(edges_[cur][i]);
+      }
+    }
+  };
+  dfs(start);
+  return res;
 }
