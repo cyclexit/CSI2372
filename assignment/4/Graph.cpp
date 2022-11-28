@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <queue>
 
 #include "Graph.h"
 
@@ -46,4 +47,32 @@ bool Graph::edge_exist(int u, int v) const {
 
 int Graph::get_degree(int u) const {
   return edges_[u].size();
+}
+
+bool Graph::path_exist(int u, int v) const {
+  if (!is_node_valid(u) || !is_node_valid(v)) {
+    printf("Error: Node %d and/or %d not exist.\n", u, v);
+    return false;
+  }
+
+  std::vector<bool> visited(edges_.size(), false);
+  for (int i = 0; i <= edges_.size(); ++i) {
+    visited[i] = false;
+  }
+
+  // BFS
+  std::queue<int> q;
+  q.push(u);
+  while (q.size() > 0) {
+    int cur = q.front();
+    q.pop();
+    visited[cur] = true;
+    for (int i = 0; i < edges_[cur].size(); ++i) {
+      if (edges_[cur][i] == v) {
+        return true;
+      }
+      if (!visited[edges_[cur][i]]) q.push(edges_[cur][i]);
+    }
+  }
+  return false;
 }
