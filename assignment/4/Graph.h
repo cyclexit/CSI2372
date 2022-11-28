@@ -19,8 +19,8 @@ class Graph {
   bool edge_exist(int u, int v) const;
   int get_degree(int u) const;
   bool path_exist(int u, int v) const;
-  std::vector<int> BFS(int start);
-  std::vector<int> DFS(int start);
+  std::vector<int> BFS(int start) const;
+  std::vector<int> DFS(int start) const;
 
   // operators
   Graph& operator++();

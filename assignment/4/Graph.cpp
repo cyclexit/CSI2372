@@ -55,12 +55,8 @@ bool Graph::path_exist(int u, int v) const {
     return false;
   }
 
-  std::vector<bool> visited(edges_.size(), false);
-  for (int i = 0; i <= edges_.size(); ++i) {
-    visited[i] = false;
-  }
-
   // BFS
+  std::vector<bool> visited(edges_.size(), false);
   std::queue<int> q;
   q.push(u);
   while (q.size() > 0) {
@@ -75,4 +71,24 @@ bool Graph::path_exist(int u, int v) const {
     }
   }
   return false;
+}
+
+std::vector<int> Graph::BFS(int start) const {
+  std::vector<int> res;
+  std::vector<bool> visited(edges_.size(), false);
+  std::queue<int> q;
+  q.push(start);
+  while (q.size() > 0) {
+    int cur = q.front();
+    q.pop();
+    res.push_back(cur);
+    visited[cur] = true;
+    for (int i = 0; i < edges_[cur].size(); ++i) {
+      if (!visited[edges_[cur][i]]) q.push(edges_[cur][i]);
+    }
+  }
+  return res;
+}
+std::vector<int> Graph::DFS(int start) const {
+
 }
