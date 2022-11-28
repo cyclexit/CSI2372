@@ -24,10 +24,15 @@ bool Graph::add_edge(int u, int v) {
   return true;
 }
 
-// void Graph::remove_edge(int u, int v) {
-//   if (!is_node_valid(u) || !is_node_valid(v)) return;
-//   edges_[u].remove_item(v);
-// }
+void Graph::remove_edge(int u, int v) {
+  if (!is_node_valid(u) || !is_node_valid(v)) return;
+
+  auto uv_itr = std::find(edges_[u].begin(), edges_[u].end(), v);
+  if (uv_itr != edges_[u].end()) edges_[u].erase(uv_itr);
+
+  auto vu_itr = std::find(edges_[v].begin(), edges_[v].end(), u);
+  if (vu_itr != edges_[v].end()) edges_[v].erase(vu_itr);
+}
 
 // bool Graph::edge_exist(int u, int v) const {
 //   if (!is_node_valid(u) || !is_node_valid(v)) {
