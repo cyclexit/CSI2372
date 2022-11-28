@@ -1,6 +1,7 @@
 #ifndef CSI2372_ASSIGNMENT_4_GRAPH_H_
 #define CSI2372_ASSIGNMENT_4_GRAPH_H_
 
+#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -36,7 +37,7 @@ class Graph {
   std::vector<std::vector<int>> edges_; // 0 is unused
 
   // methods
-  bool is_node_valid(int node) {
+  bool is_node_valid(int node) const {
     return (1 <= node) && (node <= edges_.size() - 1);
   }
 };
