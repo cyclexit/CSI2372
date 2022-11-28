@@ -12,8 +12,9 @@ add_executable(
     "TestGraph.cpp"
 )
 
-# add_executable(
-#     "TestMappingRelation"
-#     "MappingRelation.cpp"
-#     "TestMappingRelation.cpp"
-# )
+add_executable(
+    "TestForest"
+    "Graph.cpp"
+    "Forest.cpp"
+    "TestForest.cpp"
+)

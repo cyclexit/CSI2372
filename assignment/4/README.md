@@ -19,6 +19,7 @@
     make
     # run the test
     ./TestGraph
+    ./TestForest
     ```
 
-The default binary names are `TestGraph`. You can change it in `CMakeLists.txt` if you want.
+The default binary names are `TestGraph` and `TestForest`. You can change it in `CMakeLists.txt` if you want.
