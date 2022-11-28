@@ -33,7 +33,12 @@ class Graph {
   static constexpr int kDefaultNodeCount = 1;
 
   // data
-  std::vector<int> edges_; // 0 is unused
+  std::vector<std::vector<int>> edges_; // 0 is unused
+
+  // methods
+  bool is_node_valid(int node) {
+    return (1 <= node) && (node <= edges_.size() - 1);
+  }
 };
 
 #endif // CSI2372_ASSIGNMENT_4_GRAPH_H_
