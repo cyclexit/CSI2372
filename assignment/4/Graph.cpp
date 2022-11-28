@@ -94,6 +94,7 @@ std::vector<int> Graph::BFS(int start) const {
   }
   return res;
 }
+
 std::vector<int> Graph::DFS(int start) const {
   if (!is_node_valid(start)) {
     printf("Error: Start node %d not exist.\n", start);
