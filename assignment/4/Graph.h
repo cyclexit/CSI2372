@@ -29,7 +29,7 @@ class Graph {
   virtual Graph operator--(int);
   friend std::ostream& operator<<(std::ostream& out, const Graph& graph);
 
- private:
+ protected:
   // constants
   static constexpr int kDefaultNodeCount = 1;
 
