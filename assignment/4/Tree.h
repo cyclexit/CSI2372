@@ -1,3 +1,6 @@
+// Hongyi Lin 300053082
+// Stacy Guo 300157080
+
 #ifndef CSI2372_ASSIGNMENT_4_TREE_H_
 #define CSI2372_ASSIGNMENT_4_TREE_H_
 
