@@ -1,3 +1,5 @@
+#include <functional>
+
 #include "Tree.h"
 
 Tree::Tree() {
@@ -48,7 +50,7 @@ std::ostream& operator<<(std::ostream& out, const Tree& t) {
       out << cur << std::endl;
     } else {
       for (int i = 1; i < depth; ++i) {
-        out << "\t";
+        out << "   ";
       }
       out << "---" << cur << std::endl;
     }

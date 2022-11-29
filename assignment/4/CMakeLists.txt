@@ -18,3 +18,11 @@ add_executable(
     "Forest.cpp"
     "TestForest.cpp"
 )
+
+add_executable(
+    "TestTree"
+    "Graph.cpp"
+    "Forest.cpp"
+    "Tree.cpp"
+    "TestTree.cpp"
+)
