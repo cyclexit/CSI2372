@@ -39,3 +39,25 @@ Graph Tree::operator--(int) {
   operator--();
   return old;
 }
+
+std::ostream& operator<<(std::ostream& out, const Tree& t) {
+  std::vector<bool> visited(t.edges_.size(), false);
+  std::function<void(int, int)> dfs = [&](int cur, int depth) {
+    visited[cur] = true;
+    if (depth == 0) {
+      out << cur << std::endl;
+    } else {
+      for (int i = 1; i < depth; ++i) {
+        out << "\t";
+      }
+      out << "---" << cur << std::endl;
+    }
+    for (int i = 0; i < t.edges_[cur].size(); ++i) {
+      if (!visited[t.edges_[cur][i]]) {
+        dfs(t.edges_[cur][i], depth + 1);
+      }
+    }
+  };
+  dfs(t.root, 0);
+  return out;
+}

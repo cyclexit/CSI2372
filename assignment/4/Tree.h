@@ -16,7 +16,7 @@ class Tree : public Forest {
   Graph operator++(int) override;
   Graph& operator--() override;
   Graph operator--(int) override;
-  friend std::ostream& operator<<(std::ostream& out, const Tree& tree);
+  friend std::ostream& operator<<(std::ostream& out, const Tree& t);
 
  protected:
   int root;
