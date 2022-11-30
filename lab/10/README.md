@@ -1,4 +1,4 @@
-# CSI2372 Lab 8
+# CSI2372 Lab 10
 
 ## Student Info
 * Name: Hongyi Lin
