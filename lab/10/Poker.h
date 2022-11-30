@@ -1,10 +1,69 @@
 #ifndef LAB_10_POKER_H_
 #define LAB_10_POKER_H_
 
+#include <algorithm>
+#include <cassert>
+#include <iostream>
+#include <string>
 #include <vector>
 
-class Poker {
+static const std::vector<std::string> kPokerCardRanks {
+  "A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"
+};
 
+static const std::vector<std::string> kPokerCardSuits {
+  "D", "C", "S", "H"
+};
+
+struct PokerCard {
+  // [A, 2, 3, 4, 5, 6, 7, 8, 9, T, J, Q, K]
+  std::string rank;
+  // D for diamonds, C for clubs, S for spades, or H for hearts
+  std::string suit;
+
+  PokerCard(const std::string& r, const std::string& s) : rank(r), suit(s) {}
+
+  std::string to_string() const {
+    return rank + suit;
+  }
+
+  friend std::ostream& operator<<(std::ostream& out, const PokerCard& card) {
+    out << card.to_string();
+    return out;
+  }
+};
+
+class Poker {
+ public:
+  Poker();
+  Poker(int total_players);
+
+  bool add_card(int player_id);
+  bool add_to_table();
+
+ private:
+  static constexpr int kDefaultTotalPlayers = 2;
+
+  std::vector<std::vector<PokerCard>> players_;
+  std::vector<PokerCard> table_;
+  std::vector<PokerCard> deck_;
+
+  bool is_player_id_valid(int player_id) {
+    return 0 <= player_id && player_id <= players_.size();
+  }
+
+  void init_deck() {
+    for (const auto& rank : kPokerCardRanks) {
+      for (const auto& suit : kPokerCardSuits) {
+        deck_.push_back(PokerCard(rank, suit));
+      }
+    }
+    assert(deck_.size() == kPokerCardRanks.size() * kPokerCardSuits.size());
+  }
+
+  void shuffle_deck() {
+    std::random_shuffle(deck_.begin(), deck_.end());
+  }
 };
 
 #endif // LAB_10_POKER_H_
