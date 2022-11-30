@@ -41,6 +41,15 @@ class Poker {
   bool add_card(int player_id);
   bool add_to_table();
 
+  static bool IsStraightFlush(const std::vector<Poker>& hand);
+  static bool IsFourofaKind(const std::vector<Poker>& hand);
+  static bool IsFullHouse(const std::vector<Poker>& hand);
+  static bool IsFlush(const std::vector<Poker>& hand);
+  static bool IsStraight(const std::vector<Poker>& hand);
+  static bool IsThreeofaKind(const std::vector<Poker>& hand);
+  static bool IsTwoPairs(const std::vector<Poker>& hand);
+  static bool IsOnePair(const std::vector<Poker>& hand);
+
  private:
   static constexpr int kDefaultTotalPlayers = 2;
 
