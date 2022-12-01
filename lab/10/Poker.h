@@ -73,6 +73,7 @@ class Poker {
   static bool IsThreeofaKind(const std::vector<PokerCard>& hand);
   static bool IsTwoPairs(const std::vector<PokerCard>& hand);
   static bool IsOnePair(const std::vector<PokerCard>& hand);
+  static bool IsHighCard(const std::vector<PokerCard>& hand) {return true;}
 
  protected:
   static constexpr int kDefaultTotalPlayers = 2;

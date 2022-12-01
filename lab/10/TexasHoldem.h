@@ -43,6 +43,7 @@ class TexasHoldem : public Poker {
     {IsThreeofaKind, "ThreeofaKind"},
     {IsTwoPairs, "TwoPairs"},
     {IsOnePair, "OnePair"},
+    {IsHighCard, "HighCard"}
   };
 };
 
