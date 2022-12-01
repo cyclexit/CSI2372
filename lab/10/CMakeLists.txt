@@ -11,3 +11,10 @@ add_executable(
     "Poker.cpp"
     "TestPoker.cpp"
 )
+
+add_executable(
+    "TestTexasHoldem"
+    "Poker.cpp"
+    "TexasHoldem.cpp"
+    "TestTexasHoldem.cpp"
+)

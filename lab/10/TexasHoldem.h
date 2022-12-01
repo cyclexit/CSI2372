@@ -21,7 +21,7 @@ class TexasHoldem : public Poker {
       out << texas.table_[i];
     }
     for (int i = 0; i < texas.players_.size(); ++i) {
-      out << "Player " << i << ":" << std::endl;
+      out << "\nPlayer " << i << ":" << std::endl;
       for (const auto& card : texas.players_[i]) {
         if (card != *texas.players_[i].begin()) out << ", ";
         out << card;
