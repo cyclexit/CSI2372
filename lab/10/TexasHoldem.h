@@ -5,6 +5,9 @@
 
 class TexasHoldem : public Poker {
  public:
+  static constexpr int kTableSize = 5;
+  static constexpr int kPlayHandSize = 2;
+
   TexasHoldem();
   TexasHoldem(int total_players);
 

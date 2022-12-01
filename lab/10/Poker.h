@@ -35,6 +35,7 @@ struct PokerCard {
   // D for diamonds, C for clubs, S for spades, or H for hearts
   std::string suit;
 
+  PokerCard() = default;
   PokerCard(const std::string& r, const std::string& s) : rank(r), suit(s) {}
 
   std::string to_string() const {
