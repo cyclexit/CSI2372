@@ -1,16 +1,8 @@
 #include "TexasHoldem.h"
 
-TexasHoldem::TexasHoldem() {
-  players_.resize(kDefaultTotalPlayers);
-  init_deck();
-  shuffle_deck();
-}
+TexasHoldem::TexasHoldem() : Poker() {}
 
-TexasHoldem::TexasHoldem(int total_players) {
-  players_.resize(total_players);
-  init_deck();
-  shuffle_deck();
-}
+TexasHoldem::TexasHoldem(int total_players) : Poker(total_players) {}
 
 void TexasHoldem::deal() {
   // give 2 cards to each player

@@ -46,6 +46,10 @@ struct PokerCard {
     return rank == other.rank && suit == other.suit;
   }
 
+  bool operator!=(const PokerCard& other) const {
+    return !operator==(other);
+  }
+
   friend std::ostream& operator<<(std::ostream& out, const PokerCard& card) {
     out << card.to_string();
     return out;

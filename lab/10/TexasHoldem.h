@@ -13,6 +13,22 @@ class TexasHoldem : public Poker {
 
   void deal();
   std::vector<std::string> hands();
+
+  friend std::ostream& operator<<(std::ostream& out, const TexasHoldem& texas) {
+    out << "Table:" << std::endl;
+    for (int i = 0; i < texas.table_.size(); ++i) {
+      if (i > 0) out << ", ";
+      out << texas.table_[i];
+    }
+    for (int i = 0; i < texas.players_.size(); ++i) {
+      out << "Player " << i << ":" << std::endl;
+      for (const auto& card : texas.players_[i]) {
+        if (card != *texas.players_[i].begin()) out << ", ";
+        out << card;
+      }
+    }
+    return out;
+  }
 };
 
 #endif // LAB_10_TEXAS_HOLDEN_H_
