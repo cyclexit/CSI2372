@@ -65,7 +65,7 @@ bool Poker::IsStraightFlush(const std::vector<PokerCard>& hand) {
 
   // normal check for other flushes
   for (int i = 1; i < ranks.size(); ++i) {
-    if (ranks[i] != ranks[i - 1]) return false;
+    if (ranks[i] != ranks[i - 1] + 1) return false;
   }
   return true;
 }
@@ -75,6 +75,15 @@ bool Poker::IsFourofaKind(const std::vector<PokerCard>& hand) {
     printf("Error: hand size should have %d cards", kHandSize);
     return false;
   }
+
+  std::map<std::string, int> rank_counter;
+  for (const auto& card : hand) {
+    ++rank_counter[card.rank];
+  }
+  for (auto p : rank_counter) {
+    if (p.second == 4) return true;
+  }
+  return false;
 }
 
 bool Poker::IsFullHouse(const std::vector<PokerCard>& hand) {
