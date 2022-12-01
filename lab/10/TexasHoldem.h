@@ -1,6 +1,8 @@
 #ifndef LAB_10_TEXAS_HOLDEN_H_
 #define LAB_10_TEXAS_HOLDEN_H_
 
+#include <functional>
+
 #include "Poker.h"
 
 class TexasHoldem : public Poker {
@@ -29,6 +31,19 @@ class TexasHoldem : public Poker {
     }
     return out;
   }
+
+ private:
+  using ValidatorMap = std::vector<std::pair<std::function<bool(const std::vector<PokerCard>&)>, std::string>>;
+  ValidatorMap hand_rank_validators {
+    {IsStraightFlush, "StraightFlush"},
+    {IsFourofaKind, "FourofaKind"},
+    {IsFullHouse, "FullHouse"},
+    {IsFlush, "Flush"},
+    {IsStraight, "Straight"},
+    {IsThreeofaKind, "ThreeofaKind"},
+    {IsTwoPairs, "TwoPairs"},
+    {IsOnePair, "OnePair"},
+  };
 };
 
 #endif // LAB_10_TEXAS_HOLDEN_H_
