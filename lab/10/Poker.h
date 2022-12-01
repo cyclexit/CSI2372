@@ -68,7 +68,7 @@ class Poker {
   static bool IsTwoPairs(const std::vector<PokerCard>& hand);
   static bool IsOnePair(const std::vector<PokerCard>& hand);
 
- private:
+ protected:
   static constexpr int kDefaultTotalPlayers = 2;
   static constexpr int kHandSize = 5;
 
