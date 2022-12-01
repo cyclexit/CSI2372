@@ -1,4 +1,6 @@
 #include <cstdio>
+#include <numeric>
+#include <set>
 
 #include "Poker.h"
 
@@ -38,4 +40,81 @@ bool Poker::add_to_table() {
   table_.push_back(deck_.back());
   deck_.pop_back();
   return true;
+}
+
+bool Poker::IsStraightFlush(const std::vector<PokerCard>& hand) {
+  if (hand.size() != 5) {
+    printf("Error: hand size should have %d cards", kHandSize);
+    return false;
+  }
+
+  std::set<std::string> suit_set;
+  std::set<int> rank_set;
+  for (const auto& card : hand) {
+    suit_set.insert(card.suit);
+    rank_set.insert(kPokerCardRanks.at(card.rank));
+  }
+
+  if (suit_set.size() != 1) return false;
+  if (rank_set.size() != kHandSize) return false;
+
+  // special check for royal flush
+  int sum = std::accumulate(rank_set.begin(), rank_set.end(), 0);
+  if (sum == 47 && *rank_set.begin() == 1 && *rank_set.crend() == 13) return true;
+
+  // normal check for other flushes
+  std::vector<int> ranks(rank_set.begin(), rank_set.end()); // already sorted
+  for (int i = 1; i < ranks.size(); ++i) {
+    if (ranks[i] != ranks[i - 1]) return false;
+  }
+  return true;
+}
+
+bool Poker::IsFourofaKind(const std::vector<PokerCard>& hand) {
+  if (hand.size() != 5) {
+    printf("Error: hand size should have %d cards", kHandSize);
+    return false;
+  }
+}
+
+bool Poker::IsFullHouse(const std::vector<PokerCard>& hand) {
+  if (hand.size() != 5) {
+    printf("Error: one hand should have %d cards", kHandSize);
+    return false;
+  }
+}
+
+bool Poker::IsFlush(const std::vector<PokerCard>& hand) {
+  if (hand.size() != 5) {
+    printf("Error: hand size should have %d cards", kHandSize);
+    return false;
+  }
+}
+
+bool Poker::IsStraight(const std::vector<PokerCard>& hand) {
+  if (hand.size() != 5) {
+    printf("Error: hand size should have %d cards", kHandSize);
+    return false;
+  }
+}
+
+bool Poker::IsThreeofaKind(const std::vector<PokerCard>& hand) {
+  if (hand.size() != 5) {
+    printf("Error: hand size should have %d cards", kHandSize);
+    return false;
+  }
+}
+
+bool Poker::IsTwoPairs(const std::vector<PokerCard>& hand) {
+  if (hand.size() != 5) {
+    printf("Error: hand size should have %d cards", kHandSize);
+    return false;
+  }
+}
+
+bool Poker::IsOnePair(const std::vector<PokerCard>& hand) {
+  if (hand.size() != 5) {
+    printf("Error: hand size should have %d cards", kHandSize);
+    return false;
+  }
 }

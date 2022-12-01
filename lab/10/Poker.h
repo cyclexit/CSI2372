@@ -4,11 +4,24 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <map>
 #include <string>
 #include <vector>
 
-static const std::vector<std::string> kPokerCardRanks {
-  "A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"
+static const std::map<std::string, int> kPokerCardRanks {
+  {"A", 1},
+  {"2", 2},
+  {"3", 3},
+  {"4", 4},
+  {"5", 5},
+  {"6", 6},
+  {"7", 7},
+  {"8", 8},
+  {"9", 9},
+  {"T", 10},
+  {"J", 11},
+  {"Q", 12},
+  {"K", 13}
 };
 
 static const std::vector<std::string> kPokerCardSuits {
@@ -41,17 +54,18 @@ class Poker {
   bool add_card(int player_id);
   bool add_to_table();
 
-  static bool IsStraightFlush(const std::vector<Poker>& hand);
-  static bool IsFourofaKind(const std::vector<Poker>& hand);
-  static bool IsFullHouse(const std::vector<Poker>& hand);
-  static bool IsFlush(const std::vector<Poker>& hand);
-  static bool IsStraight(const std::vector<Poker>& hand);
-  static bool IsThreeofaKind(const std::vector<Poker>& hand);
-  static bool IsTwoPairs(const std::vector<Poker>& hand);
-  static bool IsOnePair(const std::vector<Poker>& hand);
+  static bool IsStraightFlush(const std::vector<PokerCard>& hand);
+  static bool IsFourofaKind(const std::vector<PokerCard>& hand);
+  static bool IsFullHouse(const std::vector<PokerCard>& hand);
+  static bool IsFlush(const std::vector<PokerCard>& hand);
+  static bool IsStraight(const std::vector<PokerCard>& hand);
+  static bool IsThreeofaKind(const std::vector<PokerCard>& hand);
+  static bool IsTwoPairs(const std::vector<PokerCard>& hand);
+  static bool IsOnePair(const std::vector<PokerCard>& hand);
 
  private:
   static constexpr int kDefaultTotalPlayers = 2;
+  static constexpr int kHandSize = 5;
 
   std::vector<std::vector<PokerCard>> players_;
   std::vector<PokerCard> table_;
@@ -64,7 +78,7 @@ class Poker {
   void init_deck() {
     for (const auto& rank : kPokerCardRanks) {
       for (const auto& suit : kPokerCardSuits) {
-        deck_.push_back(PokerCard(rank, suit));
+        deck_.push_back(PokerCard(rank.first, suit));
       }
     }
     assert(deck_.size() == kPokerCardRanks.size() * kPokerCardSuits.size());
