@@ -59,11 +59,11 @@ bool Poker::IsStraightFlush(const std::vector<PokerCard>& hand) {
   if (rank_set.size() != kHandSize) return false;
 
   // special check for royal flush
-  int sum = std::accumulate(rank_set.begin(), rank_set.end(), 0);
-  if (sum == 47 && *rank_set.begin() == 1 && *rank_set.crend() == 13) return true;
+  std::vector<int> ranks(rank_set.begin(), rank_set.end()); // already sorted
+  int sum = std::accumulate(ranks.begin(), ranks.end(), 0);
+  if (sum == 47 && ranks[0] == 1 && ranks[kHandSize - 1] == 13) return true;
 
   // normal check for other flushes
-  std::vector<int> ranks(rank_set.begin(), rank_set.end()); // already sorted
   for (int i = 1; i < ranks.size(); ++i) {
     if (ranks[i] != ranks[i - 1]) return false;
   }

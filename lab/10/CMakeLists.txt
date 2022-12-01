@@ -7,7 +7,7 @@ project("lab10")
 # add_definitions(-DENABLE_DEBUG)
 
 add_executable(
-    "TestMapping"
-    "Mapping.cpp"
-    "TestMapping.cpp"
+    "TestPoker"
+    "Poker.cpp"
+    "TestPoker.cpp"
 )
