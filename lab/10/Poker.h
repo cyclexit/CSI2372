@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <iostream>
 #include <map>
+#include <random>
 #include <string>
 #include <vector>
 
@@ -95,7 +96,9 @@ class Poker {
   }
 
   void shuffle_deck() {
-    std::random_shuffle(deck_.begin(), deck_.end());
+    std::random_device rd;
+    std::default_random_engine rng(rd());
+    std::shuffle(deck_.begin(), deck_.end(), rng);
   }
 
   static bool has_duplicate(const std::vector<PokerCard>& hand) {
