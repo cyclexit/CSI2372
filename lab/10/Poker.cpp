@@ -1,4 +1,3 @@
-#include <cstdio>
 #include <numeric>
 #include <set>
 
@@ -43,10 +42,7 @@ bool Poker::add_to_table() {
 }
 
 bool Poker::IsStraightFlush(const std::vector<PokerCard>& hand) {
-  if (hand.size() != 5) {
-    printf("Error: hand size should have %d cards", kHandSize);
-    return false;
-  }
+  if (!is_hand_legal(hand)) return false;
 
   std::set<std::string> suit_set;
   std::set<int> rank_set;
@@ -71,10 +67,7 @@ bool Poker::IsStraightFlush(const std::vector<PokerCard>& hand) {
 }
 
 bool Poker::IsFourofaKind(const std::vector<PokerCard>& hand) {
-  if (hand.size() != 5) {
-    printf("Error: hand size should have %d cards", kHandSize);
-    return false;
-  }
+  if (!is_hand_legal(hand)) return false;
 
   std::map<std::string, int> rank_counter;
   std::set<std::string> suit_set;
@@ -90,43 +83,25 @@ bool Poker::IsFourofaKind(const std::vector<PokerCard>& hand) {
 }
 
 bool Poker::IsFullHouse(const std::vector<PokerCard>& hand) {
-  if (hand.size() != 5) {
-    printf("Error: one hand should have %d cards", kHandSize);
-    return false;
-  }
+  if (!is_hand_legal(hand)) return false;
 }
 
 bool Poker::IsFlush(const std::vector<PokerCard>& hand) {
-  if (hand.size() != 5) {
-    printf("Error: hand size should have %d cards", kHandSize);
-    return false;
-  }
+  if (!is_hand_legal(hand)) return false;
 }
 
 bool Poker::IsStraight(const std::vector<PokerCard>& hand) {
-  if (hand.size() != 5) {
-    printf("Error: hand size should have %d cards", kHandSize);
-    return false;
-  }
+  if (!is_hand_legal(hand)) return false;
 }
 
 bool Poker::IsThreeofaKind(const std::vector<PokerCard>& hand) {
-  if (hand.size() != 5) {
-    printf("Error: hand size should have %d cards", kHandSize);
-    return false;
-  }
+  if (!is_hand_legal(hand)) return false;
 }
 
 bool Poker::IsTwoPairs(const std::vector<PokerCard>& hand) {
-  if (hand.size() != 5) {
-    printf("Error: hand size should have %d cards", kHandSize);
-    return false;
-  }
+  if (!is_hand_legal(hand)) return false;
 }
 
 bool Poker::IsOnePair(const std::vector<PokerCard>& hand) {
-  if (hand.size() != 5) {
-    printf("Error: hand size should have %d cards", kHandSize);
-    return false;
-  }
+  if (!is_hand_legal(hand)) return false;
 }

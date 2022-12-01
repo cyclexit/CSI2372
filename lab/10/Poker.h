@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <cstdio>
 #include <iostream>
 #include <map>
 #include <string>
@@ -38,6 +39,10 @@ struct PokerCard {
 
   std::string to_string() const {
     return rank + suit;
+  }
+
+  bool operator==(const PokerCard& other) const {
+    return rank == other.rank && suit == other.suit;
   }
 
   friend std::ostream& operator<<(std::ostream& out, const PokerCard& card) {
@@ -86,6 +91,27 @@ class Poker {
 
   void shuffle_deck() {
     std::random_shuffle(deck_.begin(), deck_.end());
+  }
+
+  static bool has_duplicate(const std::vector<PokerCard>& hand) {
+    for (int i = 0; i < hand.size(); ++i) {
+      for (int j = i + 1; j < hand.size(); ++j) {
+        if (hand[i] == hand[j]) return true;
+      }
+    }
+    return false;
+  }
+
+  static bool is_hand_legal(const std::vector<PokerCard>& hand) {
+    if (hand.size() != 5) {
+      printf("Error: hand size should have %d cards", kHandSize);
+      return false;
+    }
+    if (has_duplicate(hand)) {
+      printf("Error: this hand has duplicates! You are cheating!");
+      return false;
+    }
+    return true;
   }
 };
 
