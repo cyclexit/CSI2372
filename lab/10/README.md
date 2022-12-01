@@ -15,5 +15,6 @@ cmake -S . -B ./build
 cd build
 make
 # run the test
-./TestMapping
+./TestPoker
+./TestTexasHoldem
 ```
