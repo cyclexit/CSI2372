@@ -68,5 +68,31 @@ int main() {
   } else {
     cout << "Test IsFourofaKind false... Failed" << endl;
   }
+
+  // IsFullHouse
+  vector<PokerCard> h3 {
+    {"9", "S"},
+    {"9", "C"},
+    {"9", "D"},
+    {"A", "H"},
+    {"A", "S"}
+  };
+  if (Poker::IsFullHouse(h3)) {
+    cout << "Test IsFullHouse true... Passed" << endl;
+  } else {
+    cout << "Test IsFullHouse true... Failed" << endl;
+  }
+  h3 = {
+    {"9", "S"},
+    {"9", "C"},
+    {"9", "D"},
+    {"9", "H"},
+    {"A", "S"}
+  };
+  if (!Poker::IsFullHouse(h3)) {
+    cout << "Test IsFullHouse false... Passed" << endl;
+  } else {
+    cout << "Test IsFullHouse false... Failed" << endl;
+  }
   return 0;
 }

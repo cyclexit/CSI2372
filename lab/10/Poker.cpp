@@ -81,6 +81,15 @@ bool Poker::IsFourofaKind(const std::vector<PokerCard>& hand) {
 
 bool Poker::IsFullHouse(const std::vector<PokerCard>& hand) {
   if (!is_hand_legal(hand)) return false;
+  std::map<std::string, int> rank_counter;
+  for (const auto& card : hand) {
+    ++rank_counter[card.rank];
+  }
+  if (rank_counter.size() != 2) return false;
+  for (auto p : rank_counter) {
+    if (p.second == 2) return true;
+  }
+  return false;
 }
 
 bool Poker::IsFlush(const std::vector<PokerCard>& hand) {
