@@ -1,3 +1,5 @@
+#include <utility>
+
 #include "TexasHoldem.h"
 
 TexasHoldem::TexasHoldem() : Poker() {}
@@ -28,6 +30,7 @@ std::vector<std::string> TexasHoldem::hands() {
     }
     assert(seven_cards.size() == kTableSize + kPlayHandSize);
 
+    std::pair<int, std::string> highest_res(hand_rank_validators.size(), "");
     std::vector<int> selected(seven_cards.size(), 1);
     selected[0] = selected[1] = 0;
     do {
@@ -35,14 +38,16 @@ std::vector<std::string> TexasHoldem::hands() {
       for (int i = 0; i < kTableSize + kPlayHandSize; ++i) {
         if (selected[i]) cur.push_back(seven_cards[i]);
       }
-      for (auto& validator : hand_rank_validators) {
-        if (validator.first(cur)) {
-          res.push_back(validator.second);
-          break;
+      for (int i = 0; i < hand_rank_validators.size(); ++i) {
+        if (hand_rank_validators[i].first(cur)) {
+          if (i < highest_res.first) {
+            highest_res = {i, hand_rank_validators[i].second};
+          }
         }
       }
     } while (std::next_permutation(selected.begin(), selected.end()));
-    
+    res.push_back(highest_res.second);
+
     while (seven_cards.size() > kTableSize) {
       seven_cards.pop_back();
     }
