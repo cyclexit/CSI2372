@@ -77,9 +77,12 @@ bool Poker::IsFourofaKind(const std::vector<PokerCard>& hand) {
   }
 
   std::map<std::string, int> rank_counter;
+  std::set<std::string> suit_set;
   for (const auto& card : hand) {
     ++rank_counter[card.rank];
+    suit_set.insert(card.suit);
   }
+  if (suit_set.size() != 4) return false;
   for (auto p : rank_counter) {
     if (p.second == 4) return true;
   }

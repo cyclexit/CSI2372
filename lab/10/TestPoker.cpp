@@ -44,5 +44,29 @@ int main() {
   }
 
   // IsFourofaKind
+  vector<PokerCard> h2 {
+    {"9", "S"},
+    {"9", "C"},
+    {"9", "D"},
+    {"9", "H"},
+    {"A", "S"}
+  };
+  if (Poker::IsFourofaKind(h2)) {
+    cout << "Test IsFourofaKind true... Passed" << endl;
+  } else {
+    cout << "Test IsFourofaKind true... Failed" << endl;
+  }
+  h2 = {
+    {"9", "S"},
+    {"8", "C"},
+    {"9", "D"},
+    {"9", "H"},
+    {"A", "S"}
+  };
+  if (!Poker::IsFourofaKind(h2)) {
+    cout << "Test IsFourofaKind false... Passed" << endl;
+  } else {
+    cout << "Test IsFourofaKind false... Failed" << endl;
+  }
   return 0;
 }
