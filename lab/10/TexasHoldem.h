@@ -35,15 +35,15 @@ class TexasHoldem : public Poker {
  private:
   using ValidatorMap = std::vector<std::pair<std::function<bool(const std::vector<PokerCard>&)>, std::string>>;
   ValidatorMap hand_rank_validators {
-    {IsStraightFlush, "StraightFlush"},
-    {IsFourofaKind, "FourofaKind"},
-    {IsFullHouse, "FullHouse"},
+    {IsStraightFlush, "Straight Flush"},
+    {IsFourofaKind, "Four of a Kind"},
+    {IsFullHouse, "Full House"},
     {IsFlush, "Flush"},
     {IsStraight, "Straight"},
-    {IsThreeofaKind, "ThreeofaKind"},
-    {IsTwoPairs, "TwoPairs"},
-    {IsOnePair, "OnePair"},
-    {IsHighCard, "HighCard"}
+    {IsThreeofaKind, "Three of a Kind"},
+    {IsTwoPairs, "Two Pairs"},
+    {IsOnePair, "One Pair"},
+    {IsHighCard, "High Card"}
   };
 };
 
