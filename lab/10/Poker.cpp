@@ -105,12 +105,42 @@ bool Poker::IsStraight(const std::vector<PokerCard>& hand) {
 
 bool Poker::IsThreeofaKind(const std::vector<PokerCard>& hand) {
   if (!is_hand_legal(hand)) return false;
+
+  std::map<std::string, int> rank_counter;
+  for (const auto& card : hand) {
+    ++rank_counter[card.rank];
+  }
+  if (rank_counter.size() != 3) return false;
+  for (auto p : rank_counter) {
+    if (p.second == 3) return true;
+  }
+  return false;
 }
 
 bool Poker::IsTwoPairs(const std::vector<PokerCard>& hand) {
   if (!is_hand_legal(hand)) return false;
+
+  std::map<std::string, int> rank_counter;
+  for (const auto& card : hand) {
+    ++rank_counter[card.rank];
+  }
+  int pair_cnt = 0;
+  for (auto p : rank_counter) {
+    if (p.second == 2) ++pair_cnt;
+  }
+  return pair_cnt == 2;
 }
 
 bool Poker::IsOnePair(const std::vector<PokerCard>& hand) {
   if (!is_hand_legal(hand)) return false;
+
+  std::map<std::string, int> rank_counter;
+  for (const auto& card : hand) {
+    ++rank_counter[card.rank];
+  }
+  int pair_cnt = 0;
+  for (auto p : rank_counter) {
+    if (p.second == 2) ++pair_cnt;
+  }
+  return pair_cnt == 1;
 }
