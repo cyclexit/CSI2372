@@ -79,7 +79,7 @@ std::ostream& operator<<(std::ostream& out, const FuzzySet<T>& fz) {
     } else {
       out << ", ";
     }
-    out << "(" << p.first << ", " << p.second ")";
+    out << "(" << p.first << ", " << p.second << ")";
   }
   out << "}";
   return out;
