@@ -34,8 +34,13 @@ bool Image::same_size(const Image& other) const {
 Image Image::operator-(const Image& other) const {
   if (!same_size(other)) return *this;
 
-  Image res(other);
-
+  Image res(*this);
+  for (int h = 0; h < height; ++h) {
+    for (int w = 0; w < width; ++w) {
+      res.pixels[h][w] -= other.pixels[h][w];
+      res.pixels[h][w] = max(res.pixels[h][w], 0);
+    }
+  }
 
   return res;
 }

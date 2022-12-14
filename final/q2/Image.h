@@ -1,6 +1,7 @@
 #ifndef FINAL_IMAGE_H_
 #define FINAL_IMAGE_H_
 
+#include <algorithm>
 #include <vector>
 
 using namespace std;
