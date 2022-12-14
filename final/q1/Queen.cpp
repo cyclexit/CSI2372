@@ -1,4 +1,4 @@
-#include "queen.h"
+#include "Queen.h"
 
 Queen::Queen(int clr, int r, char c) : Piece(clr, r, c) {}
 
