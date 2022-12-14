@@ -47,6 +47,8 @@ FuzzySet<T> FuzzySet<T>::operator-(const FuzzySet<T>& other) const {
 
 template<typename T>
 FuzzySet<T> FuzzySet<T>::operator==(const FuzzySet<T>& other) const {
+  if (fuzzy.size() != other.fuzzy.size()) return false;
+
   for (pair<T, double> p : fuzzy) {
     if (other.fuzzy[p.first] != p.second) {
       return false;
