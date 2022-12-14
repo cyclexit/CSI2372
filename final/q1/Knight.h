@@ -10,7 +10,6 @@ class Knight : public Piece {
   ~Knight() = default;
 
   bool is_move_valid(int r, char c) override;
-  bool move(int r, char c) override;
 };
 
 #endif // FINAL_KNIGHT_H_

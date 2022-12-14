@@ -23,13 +23,3 @@ bool King::is_move_valid(int r, char c) {
 
   return false;
 }
-
-bool King::move(int r, char c) {
-  if (is_move_valid(r, c)) {
-    row = r;
-    column = c;
-    return true;
-  }
-
-  return false;
-}
