@@ -5,12 +5,25 @@ Queen::Queen(int clr, int r, char c) : Piece(clr, r, c) {}
 bool Queen::is_move_valid(int r, char c) {
   if (!in_chessboard(r, c)) return false;
 
-  // diagonal
   for (int i = 0; i < kMaxColumn; ++i) {
-    
+    // diagonal
+    if ((r == row + i && c == column + i)
+        || (r == row - i && c == column - i)
+        || (r == row + i && c == column - i)
+        || (r == row - i && c == column + i)) {
+      return true;
+    }
+
+    // cross
+    if ((r == row) && (c == column + i || c == column - i)) {
+      return true;
+    }
+    if ((c == column) && (r == row + i || r == row - i)) {
+      return true;
+    }
   }
 
-  // cross
+  return false;
 }
 
 bool Queen::move(int r, char c) {
