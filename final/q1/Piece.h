@@ -19,7 +19,7 @@ class Piece {
 
   virtual bool move(int r, char c) = 0;
 
- private:
+ protected:
   // color: 0 means white and 1 means black.
   int color;
   // current position

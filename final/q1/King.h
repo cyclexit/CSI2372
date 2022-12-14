@@ -6,6 +6,7 @@
 class King : public Piece {
  public:
   King() = default;
+  King(int clr, int r, char c);
   ~King() = default;
 
   bool move(int r, char c) override;
