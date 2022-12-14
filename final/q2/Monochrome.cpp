@@ -42,9 +42,17 @@ Image Monochrome::operator+(const Image& other) const {
 }
 
 Image Monochrome::operator++() {
-  
+  for (int h = 0; h < height; ++h) {
+    for (int w = 0; w < width; ++w) {
+      ++pixels[h][w];
+      pixels[h][w] %= kMaxIntensity;
+    }
+  }
+  return *this;
 }
 
 Image Monochrome::operator++(int) {
-
+  Image old(*this);
+  operator++();
+  return old;
 }
