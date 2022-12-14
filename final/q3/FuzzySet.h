@@ -1,6 +1,7 @@
 #ifndef FINAL_FUZZYSET_H_
 #define FINAL_FUZZYSET_H_
 
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <utility>
