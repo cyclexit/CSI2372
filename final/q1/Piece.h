@@ -14,11 +14,17 @@ class Piece {
   static constexpr char kMaxColumn = 'h';
 
   Piece() = default;
+  Piece(int clr, int r, char c);
   ~Piece() = default;
 
   virtual bool move(int r, char c) = 0;
 
  private:
+  // color: 0 means white and 1 means black.
+  int color;
+  int cur_row;
+  char cur_column;
+
   static bool in_chessboard(int r, char c) {
     return (kMinRow <= r && r <= kMaxRow)
            && (kMinColumn <= c && c <= kMaxColumn);
