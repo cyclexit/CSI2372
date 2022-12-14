@@ -2,6 +2,7 @@
 #define FINAL_FUZZYSET_H_
 
 #include <algorithm>
+#include <cstdlib>
 #include <iostream>
 #include <map>
 #include <utility>

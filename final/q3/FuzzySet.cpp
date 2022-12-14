@@ -42,7 +42,19 @@ FuzzySet<T> FuzzySet<T>::operator+(const FuzzySet<T>& other) const {
 
 template<typename T>
 FuzzySet<T> FuzzySet<T>::operator-(const FuzzySet<T>& other) const {
+  FuzzySet<T> res;
 
+  for (pair<T, double> p : fuzzy) {
+    if (p.second == 0) continue;
+    if (other.fuzzy.count(p.first) == 1) {
+      double value = p.second - other.fuzzy[p.first];
+      if (value > 0.0) {
+        res[p.first] = value;
+      }
+    }
+  }
+
+  return res;
 }
 
 template<typename T>
