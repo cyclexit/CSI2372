@@ -44,3 +44,16 @@ Image Image::operator-(const Image& other) const {
 
   return res;
 }
+
+Image Image::operator+(const Image& other) const {
+  if (!same_size(other)) return *this;
+
+  Image res(*this);
+  for (int h = 0; h < height; ++h) {
+    for (int w = 0; w < width; ++w) {
+      res.pixels[h][w] += other.pixels[h][w];
+    }
+  }
+
+  return res;
+}
