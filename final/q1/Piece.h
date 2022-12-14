@@ -13,7 +13,7 @@ class Piece {
   static constexpr char kMinColumn = 'a';
   static constexpr char kMaxColumn = 'h';
 
-  Piece() = default;
+  Piece();
   Piece(int clr, int r, char c);
   ~Piece() = default;
 
