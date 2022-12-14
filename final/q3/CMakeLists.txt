@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16.3)
 
-project("final-q2")
+project("final-q3")
 
 file(GLOB SRCS *.cpp)
 
