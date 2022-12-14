@@ -7,7 +7,7 @@ Image::Image() :
   pixels.resize(height, vector<int>(width, intensity));
 }
 
-Image::Image(int w, int h, int inten) :
+Image::Image(int h, int w, int inten) :
     height(h),
     width(w),
     intensity(inten) {

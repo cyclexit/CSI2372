@@ -13,11 +13,12 @@ class Image {
   static constexpr int kDefaultIntensity = 0;
 
   Image();
-  Image(int w, int h, int inten);
+  Image(int h, int w, int inten);
   Image(const Image& other);
   ~Image() = default;
 
   bool same_size(const Image& other) const;
+  int get_pixel(int h, int w);
 
   Image operator-(const Image& other) const;
   virtual Image operator+(const Image& other) const;
