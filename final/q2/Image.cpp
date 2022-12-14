@@ -88,3 +88,32 @@ Image Image::operator--(int) {
   operator--();
   return old;
 }
+
+bool Image::sub_image(const Image& other) const {
+  // current image is larger than the other image in width or height
+  if (width > other.width || height > other.height) return false;
+
+  bool found = false;
+  for (int h = 0; h < other.height; ++h) {
+    if (found) break;
+    if (h + height > other.height) break;
+
+    for (int w = 0; w < other.width; ++w) {
+      if (w + width > other.width) break;
+
+      bool flag = true;
+      for (int i = 0; i < height; ++i) {
+        if (!flag) break;
+        for (int j = 0; j < width; ++j) {
+          if (pixels[i][j] != other.pixels[h + i][w + j]) {
+            flag = false;
+            break;
+          }
+        }
+      }
+      found = flag;
+    }
+  }
+
+  return found;
+}
