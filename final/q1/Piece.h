@@ -17,6 +17,7 @@ class Piece {
   Piece(int clr, int r, char c);
   ~Piece() = default;
 
+  virtual bool is_move_valid(int r, char c) = 0;
   virtual bool move(int r, char c) = 0;
 
  protected:
