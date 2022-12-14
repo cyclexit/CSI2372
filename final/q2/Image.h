@@ -20,7 +20,7 @@ class Image {
   bool same_size(const Image& other) const;
 
   Image operator-(const Image& other) const;
-  Image operator+(const Image& other) const;
+  virtual Image operator+(const Image& other) const;
   Image operator++();
   Image operator++(int);
   Image operator--();
