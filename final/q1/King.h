@@ -9,6 +9,7 @@ class King : public Piece {
   King(int clr, int r, char c);
   ~King() = default;
 
+  bool is_move_valid(int r, char c) override;
   bool move(int r, char c) override;
 };
 
