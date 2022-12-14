@@ -1,10 +1,14 @@
 #ifndef FINAL_IMAGE_H_
 #define FINAL_IMAGE_H_
 
+#include <vector>
+
+using namespace std;
+
 class Image {
  public:
-  static constexpr int kDefaultWidth = 128;
   static constexpr int kDefaultHeight = 128;
+  static constexpr int kDefaultWidth = 128;
   static constexpr int kDefaultIntensity = 0;
 
   Image();
@@ -24,9 +28,11 @@ class Image {
   bool sub_image(const Image& other) const;
 
  protected:
-  int width;
   int height;
+  int width;
   int intensity;
+
+  vector<vector<int>> pixels;
 };
 
 #endif // FINAL_IMAGE_H_

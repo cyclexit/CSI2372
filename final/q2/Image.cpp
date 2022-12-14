@@ -1,19 +1,31 @@
 #include "Image.h"
 
 Image::Image() : 
-    width(kDefaultWidth),
     height(kDefaultHeight),
-    intensity(kDefaultIntensity) {}
+    width(kDefaultWidth),
+    intensity(kDefaultIntensity) {
+  pixels.resize(height, vector<int>(width, intensity));
+}
 
 Image::Image(int w, int h, int inten) :
-    width(w),
     height(h),
-    intensity(inten) {}
+    width(w),
+    intensity(inten) {
+  pixels.resize(height, vector<int>(width, intensity));
+}
 
 Image::Image(const Image& other) :
-    width(other.width),
     height(other.height),
-    intensity(other.intensity) {}
+    width(other.width),
+    intensity(other.intensity) {
+  pixels.clear();
+  pixels.resize(height, vector<int>(width, 0));
+  for (int h = 0; h < height; ++h) {
+    for (int w = 0; w < width; ++w) {
+      pixels[h][w] = other.pixels[h][w];
+    }
+  }
+}
 
 bool Image::same_size(const Image& other) const {
   return (width == other.width) && (height == other.height);
@@ -23,7 +35,7 @@ Image Image::operator-(const Image& other) const {
   if (!same_size(other)) return *this;
 
   Image res(other);
-  
+
 
   return res;
 }
