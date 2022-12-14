@@ -31,6 +31,11 @@ bool Image::same_size(const Image& other) const {
   return (width == other.width) && (height == other.height);
 }
 
+int Image::get_pixel(int h, int w) const {
+  if (h < 0 || h > height || w < 0 || w > width) return -1;
+  return pixels[h][w];
+}
+
 Image Image::operator-(const Image& other) const {
   if (!same_size(other)) return *this;
 

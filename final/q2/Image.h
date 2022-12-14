@@ -18,7 +18,7 @@ class Image {
   ~Image() = default;
 
   bool same_size(const Image& other) const;
-  int get_pixel(int h, int w);
+  int get_pixel(int h, int w) const;
 
   Image operator-(const Image& other) const;
   virtual Image operator+(const Image& other) const;

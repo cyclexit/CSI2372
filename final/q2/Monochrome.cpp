@@ -33,7 +33,7 @@ Image Monochrome::operator+(const Image& other) const {
   Monochrome res(*this);
   for (int h = 0; h < height; ++h) {
     for (int w = 0; w < width; ++w) {
-      res.pixels[h][w] += other.pixels[h][w];
+      res.pixels[h][w] += other.get_pixel(h, w);
       res.pixels[h][w] %= kMaxIntensity;
     }
   }
