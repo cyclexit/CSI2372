@@ -15,6 +15,6 @@ RightAngledIsosceles::RightAngledIsosceles()
 
 RightAngledIsosceles::RightAngledIsosceles(double x)
 {
-	//Triangle t = Triangle(x, x, sqrt(2.0 * x));
+	//Triangle t = Triangle(x, x, sqrt(2.0) * x);
 	RightAngledTriangle rt = RightAngledTriangle(x, x);
 }
