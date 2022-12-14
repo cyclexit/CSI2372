@@ -27,4 +27,3 @@ bool Rook::move(int r, char c) {
 
   return false;
 }
-
