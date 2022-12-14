@@ -29,8 +29,8 @@ class Image {
   bool sub_image(const Image& other) const;
 
  protected:
-  int height;
-  int width;
+  int height; // number of rows
+  int width; // number of columns
   int intensity;
 
   vector<vector<int>> pixels;
