@@ -68,3 +68,19 @@ FuzzySet<T> FuzzySet<T>::operator==(const FuzzySet<T>& other) const {
   }
   return true;
 }
+
+template<typename T>
+std::ostream& operator<<(std::ostream& out, const FuzzySet<T>& fz) {
+  out << "{";
+  bool flag = true;
+  for (pair<T, double> p : fz.fuzzy) {
+    if (flag) {
+      flag = false;
+    } else {
+      out << ", ";
+    }
+    out << "(" << p.first << ", " << p.second ")";
+  }
+  out << "}";
+  return out;
+}
