@@ -39,6 +39,7 @@ double RightAngledTriangle::area()
 	// accessing the area function in the parent class
 	//double x = Triangle::area();
 	cout << "This is the area of RightAngled Triangle." << endl;
+	cout << side1 << " " << side2 << endl;
 	return side1 * side2 / 2.0;
 }
 
