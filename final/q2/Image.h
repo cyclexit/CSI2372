@@ -9,15 +9,19 @@ class Image {
 
   Image();
   Image(int w, int h, int inten);
+  Image(const Image& other);
+  ~Image() = default;
 
-  Image operator-(const Image& other);
-  Image operator+(const Image& other);
+  bool same_size(const Image& other) const;
+
+  Image operator-(const Image& other) const;
+  Image operator+(const Image& other) const;
   Image operator++();
   Image operator++(int);
   Image operator--();
   Image operator--(int);
 
-  bool sub_image(const Image& other);
+  bool sub_image(const Image& other) const;
 
  protected:
   int width;
