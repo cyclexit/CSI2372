@@ -22,8 +22,9 @@ class Piece {
  private:
   // color: 0 means white and 1 means black.
   int color;
-  int cur_row;
-  char cur_column;
+  // current position
+  int row;
+  char column;
 
   static bool in_chessboard(int r, char c) {
     return (kMinRow <= r && r <= kMaxRow)
