@@ -17,6 +17,7 @@ class Piece {
   ~Piece() = default;
 
   virtual bool move(int r, char c) = 0;
+
  private:
   static bool in_chessboard(int r, char c) {
     return (kMinRow <= r && r <= kMaxRow)
