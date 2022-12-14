@@ -21,8 +21,8 @@ class Image {
 
   Image operator-(const Image& other) const;
   virtual Image operator+(const Image& other) const;
-  Image operator++();
-  Image operator++(int);
+  virtual Image operator++();
+  virtual Image operator++(int);
   Image operator--();
   Image operator--(int);
 
