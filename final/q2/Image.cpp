@@ -57,3 +57,34 @@ Image Image::operator+(const Image& other) const {
 
   return res;
 }
+
+Image Image::operator++() {
+  Image res(*this);
+  for (int h = 0; h < height; ++h) {
+    for (int w = 0; w < width; ++w) {
+      ++pixels[h][w];
+    }
+  }
+}
+
+Image Image::operator++(int) {
+  Image old(*this);
+  operator++();
+  return old;
+}
+
+Image Image::operator--() {
+  Image res(*this);
+  for (int h = 0; h < height; ++h) {
+    for (int w = 0; w < width; ++w) {
+      --pixels[h][w];
+      pixels[h][w] = max(0, pixels[h][w]);
+    }
+  }
+}
+
+Image Image::operator--(int) {
+  Image old(*this);
+  operator--();
+  return old;
+}
